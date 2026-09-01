@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 578 116" font-family="'JetBrains Mono', 'Fira Code', Consolas, Menlo, monospace">
+  <!-- Background card matching the course code-block style -->
+  <rect x="1" y="1" width="576" height="114" rx="14" fill="#f9fafb" stroke="#e5e7eb"/>
+
+  <!-- The path, one text element per segment so columns are exact.
+       Grid: 10px per character, 53 characters, starting at x=24.
+       Segment colours: drive blue, folders green, file name amber, extension violet. -->
+  <g font-size="16">
+    <text x="24"  y="36" textLength="20"  lengthAdjust="spacingAndGlyphs" fill="#2563eb">C:</text>
+    <text x="44"  y="36" textLength="10"  lengthAdjust="spacingAndGlyphs" fill="#9ca3af">\</text>
+    <text x="54"  y="36" textLength="360" lengthAdjust="spacingAndGlyphs" fill="#059669">Users\petter\projects\cmj_study\data</text>
+    <text x="414" y="36" textLength="10"  lengthAdjust="spacingAndGlyphs" fill="#9ca3af">\</text>
+    <text x="424" y="36" textLength="90"  lengthAdjust="spacingAndGlyphs" fill="#d97706">athlete01</text>
+    <text x="514" y="36" textLength="40"  lengthAdjust="spacingAndGlyphs" fill="#7c3aed">.csv</text>
+  </g>
+
+  <!-- Brackets, colour-matched to their segment -->
+  <g stroke-width="1.5" fill="none">
+    <!-- drive: C: spans x 24-44 -->
+    <path d="M 24 46 v 5 h 20 v -5 M 34 51 v 7" stroke="#2563eb"/>
+    <!-- folders: Users...data spans x 54-414 -->
+    <path d="M 54 46 v 5 h 360 v -5 M 234 51 v 7" stroke="#059669"/>
+    <!-- file name: athlete01 spans x 424-514 -->
+    <path d="M 424 46 v 5 h 90 v -5 M 469 51 v 7" stroke="#d97706"/>
+    <!-- extension: .csv spans x 514-554, longer tick so its label sits on a second row -->
+    <path d="M 514 46 v 5 h 40 v -5 M 534 51 v 29" stroke="#7c3aed"/>
+  </g>
+
+  <!-- Labels centred under each tick -->
+  <g font-size="14" text-anchor="middle">
+    <text x="34"  y="72" fill="#2563eb">drive</text>
+    <text x="234" y="72" fill="#059669">folders</text>
+    <text x="469" y="72" fill="#d97706">file name</text>
+    <text x="534" y="99" fill="#7c3aed">extension</text>
+  </g>
+</svg>
