@@ -310,7 +310,7 @@ Rank 2: 42.8 cm
 Rank 3: 41.0 cm
 Rank 4: 38.5 cm
 Rank 5: 36.1 cm`,hints:["enumerate(list, 1) yields (rank, value) pairs starting the count at 1.",`for rank, height in enumerate(cmj_heights, ___):
-    print(f"Rank {rank}: {height} cm")`]},{type:"md",md:"---\n\n## Looping Over Dictionaries\n\nA dictionary's `.items()` method gives you `(key, value)` pairs. Looping over items lets you process every field in an athlete profile or every metric in a test result:\n\n```python\nfor key, value in my_dict.items():\n    print(key, value)\n```\n\nUse `.keys()` if you only need keys, and `.values()` if you only need values."},{type:"example",caption:"Loop over dict.items(): print an athlete's test battery.",code:`test_results = {
+    print(f"Rank {rank}: {height} cm")`]},{type:"md",md:"---\n\n## Looping Over Dictionaries\n\nA dictionary's `.items()` method gives you `(key, value)` pairs. Looping over items lets you process every field in an athlete profile or every metric in a test result:\n\n```python\nfor key, value in my_dict.items():\n    print(key, value)\n```\n\nWhen you only need one side, replace `.items()` in the loop with `.keys()` (just the keys) or `.values()` (just the values). The loop then uses a single loop variable instead of a pair: `for test in my_dict.keys():` or `for result in my_dict.values():`."},{type:"example",caption:"Loop over dict.items(): print an athlete's test battery.",code:`test_results = {
     "CMJ height":    "35.2 cm",
     "20m sprint":    "3.05 s",
     "Yo-Yo IR1":     "1840 m",
@@ -318,7 +318,7 @@ Rank 5: 36.1 cm`,hints:["enumerate(list, 1) yields (rank, value) pairs starting 
 }
 
 for test, result in test_results.items():
-    print(f"{test:<20} {result:>10}")`},{type:"md",md:`---
+    print(f"{test}: {result}")`},{type:"md",md:`---
 
 ## Looping Over Real Data
 
@@ -364,13 +364,13 @@ Two keywords let you control the loop body mid-iteration:
 | \`break\` | Exit the loop immediately |
 | \`continue\` | Skip the rest of this iteration; go to the next |
 
-These are useful in sport science for stopping a simulation when a physiological limit is reached, or skipping invalid sensor readings.`},{type:"example",caption:"break + continue: process HR readings, skip artifacts, stop on max.",code:`hr_readings = [72, 85, -1, 110, 135, 155, 198, 175]
+These are useful in sport science for stopping a process when a limit is reached, or skipping invalid sensor readings.`},{type:"example",caption:"Collect heart rate readings: continue skips a broken reading, break stops everything when the sensor has clearly failed.",code:`hr_readings = [72, 85, -1, 110, 135, 155, 226, 175]
 
 valid = []
 for hr in hr_readings:
     if hr < 0:          # artifact
         continue
-    if hr > 195:        # exceeded max: stop monitoring
+    if hr > 220:        # above any plausible HR: stop monitoring
         print(f"ALERT: HR = {hr} bpm - stopping")
         break
     valid.append(hr)
@@ -388,7 +388,7 @@ print(f"Mean speed: {sum(valid_speeds) / len(valid_speeds):.1f} m/s")`]},{type:"
 
 ## List Comprehensions (Compact Loops)
 
-A list comprehension creates a new list in one line:
+You will constantly build one list from another: convert every speed, extract every name, keep only the valid readings. The loop version is the accumulator pattern from earlier in this lesson: start with an empty list, loop, and append. A **list comprehension** collapses those three lines into one:
 
 \`\`\`python
 # Traditional:
@@ -396,11 +396,15 @@ result = []
 for x in data:
     result.append(expression)
 
-# Comprehension:
+# Comprehension: exactly the same result
 result = [expression for x in data]
 \`\`\`
 
-Add an optional filter: \`[expr for x in data if condition]\`. Use comprehensions for simple transformations; a regular loop is clearer for complex logic.`},{type:"example",caption:"List comprehension: convert sprint times from seconds to km/h.",code:`# 100 m sprint times in seconds
+Read it from left to right inside the brackets: "build a list of *expression*, for each *x* in *data*". The expression at the front is what gets stored, and the \`for\` part after it is a normal loop header. So \`[t * 60 for t in times_min]\` means "for each t in times_min, store t * 60".
+
+You can also add a filter at the end: \`[expr for x in data if condition]\` keeps only the items where the condition is true, for example \`[t for t in times_s if t < 10.0]\`.
+
+The square brackets are what make it a list: the result is a brand new list and the original data is untouched. Use comprehensions for simple transformations like unit conversions; the moment the logic needs more than one step, a regular loop is clearer.`},{type:"example",caption:"List comprehension: convert sprint times from seconds to km/h.",code:`# 100 m sprint times in seconds
 times_s = [9.58, 10.12, 10.45, 9.83, 10.30]
 
 # Convert to km/h: speed = 100m / time_s * 3.6
@@ -409,13 +413,7 @@ print(speeds_kmh)
 
 # Filter: only keep times under 10.0 s
 elite = [t for t in times_s if t < 10.0]
-print(f"Elite times (< 10 s): {elite}")`},{type:"exercise",id:"ex-3-26",title:"Convert GPS Speeds",domain:"biomechanics",packages:["pandas"],dataFiles:["gps_speeds.csv"],description:"A small GPS recording is imported for you as a DataFrame with speeds in m/s. Use a list comprehension over the Speed_ms column to convert every value to km/h (multiply by 3.6), rounded to 1 decimal place. Assign the result to speeds_kmh and print it.",initialCode:`import pandas as pd
-
-df = pd.read_csv('data/gps_speeds.csv')
-print(df.head(3))`,testCode:`expected = [round(float(s) * 3.6, 1) for s in df['Speed_ms']]
-assert list(speeds_kmh) == expected, f"Expected {expected}, got {list(speeds_kmh)}"
-print("PASS")`,hints:['A comprehension iterates over a DataFrame column just like a list: [expression for s in df["Speed_ms"]].',`speeds_kmh = [round(s * ___, 1) for s in df["Speed_ms"]]
-print(speeds_kmh)`]},{type:"md",md:`## Dictionary Comprehensions
+print(f"Elite times (< 10 s): {elite}")`},{type:"md",md:`## Dictionary Comprehensions
 
 The same compact syntax builds dictionaries. Swap the square brackets for curly braces and write each entry as \`key_expr: value_expr\`:
 
@@ -427,18 +425,9 @@ for split, t in times_s.items():
 
 # Comprehension:
 times_ms = {split: t * 1000 for split, t in times_s.items()}
-\`\`\`
-
-One companion tool is worth knowing here: when the keys and the values start out as two separate lists, \`zip(keys, values)\` pairs them element by element, first with first, second with second, giving the comprehension exactly the pairs it needs.`},{type:"example",caption:"Dictionary comprehensions: transform an existing dict, or build one from two lists with zip().",code:`# Transform: sprint splits from seconds to milliseconds
-times_s  = {"10m": 1.83, "20m": 2.87, "30m": 3.78, "40m": 4.65}
+\`\`\``},{type:"example",caption:"Dictionary comprehension: convert sprint splits from seconds to milliseconds.",code:`times_s  = {"10m": 1.83, "20m": 2.87, "30m": 3.78, "40m": 4.65}
 times_ms = {split: round(t * 1000) for split, t in times_s.items()}
-print(times_ms)
-
-# Build from two lists: pair test names with percentiles
-tests = ["cmj", "sprint_20m", "yo_yo", "grip"]
-percentiles = [75, 68, 82, 71]
-lookup = {test: pct for test, pct in zip(tests, percentiles)}
-print(lookup["cmj"])`},{type:"md",md:`---
+print(times_ms)`},{type:"md",md:`---
 
 ## While Loops: Repeat Until a Condition
 
@@ -462,34 +451,21 @@ while total_km < 10000:
     total_km += weekly_km
 
 print(f"Weeks to 10 000 km: {weeks}")
-print(f"Total after {weeks} weeks: {total_km} km")`},{type:"exercise",id:"ex-3-27",title:"Ramp Up Speed",domain:"physiology",description:'A treadmill starts at 8 km/h and increases by 1 km/h each stage until it reaches 14 km/h. Use a while loop to print each stage speed in the format "Stage: X km/h".',initialCode:"speed_kmh = 8",expectedOutput:`Stage: 8 km/h
-Stage: 9 km/h
-Stage: 10 km/h
-Stage: 11 km/h
-Stage: 12 km/h
-Stage: 13 km/h
-Stage: 14 km/h`,hints:["Loop while speed_kmh <= 14: print, then increase speed_kmh by 1. Without the increment the loop never ends.",`while speed_kmh <= 14:
-    print(f"Stage: {speed_kmh} km/h")
-    speed_kmh += ___`]},{type:"exercise",id:"ex-3-28",title:"Recovery Time Calculator",domain:"physiology",description:'Simulate heart rate recovery after exercise. Starting at 185 bpm, HR decreases by 7% each minute. Use a while loop to count how many minutes it takes to drop below 100 bpm. Print "Minute N: X bpm" (whole bpm) for each minute, then a blank line and "Recovery time: N minutes".',initialCode:`hr_bpm = 185
+print(f"Total after {weeks} weeks: {total_km} km")`},{type:"exercise",id:"ex-3-28",title:"Recovery Time Calculator",domain:"physiology",description:`Simulate heart rate recovery after exercise. Starting at 185 bpm, HR decreases by 7% each minute.
+1. Use a while loop that runs until hr_bpm drops below target_bpm, counting the minutes in minutes.
+2. Print the heart rate after each minute.
+3. After the loop, print the recovery time in minutes.
+Any clear print format is fine.`,initialCode:`hr_bpm = 185
 target_bpm = 100
 decay = 0.07
-minutes = 0`,expectedOutput:`Minute 1: 172 bpm
-Minute 2: 160 bpm
-Minute 3: 149 bpm
-Minute 4: 138 bpm
-Minute 5: 129 bpm
-Minute 6: 120 bpm
-Minute 7: 111 bpm
-Minute 8: 104 bpm
-Minute 9: 96 bpm
-
-Recovery time: 9 minutes`,hints:["Loop while hr_bpm > target_bpm: increment minutes, update hr_bpm = hr_bpm * (1 - decay), and print with the :.0f format specifier.",`while hr_bpm > target_bpm:
+minutes = 0`,testCode:`assert minutes == 9, f"Recovery should take 9 minutes, got {minutes}"
+assert abs(hr_bpm - 96.3) < 0.5, f"After the loop hr_bpm should be about 96, got {hr_bpm}"
+print("PASS")`,hints:["Loop while hr_bpm > target_bpm: increment minutes, update hr_bpm = hr_bpm * (1 - decay), and print the new value.",`while hr_bpm > target_bpm:
     minutes += 1
     hr_bpm = hr_bpm * (1 - ___)
-    print(f"Minute {minutes}: {hr_bpm:.0f} bpm")
+    print(minutes, round(hr_bpm))
 
-print()
-print(f"Recovery time: {minutes} minutes")`]},{type:"md",md:`---
+print(minutes)`]},{type:"md",md:`---
 
 ## For or While?
 
@@ -523,7 +499,11 @@ In the next lesson, we wrap calculations in functions: named, reusable, and test
 
 ## Introduction
 
-A **function** is a reusable block of code that performs a specific task. Functions let you name a calculation, call it from anywhere, and never write the same logic twice. In sport science you will write functions to calculate VO2max, estimate training load, convert units, classify performance, and more.
+You have been using functions since your very first line of code: \`print()\`, \`round()\`, \`len()\`, \`min()\`, and \`pd.read_csv()\` are all functions, ready-made blocks of code that you call by name, hand some inputs, and get a result back. In this lesson you learn to write your **own**: give a task a name once, then call it from anywhere. The task can be anything, a calculation, a cleaning step for messy data, a nicely formatted report, a whole plot.
+
+The reason to do this is a principle important enough to have its own name: **DRY, Don't Repeat Yourself**. If you write the same logic twice, extract it into a function. DRY code has one authoritative place for each piece of logic, is easier to update (you change one function, not many copies), and is easier to test. A good rule of thumb is the **rule of three**: when you catch yourself writing the same logic a third time, it is time to make a function.
+
+In sport science you will write functions to calculate VO2max, estimate training load, convert units, classify performance, and more.
 
 ---
 
@@ -553,25 +533,15 @@ result = function_name(value1, value2)
     return bmi
 
 result = calculate_bmi(85, 1.82)
-print(f"BMI: {result:.1f}")`},{type:"exercise",id:"ex-3-34",title:"Max Heart Rate Function",domain:"physiology",description:'Write a function called max_hr(age) that returns the estimated maximum heart rate using the Tanaka formula: 208 - 0.7 * age. Call it for ages 20, 30, and 40, and print each result rounded to 1 decimal place in the format "Age XX: XXX.X bpm".',initialCode:"",expectedOutput:`Age 20: 194.0 bpm
-Age 30: 187.0 bpm
-Age 40: 180.0 bpm`,hints:["Define the function with def and return the Tanaka formula, then loop over the three ages and print with :.1f.",`def max_hr(age):
+print(f"BMI: {result:.1f}")`},{type:"exercise",id:"ex-3-34",title:"Max Heart Rate Function",domain:"physiology",description:`Write a function called max_hr(age) that returns the estimated maximum heart rate using the Tanaka formula: 208 - 0.7 * age. Call it for the ages 20 and 40, and print both results.
+Any clear print format is fine.`,initialCode:"",testCode:`assert abs(max_hr(20) - 194.0) < 0.01, f"max_hr(20) should be 194.0, got {max_hr(20)}"
+assert abs(max_hr(40) - 180.0) < 0.01, f"max_hr(40) should be 180.0, got {max_hr(40)}"
+print("PASS")`,hints:["Define the function with def, return the Tanaka formula, then call it twice inside print().",`def max_hr(age):
     """Estimate max HR using the Tanaka formula."""
     return 208 - ___ * age
 
-for age in [20, 30, 40]:
-    print(f"Age {age}: {max_hr(age):.1f} bpm")`]},{type:"md",md:`---
-
-## Parameters, Arguments, and Return Values
-
-A function can return any value — a number, string, list, or even nothing (\`None\`). To return **multiple values**, list them after \`return\` separated by commas — Python packs them into a tuple, which you can unpack on the caller side:
-
-\`\`\`python
-def stats(values):
-    return min(values), max(values), sum(values) / len(values)
-
-lo, hi, avg = stats([4.5, 4.8, 4.2])
-\`\`\``},{type:"example",caption:"Multiple return values: fastest, slowest, and average sprint time.",code:`def analyze_sprints(times):
+print(max_hr(20))
+print(max_hr(40))`]},{type:"md",md:'---\n\n## Parameters, Arguments, and Return Values\n\n**`return` is how a function hands its result back.** When Python reaches a `return` statement, the function ends immediately, and the value after `return` is delivered to wherever the function was called. From there it behaves like any other value: store it in a variable, use it in a calculation, or pass it straight into another function.\n\n```python\ndef max_hr(age):\n    return 208 - 0.7 * age\n\nhr = max_hr(30)                # store the result\nzone_top = max_hr(30) * 0.9    # use it in a calculation\nprint(max_hr(30))              # pass it to another function\n```\n\n**`return` is not `print()`.** A function that only prints its result shows it on the screen, but the caller receives nothing to work with (technically it receives `None`, Python\'s "no value"). A function that returns its result gives the caller something to keep computing with. Print inside a function only when printing is the point of the function.\n\nA function can return any value: a number, a string, a list, a dictionary. To return **multiple values**, list them after `return` separated by commas. Python packs them into a tuple, which you can unpack on the caller side:\n\n```python\ndef stats(values):\n    return min(values), max(values), sum(values) / len(values)\n\nlo, hi, avg = stats([4.5, 4.8, 4.2])\n```'},{type:"example",caption:"Multiple return values: fastest, slowest, and average sprint time.",code:`def analyze_sprints(times):
     """Return (fastest, slowest, average) for a list of sprint times."""
     fastest = min(times)
     slowest = max(times)
@@ -581,21 +551,19 @@ lo, hi, avg = stats([4.5, 4.8, 4.2])
 fast, slow, avg = analyze_sprints([4.52, 4.61, 4.48, 4.95, 4.33])
 print(f"Fastest: {fast} s")
 print(f"Slowest: {slow} s")
-print(f"Average: {avg:.2f} s")`},{type:"exercise",id:"ex-3-35",title:"Sprint Statistics",domain:"coaching",description:'Write a function sprint_stats(times) that returns a tuple of (fastest, slowest, mean). Call it on [5.42, 4.98, 5.21, 5.65, 5.10] and print all three values formatted to 2 decimal places as "Fastest: X.XX s", "Slowest: X.XX s", and "Mean:    X.XX s".',initialCode:"",testCode:`fast2, slow2, avg2 = sprint_stats([5.42, 4.98, 5.21, 5.65, 5.10])
-assert abs(fast2 - 4.98) < 0.001, f"fastest wrong: {fast2}"
-assert abs(slow2 - 5.65) < 0.001, f"slowest wrong: {slow2}"
-assert abs(avg2 - 5.272) < 0.001, f"mean wrong: {avg2}"
-print("PASS")`,hints:["Inside the function, use min(times), max(times), and sum(times) / len(times), and return all three separated by commas.",`def sprint_stats(times):
-    """Return (fastest, slowest, mean) for a list of sprint times."""
-    fastest = min(times)
-    slowest = ___(times)
-    mean = sum(times) / len(times)
-    return fastest, slowest, mean
+print(f"Average: {avg:.2f} s")`},{type:"exercise",id:"ex-3-35",title:"Aerobic Zone Boundaries",domain:"coaching",description:`Write a function zone_bounds(hr_max_bpm) that returns the lower and upper heart rate of the aerobic zone as two values: 60% and 70% of maximum heart rate. Call it with 190, unpack the result into two variables, and print both.
+Any clear print format is fine.`,initialCode:"",testCode:`vals190 = sorted(zone_bounds(190))
+assert abs(vals190[0] - 114.0) < 0.01 and abs(vals190[1] - 133.0) < 0.01, f"zone_bounds(190) should give 114.0 and 133.0, got {vals190}"
+vals200 = sorted(zone_bounds(200))
+assert abs(vals200[0] - 120.0) < 0.01 and abs(vals200[1] - 140.0) < 0.01, f"zone_bounds(200) should give 120.0 and 140.0, got {vals200}"
+print("PASS")`,hints:["Multiply hr_max_bpm by 0.6 and by 0.7, and return both values separated by a comma.",`def zone_bounds(hr_max_bpm):
+    lower = hr_max_bpm * 0.6
+    upper = hr_max_bpm * ___
+    return lower, upper
 
-fast, slow, avg = sprint_stats([5.42, 4.98, 5.21, 5.65, 5.10])
-print(f"Fastest: {fast:.2f} s")
-print(f"Slowest: {slow:.2f} s")
-print(f"Mean:    {avg:.2f} s")`]},{type:"md",md:`---
+low, high = zone_bounds(190)
+print(low)
+print(high)`]},{type:"md",md:`---
 
 ## Default Parameter Values
 
@@ -614,41 +582,17 @@ greet("Petter", "Hi")     # overrides: "Hi, Petter!"
     return 208 - coefficient * age
 
 print(estimate_hr_max(30))                   # default: 187.0
-print(estimate_hr_max(30, coefficient=0.8))  # custom:  184.0`},{type:"exercise",id:"ex-3-36",title:"VO2max Cooper Test Function",domain:"physiology",description:'Write a function vo2max_cooper(distance_m) that estimates VO2max from the Cooper 12-minute run test: VO2max = (distance_m - 504.9) / 44.73. Test it with distances of 2400, 2800, and 3200 metres, printing each result as "Distance: XXXXm -> VO2max: XX.X mL/kg/min" (1 decimal place).',initialCode:"",expectedOutput:`Distance: 2400m -> VO2max: 42.4 mL/kg/min
-Distance: 2800m -> VO2max: 51.3 mL/kg/min
-Distance: 3200m -> VO2max: 60.3 mL/kg/min`,hints:["The function body is a single return line using the given formula. Then loop over the three distances.",`def vo2max_cooper(distance_m):
+print(estimate_hr_max(30, coefficient=0.8))  # custom:  184.0`},{type:"exercise",id:"ex-3-36",title:"VO2max Cooper Test Function",domain:"physiology",description:`Write a function vo2max_cooper(distance_m) that estimates VO2max from the Cooper 12-minute run test: VO2max = (distance_m - 504.9) / 44.73. Test it with distances of 2400, 2800, and 3200 metres, printing each result.
+Any clear print format is fine.`,initialCode:"",testCode:`assert abs(vo2max_cooper(2400) - 42.37) < 0.05, f"vo2max_cooper(2400) should be about 42.4, got {vo2max_cooper(2400)}"
+assert abs(vo2max_cooper(2800) - 51.31) < 0.05, f"vo2max_cooper(2800) should be about 51.3, got {vo2max_cooper(2800)}"
+assert abs(vo2max_cooper(3200) - 60.25) < 0.05, f"vo2max_cooper(3200) should be about 60.3, got {vo2max_cooper(3200)}"
+print("PASS")`,hints:["The function body is a single return line using the given formula. Then call it for the three distances.",`def vo2max_cooper(distance_m):
     """Estimate VO2max from the Cooper 12-min run test."""
     return (distance_m - 504.9) / ___
 
 for d in [2400, 2800, 3200]:
-    print(f"Distance: {d}m -> VO2max: {vo2max_cooper(d):.1f} mL/kg/min")`]},{type:"md",md:`---
-
-## The DRY Principle — Don't Repeat Yourself
-
-If you write the same logic twice, extract it into a function. DRY code:
-- has one authoritative place for each calculation
-- is easier to update (change one function, not many copies)
-- is easier to test
-
-**The rule of three:** when you write the same logic a third time, it is time to make a function.`},{type:"example",caption:"DRY: extract BMI calculation and classification into two functions.",code:`def calculate_bmi(weight_kg, height_m):
-    return weight_kg / height_m ** 2
-
-def classify_bmi(bmi):
-    if bmi < 18.5: return "Underweight"
-    if bmi < 25.0: return "Normal"
-    if bmi < 30.0: return "Overweight"
-    return "Obese"
-
-athletes = [
-    ("Haaland",  88.0, 1.94),
-    ("Messi",    72.0, 1.70),
-    ("O'Neal",  147.0, 2.16),
-]
-
-for name, w, h in athletes:
-    bmi = calculate_bmi(w, h)
-    cat = classify_bmi(bmi)
-    print(f"{name}: BMI = {bmi:.1f} ({cat})")`},{type:"exercise",id:"ex-3-37",title:"Classify VO2max",domain:"physiology",description:'Write a function classify_vo2max(vo2max) that returns "Elite" for >= 60, "Good" for >= 50, "Average" for >= 40, and "Poor" for anything below. Test it by looping over [72.3, 54.1, 43.8, 38.2] and printing "X.X: Category".',initialCode:"",testCode:`assert classify_vo2max(72.3) == "Elite", f"72.3 wrong: {classify_vo2max(72.3)}"
+    print(d, round(vo2max_cooper(d), 1))`]},{type:"exercise",id:"ex-3-37",title:"Classify VO2max",domain:"physiology",description:`Write a function classify_vo2max(vo2max) that returns "Elite" for >= 60, "Good" for >= 50, "Average" for >= 40, and "Poor" for anything below. Test it by calling it on the values [72.3, 54.1, 43.8, 38.2] and printing each result.
+Any clear print format is fine.`,initialCode:"",testCode:`assert classify_vo2max(72.3) == "Elite", f"72.3 wrong: {classify_vo2max(72.3)}"
 assert classify_vo2max(54.1) == "Good", f"54.1 wrong: {classify_vo2max(54.1)}"
 assert classify_vo2max(43.8) == "Average", f"43.8 wrong: {classify_vo2max(43.8)}"
 assert classify_vo2max(38.2) == "Poor", f"38.2 wrong: {classify_vo2max(38.2)}"
@@ -664,7 +608,7 @@ print("PASS")`,hints:["Use an if-elif-else chain inside the function, returning 
         return "Poor"
 
 for v in [72.3, 54.1, 43.8, 38.2]:
-    print(f"{v}: {classify_vo2max(v)}")`]},{type:"md",md:`---
+    print(v, classify_vo2max(v))`]},{type:"md",md:`---
 
 ## Functions That Call Other Functions
 
@@ -681,16 +625,15 @@ def weekly_load(sessions):
 
 week = [(75, 7), (60, 9), (40, 3), (90, 6), (85, 8)]
 total = weekly_load(week)
-print(f"Weekly load: {total} AU")`},{type:"exercise",id:"ex-3-38",title:"Training Load Calculator",domain:"coaching",description:`Write two functions:
-1. session_load(duration, rpe): returns duration * rpe.
-2. weekly_load(sessions): takes a list of (duration, rpe) tuples and returns the total.
-Then print each session as "Duration: D min, RPE: R -> Load: L AU", a blank line, and "Total weekly load: N AU".`,initialCode:"week = [(75, 7), (60, 9), (40, 3), (90, 6), (85, 8)]",expectedOutput:`Duration: 75 min, RPE: 7 -> Load: 525 AU
-Duration: 60 min, RPE: 9 -> Load: 540 AU
-Duration: 40 min, RPE: 3 -> Load: 120 AU
-Duration: 90 min, RPE: 6 -> Load: 540 AU
-Duration: 85 min, RPE: 8 -> Load: 680 AU
-
-Total weekly load: 2405 AU`,hints:["session_load is a one-line return. weekly_load loops through the tuples, calls session_load for each, and accumulates a total.",`def session_load(duration, rpe):
+print(f"Weekly load: {total} AU")`},{type:"exercise",id:"ex-3-38",title:"Training Load Calculator",domain:"coaching",description:`A coach logged five training sessions in the list week. Each entry is a pair of (duration in minutes, RPE).
+1. Write a function session_load(duration, rpe) that returns the load of one session: duration * rpe.
+2. Write a second function weekly_load(sessions) that loops over a list of such pairs, calls session_load on each pair, adds the results together, and returns the total.
+3. Use the two functions on week: print each session's load, then the weekly total.
+Any clear print format is fine.`,initialCode:"week = [(75, 7), (60, 9), (40, 3), (90, 6), (85, 8)]",testCode:`assert session_load(75, 7) == 525, f"session_load(75, 7) should be 525, got {session_load(75, 7)}"
+assert session_load(60, 9) == 540, f"session_load(60, 9) should be 540, got {session_load(60, 9)}"
+assert weekly_load(week) == 2405, f"weekly_load(week) should be 2405, got {weekly_load(week)}"
+assert weekly_load([(30, 5)]) == 150, f"weekly_load([(30, 5)]) should be 150, got {weekly_load([(30, 5)])}"
+print("PASS")`,hints:["session_load is a one-line return. weekly_load loops through the tuples, calls session_load for each, and accumulates a total.",`def session_load(duration, rpe):
     return duration * rpe
 
 def weekly_load(sessions):
@@ -700,53 +643,9 @@ def weekly_load(sessions):
     return total
 
 for duration, rpe in week:
-    load = session_load(duration, rpe)
-    print(f"Duration: {duration} min, RPE: {rpe} -> Load: {load} AU")
+    print(duration, rpe, session_load(duration, rpe))
 
-print()
-print(f"Total weekly load: {weekly_load(week)} AU")`]},{type:"md",md:`---
-
-## Refactoring: Replace Repeated Code with Functions
-
-When you see the same block of code copy-pasted, extract it. Spot the repeated pattern, wrap it in a \`def\`, and replace all copies with a call.`},{type:"example",caption:"Refactor: extract classify_intensity to avoid repeating if-elif-else.",code:`def classify_intensity(rpe):
-    if rpe <= 3: return "Low"
-    if rpe <= 6: return "Moderate"
-    return "High"
-
-def session_summary(duration, rpe):
-    load = duration * rpe
-    intensity = classify_intensity(rpe)
-    return load, intensity
-
-sessions = [(75, 7), (60, 4), (40, 2)]
-for i, (dur, rpe) in enumerate(sessions, 1):
-    load, intensity = session_summary(dur, rpe)
-    print(f"Session {i}: Load={load}, Intensity={intensity}")`},{type:"exercise",id:"ex-3-39",title:"Refactor Repeated Code",domain:"coaching",description:`The commented-out code shows the repeated pattern you are replacing.
-1. Write session_load(duration, rpe).
-2. Write classify_intensity(rpe): "Low" for RPE 1-3, "Moderate" for 4-6, "High" for 7-10.
-3. Use one loop with enumerate(sessions, 1) to print "Session N: Load=L, Intensity=I" for each session.`,initialCode:`# BEFORE: repeated code (shown for reference -- do not uncomment)
-# load_1 = 75 * 7
-# intensity_1 = "High"
-# print(f"Session 1: Load={load_1}, Intensity={intensity_1}")
-# ...the same three lines repeat for sessions 2 and 3...
-
-sessions = [(75, 7), (60, 4), (40, 2)]`,expectedOutput:`Session 1: Load=525, Intensity=High
-Session 2: Load=240, Intensity=Moderate
-Session 3: Load=80, Intensity=Low`,hints:["Write the two small functions, then a single loop with enumerate(sessions, 1) replaces all three repeated blocks.",`def session_load(duration, rpe):
-    return duration * rpe
-
-def classify_intensity(rpe):
-    if rpe <= 3:
-        return "Low"
-    elif rpe <= ___:
-        return "Moderate"
-    else:
-        return "High"
-
-for i, (duration, rpe) in enumerate(sessions, 1):
-    load = session_load(duration, rpe)
-    intensity = classify_intensity(rpe)
-    print(f"Session {i}: Load={load}, Intensity={intensity}")`]},{type:"md",md:`---
+print(weekly_load(week))`]},{type:"md",md:`---
 
 ## Scope — Local vs Global Variables
 
@@ -761,47 +660,14 @@ def greet_squad():
 
 greet_squad()
 # print(msg)  # NameError — msg does not exist here
-\`\`\`
+\`\`\``},{type:"md",md:`---
 
-Best practice: pass data in through parameters and receive it back through \`return\` rather than relying on global variables.`},{type:"example",caption:"Scope: local result lives only inside the function.",code:`TANAKA_A = 208     # global constant (conventional UPPER_CASE)
-TANAKA_B = 0.7
+## Docstrings (Best Practice)
 
-def hr_max(age):
-    result = TANAKA_A - TANAKA_B * age   # local variable
-    return result
-
-print(hr_max(25))
-print(hr_max(35))
-# print(result)   # would raise NameError`},{type:"exercise",id:"ex-3-40",title:"Percent of Best Function",domain:"physiology",description:'Write a function percent_of_best(current_cm, previous_cms) that expresses the current jump height as a percentage of the best previous jump: current / max(previous) * 100. Return 0.0 if previous_cms is empty. Test with current_cm = 36.4 and previous_cms = [38.1, 40.0, 37.5]. Print the result as "Percent of best: X.X%" (1 decimal place).',initialCode:"",testCode:`assert abs(percent_of_best(36.4, [38.1, 40.0, 37.5]) - 91.0) < 0.001, "36.4 against a best of 40.0 should be 91.0"
-assert percent_of_best(35.0, []) == 0.0, "an empty history should return 0.0"
-print("PASS")`,hints:["Guard the empty-list case first (return 0.0), then find the best with max() and return the percentage.",`def percent_of_best(current_cm, previous_cms):
-    """Return the current jump as a percentage of the season best."""
-    if len(previous_cms) == 0:
-        return 0.0
-    best = ___(previous_cms)
-    return current_cm / best * 100
-
-result = percent_of_best(36.4, [38.1, 40.0, 37.5])
-print(f"Percent of best: {result:.1f}%")`]},{type:"exercise",id:"ex-3-41",title:"Fitness Report Function",domain:"coaching",description:`Write a function print_athlete_report(name, vo2max, sprint_s, cmj_cm) that prints a formatted three-line report:
-  Athlete: NAME
-  VO2max: X.X mL/kg/min
-  Sprint: X.XX s | CMJ: X.X cm
-Call it for "Lena" with vo2max=56.3, sprint_s=4.71, cmj_cm=38.5.`,initialCode:"",expectedOutput:`Athlete: Lena
-VO2max: 56.3 mL/kg/min
-Sprint: 4.71 s | CMJ: 38.5 cm`,hints:["The function body is three print() calls with f-strings, using :.1f and :.2f format specifiers.",`def print_athlete_report(name, vo2max, sprint_s, cmj_cm):
-    """Print a three-line formatted athlete report."""
-    print(f"Athlete: {name}")
-    print(f"VO2max: {vo2max:.1f} mL/kg/min")
-    print(f"Sprint: {sprint_s:.2f} s | CMJ: {___:.1f} cm")
-
-print_athlete_report("Lena", 56.3, 4.71, 38.5)`]},{type:"md",md:`---
-
-## Type Hints and Docstrings (Best Practice)
-
-Type hints (optional) tell readers what types to expect. Docstrings (strongly recommended) explain what the function does, its parameters, and what it returns.
+A docstring explains what a function does, what its parameters mean, and what it returns. It lives in triple quotes as the first line of the function body:
 
 \`\`\`python
-def calculate_bmi(weight_kg: float, height_m: float) -> float:
+def calculate_bmi(weight_kg, height_m):
     """Calculate Body Mass Index.
 
     Parameters:
@@ -814,53 +680,21 @@ def calculate_bmi(weight_kg: float, height_m: float) -> float:
     return weight_kg / height_m ** 2
 \`\`\`
 
-Well-documented functions make your code usable by colleagues — and by future you.`},{type:"example",caption:"Full-quality function: hr_recovery_time with docstring and type hints.",code:`def hr_recovery_time(hr_start: float, hr_target: float, decay: float = 0.08) -> int:
-    """Estimate minutes to recover from hr_start to hr_target.
-
-    Parameters:
-        hr_start:  Starting (post-exercise) heart rate in bpm
-        hr_target: Target (recovery) heart rate in bpm
-        decay:     Proportional HR drop per minute (default 0.08)
-
-    Returns:
-        Number of whole minutes to reach hr_target
-    """
-    minutes = 0
-    hr = hr_start
-    while hr > hr_target:
-        hr *= (1 - decay)
-        minutes += 1
-    return minutes
-
-print(hr_recovery_time(190, 130))           # default decay
-print(hr_recovery_time(190, 130, decay=0.1)) # faster recovery`},{type:"exercise",id:"ex-3-42",title:"Speed Conversion Functions",domain:"biomechanics",description:`Write two functions with type hints and docstrings:
-- ms_to_kmh(speed_ms: float) -> float: multiply by 3.6
-- kmh_to_ms(speed_kmh: float) -> float: divide by 3.6
-
-Test by converting 5.0 m/s to km/h and 18.0 km/h to m/s. Print the results to 1 decimal place as "18.0 km/h" and "5.0 m/s".`,initialCode:"",testCode:`assert abs(ms_to_kmh(5.0) - 18.0) < 0.001, f"ms_to_kmh wrong: {ms_to_kmh(5.0)}"
-assert abs(kmh_to_ms(18.0) - 5.0) < 0.001, f"kmh_to_ms wrong: {kmh_to_ms(18.0)}"
-print("PASS")`,hints:["Each function is a single return line: multiply by 3.6 one way, divide by 3.6 the other.",`def ms_to_kmh(speed_ms: float) -> float:
-    """Convert speed from m/s to km/h."""
-    return speed_ms * 3.6
-
-def kmh_to_ms(speed_kmh: float) -> float:
-    """Convert speed from km/h to m/s."""
-    return speed_kmh / ___
-
-print(f"{ms_to_kmh(5.0):.1f} km/h")
-print(f"{kmh_to_ms(18.0):.1f} m/s")`]},{type:"exercise",id:"ex-3-43",title:"Putting It Together: Team VO2max Report",domain:"physiology",description:`Write two functions:
-1. vo2max_category(v) -- returns "Elite" (>=60), "Good" (>=50), "Average" (>=40), or "Poor" (below 40)
-2. team_report(athletes) -- loops through a list of {"name": ..., "vo2max": ...} dicts and prints "NAME: X.X mL/kg/min (Category)" for each athlete.
-
-Call team_report on the provided squad list.`,initialCode:`squad = [
+Well-documented functions make your code usable by colleagues, and by future you.`},{type:"exercise",id:"ex-3-43",title:"Putting It Together: Team VO2max Report",domain:"physiology",description:`The squad list below holds one dictionary per athlete, each with a "name" and a "vo2max".
+1. Write a function vo2max_category(v) that returns the category for a VO2max value: "Elite" for 60 or more, "Good" for 50-59, "Average" for 40-49, and "Poor" below 40.
+2. Write a function team_report(athletes) that loops over the athlete dictionaries and prints one line per athlete with their name, VO2max, and category. Use vo2max_category to find the category.
+3. Call team_report(squad).
+Any clear print format is fine.`,initialCode:`squad = [
     {"name": "Kwame",  "vo2max": 63.2},
     {"name": "Ingrid", "vo2max": 52.7},
     {"name": "Tomasz", "vo2max": 44.1},
     {"name": "Lena",   "vo2max": 38.5},
-]`,expectedOutput:`Kwame: 63.2 mL/kg/min (Elite)
-Ingrid: 52.7 mL/kg/min (Good)
-Tomasz: 44.1 mL/kg/min (Average)
-Lena: 38.5 mL/kg/min (Poor)`,hints:["vo2max_category is a chain of if-returns checking the thresholds from highest down. team_report loops over the dicts, looks up the category, and prints.",`def vo2max_category(v):
+]`,testCode:`assert vo2max_category(63.2) == "Elite", f"63.2 should be Elite, got {vo2max_category(63.2)}"
+assert vo2max_category(52.7) == "Good", f"52.7 should be Good, got {vo2max_category(52.7)}"
+assert vo2max_category(44.1) == "Average", f"44.1 should be Average, got {vo2max_category(44.1)}"
+assert vo2max_category(38.5) == "Poor", f"38.5 should be Poor, got {vo2max_category(38.5)}"
+assert callable(team_report), "team_report should be a function"
+print("PASS")`,hints:["vo2max_category is a chain of if-returns checking the thresholds from highest down. team_report loops over the dicts, looks up the category, and prints.",`def vo2max_category(v):
     if v >= 60:
         return "Elite"
     if v >= ___:
@@ -872,9 +706,7 @@ Lena: 38.5 mL/kg/min (Poor)`,hints:["vo2max_category is a chain of if-returns ch
 def team_report(athletes):
     for a in athletes:
         cat = vo2max_category(a["vo2max"])
-        name = a["name"]
-        vo2 = a["vo2max"]
-        print(f"{name}: {vo2:.1f} mL/kg/min ({cat})")
+        print(a["name"], a["vo2max"], cat)
 
 team_report(squad)`]},{type:"md",md:`---
 
@@ -887,9 +719,11 @@ team_report(squad)`]},{type:"md",md:`---
 | Return multiple | \`return a, b, c\` | Returns a tuple |
 | Default parameter | \`def f(x, y=10):\` | Optional argument |
 | Docstring | \`"""Description"""\` | Document intent |
-| Type hints | \`def f(x: float) -> str:\` | Clarify expected types |
 | DRY | Extract repeated logic | One function, many calls |
 
 Functions are the foundation of organized, reusable sport science code. Start small — one function per calculation — and compose them into larger analyses.
 
-That completes this module. In the next module, we take our first full pass at real data analysis: cleaning missing data, describing datasets, and building plots.`}],quiz:{id:"quiz-3-4",title:"Functions Quiz",questions:[{id:"q1",type:"multiple-choice",question:"A function is defined as def hr_zone(hr, hr_max, num_zones=5). What does the =5 mean?",options:[{value:"a",label:"num_zones must always be exactly 5"},{value:"b",label:"Callers may omit num_zones, in which case it defaults to 5"},{value:"c",label:"The function always returns 5"},{value:"d",label:"num_zones is a global variable set to 5"}],correctAnswer:"b",explanation:"A default parameter value is used when the caller does not supply that argument. hr_zone(155, 190) uses num_zones=5; hr_zone(155, 190, num_zones=3) overrides it."},{id:"q2",type:"true-false",question:"What is a docstring?",options:[{value:"true",label:"A triple-quoted description at the top of a function explaining what it does"},{value:"false",label:"A string value that every function must return"}],correctAnswer:"true",explanation:"A docstring is the triple-quoted text on the first line inside a function body. It documents what the function does, its parameters, and its return value -- help() displays it."},{id:"q3",type:"multiple-choice",question:"What does the DRY principle stand for?",options:[{value:"a",label:"Do Repeat Yourself"},{value:"b",label:"Don't Repeat Yourself"},{value:"c",label:"Data Requires Yielding"},{value:"d",label:"Debug, Refactor, Yield"}],correctAnswer:"b",explanation:`DRY stands for "Don't Repeat Yourself." It means extracting repeated code into reusable functions to avoid duplication.`},{id:"q4",type:"multiple-choice",question:"What will this function return? def analyze(times): return min(times), max(times) -- then result = analyze([4.5, 4.8, 4.2])",options:[{value:"a",label:"A list: [4.2, 4.8]"},{value:"b",label:"A tuple: (4.2, 4.8)"},{value:"c",label:"Just the first value: 4.2"},{value:"d",label:"An error"}],correctAnswer:"b",explanation:"When a function returns multiple values separated by commas, Python automatically packs them into a tuple. The result is (4.2, 4.8)."},{id:"q5",type:"true-false",question:"A variable defined inside a function is accessible from outside that function.",options:[{value:"true",label:"True"},{value:"false",label:"False"}],correctAnswer:"false",explanation:"Variables defined inside a function are local. They only exist while the function is running and cannot be accessed from outside."}]}}};export{e as lessons};
+That completes this module. In the next module, we take our first full pass at real data analysis: cleaning missing data, describing datasets, and building plots.`}],quiz:{id:"quiz-3-4",title:"Functions Quiz",questions:[{id:"q1",type:"multiple-choice",question:"A function is defined as def hr_zone(hr, hr_max, num_zones=5). What does the =5 mean?",options:[{value:"a",label:"num_zones must always be exactly 5"},{value:"b",label:"Callers may omit num_zones, in which case it defaults to 5"},{value:"c",label:"The function always returns 5"},{value:"d",label:"num_zones is a global variable set to 5"}],correctAnswer:"b",explanation:"A default parameter value is used when the caller does not supply that argument. hr_zone(155, 190) uses num_zones=5; hr_zone(155, 190, num_zones=3) overrides it."},{id:"q2",type:"true-false",question:"What is a docstring?",options:[{value:"true",label:"A triple-quoted description at the top of a function explaining what it does"},{value:"false",label:"A string value that every function must return"}],correctAnswer:"true",explanation:"A docstring is the triple-quoted text on the first line inside a function body. It documents what the function does, its parameters, and its return value -- help() displays it."},{id:"q3",type:"multiple-choice",question:"What does the DRY principle stand for?",options:[{value:"a",label:"Do Repeat Yourself"},{value:"b",label:"Don't Repeat Yourself"},{value:"c",label:"Data Requires Yielding"},{value:"d",label:"Debug, Refactor, Yield"}],correctAnswer:"b",explanation:`DRY stands for "Don't Repeat Yourself." It means extracting repeated code into reusable functions to avoid duplication.`},{id:"q4",type:"multiple-choice",question:"What does result hold after this code runs?",code:`def analyze(times):
+    return min(times), max(times)
+
+result = analyze([4.5, 4.8, 4.2])`,options:[{value:"a",label:"A list: [4.2, 4.8]"},{value:"b",label:"A tuple: (4.2, 4.8)"},{value:"c",label:"Just the first value: 4.2"},{value:"d",label:"An error"}],correctAnswer:"b",explanation:"When a function returns multiple values separated by commas, Python automatically packs them into a tuple. The result is (4.2, 4.8)."},{id:"q5",type:"true-false",question:"A variable defined inside a function is accessible from outside that function.",options:[{value:"true",label:"True"},{value:"false",label:"False"}],correctAnswer:"false",explanation:"Variables defined inside a function are local. They only exist while the function is running and cannot be accessed from outside."}]}}};export{e as lessons};
