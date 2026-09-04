@@ -32,7 +32,7 @@ df = pd.read_csv('data/test_battery.csv')
 cmj = df['CMJ_cm']`,testCode:`assert abs(mean_cmj   - round(cmj.mean(),   1)) < 0.05, f"mean_cmj wrong: {mean_cmj}"
 assert abs(sd_cmj     - round(cmj.std(),    1)) < 0.05, f"sd_cmj wrong: {sd_cmj}"
 assert abs(median_cmj - round(cmj.median(), 1)) < 0.05, f"median_cmj wrong: {median_cmj}"
-print("PASS")`,hints:["cmj.mean(), cmj.std() (sample SD by default), and cmj.median() -- wrap each in round(x, 1).",`mean_cmj = round(cmj.mean(), 1)
+print("PASS")`,hints:["`cmj.mean()`, `cmj.std()` (sample SD by default), and `cmj.median()` -- wrap each in `round(x, 1)`.",`mean_cmj = round(cmj.mean(), 1)
 sd_cmj = round(cmj.___(), 1)
 median_cmj = round(cmj.median(), 1)
 
@@ -91,7 +91,7 @@ _sd  = grip.std()
 _sem = _sd / np.sqrt(len(grip))
 assert abs(sd_grip  - round(_sd,  2)) < 0.02, f"sd_grip={sd_grip}"
 assert abs(sem_grip - round(_sem, 2)) < 0.02, f"sem_grip={sem_grip}"
-print("PASS")`,hints:["SEM = SD / sqrt(n): use grip.std() and np.sqrt(len(grip)).",`sd_grip = round(grip.std(), 2)
+print("PASS")`,hints:["SEM = SD / `sqrt(n)`: use `grip.std()` and `np.sqrt(len(grip))`.",`sd_grip = round(grip.std(), 2)
 sem_grip = round(grip.std() / np.sqrt(___(grip)), 2)
 
 print(f"SD:  {sd_grip} kg")
@@ -134,7 +134,7 @@ from scipy import stats
 df = pd.read_csv('data/test_battery.csv')`,testCode:`_stat, _p = stats.shapiro(df['Sit_Reach_cm'])
 assert abs(p - round(_p, 3)) < 1e-3, f"p={p}"
 assert is_normal == (round(_p, 3) >= 0.05), f"is_normal={is_normal}"
-print("PASS")`,hints:["stats.shapiro(column) returns (statistic, p_value); compare the rounded p against 0.05.",`stat, pval = stats.shapiro(df["Sit_Reach_cm"])
+print("PASS")`,hints:["`stats.shapiro(column)` returns (statistic, `p_value`); compare the rounded p against 0.05.",`stat, pval = stats.shapiro(df["Sit_Reach_cm"])
 p = round(pval, 3)
 is_normal = p >= ___
 
@@ -171,7 +171,7 @@ _lo = round(_m - _tc * _sem, 1)
 _hi = round(_m + _tc * _sem, 1)
 assert abs(ci_lower - _lo) < 0.15, f"ci_lower={ci_lower}"
 assert abs(ci_upper - _hi) < 0.15, f"ci_upper={ci_upper}"
-print("PASS")`,hints:["CI = mean ± t_crit × SEM, with SEM = SD / sqrt(n) and t_crit = stats.t.ppf(0.975, df=n-1).",`mean = vo2.mean()
+print("PASS")`,hints:["CI = mean ± `t_crit` × SEM, with SEM = SD / `sqrt(n)` and `t_crit` = `stats.t.ppf(0.975, df=n-1)`.",`mean = vo2.mean()
 n = len(vo2)
 sem = vo2.std() / np.sqrt(n)
 t_crit = stats.t.ppf(0.975, df=n - ___)
@@ -195,7 +195,7 @@ _iqr = _q3 - _q1
 assert abs(q1  - round(_q1,  2)) < 0.05, f"q1={q1}"
 assert abs(q3  - round(_q3,  2)) < 0.05, f"q3={q3}"
 assert abs(iqr - round(_iqr, 2)) < 0.05, f"iqr={iqr}"
-print("PASS")`,hints:[".quantile() takes a proportion: 0.25 for Q1, 0.75 for Q3. IQR = Q3 - Q1.",`q1 = round(cmj.quantile(0.25), 2)
+print("PASS")`,hints:["`.quantile()` takes a proportion: 0.25 for Q1, 0.75 for Q3. IQR = Q3 - Q1.",`q1 = round(cmj.quantile(0.25), 2)
 q3 = round(cmj.quantile(___), 2)
 iqr = round(q3 - q1, 2)
 
@@ -249,7 +249,7 @@ for c in ['Q3','Q7','Q11']:
     _s[c] = 6 - _s[c]
 _expected = _s.mean(axis=1)
 assert abs(motivation.mean() - _expected.mean()) < 0.01, "Reverse-code Q3/Q7/Q11 then row-mean all 12 items"
-print("PASS")`,hints:["Copy the item columns, reverse the three reverse items with 6 - value, then take the row-mean with .mean(axis=1).",`scored = df[items].copy()
+print("PASS")`,hints:["Copy the item columns, reverse the three reverse items with 6 - value, then take the row-mean with `.mean`(axis=1).",`scored = df[items].copy()
 for col in ["Q3", "Q7", "Q11"]:
     scored[col] = ___ - scored[col]
 
@@ -268,7 +268,7 @@ pos_items = [c for c in items if c not in ('Q3', 'Q7', 'Q11')]`,testCode:`_pos =
 _r = round(float(df['Q7'].corr(_pos)), 2)
 assert abs(r_q7_raw - _r) < 0.03, f"r_q7_raw={r_q7_raw}, expected ~{_r}"
 assert r_q7_raw < 0, "Raw Q7 should correlate negatively with the positive items"
-print("PASS")`,hints:["Build the positive score with .mean(axis=1) over the nine positive items, then correlate raw Q7 against it with .corr().",`positive_score = df[pos_items].mean(axis=1)
+print("PASS")`,hints:["Build the positive score with `.mean`(axis=1) over the nine positive items, then correlate raw Q7 against it with `.corr()`.",`positive_score = df[pos_items].mean(axis=1)
 
 r_q7_raw = round(df["Q7"].corr(___), 2)
 print(r_q7_raw)`]},{type:"md",md:`---
@@ -292,7 +292,7 @@ for col in tests:
 
 battery['fitness_z'] = z.mean(axis=1)
 ranked = battery[['Athlete'] + tests + ['fitness_z']].sort_values('fitness_z', ascending=False)
-print(ranked.head(4).round(2).to_string(index=False))`},{type:"exercise",id:"ex-6-27",title:"Build a Z-Score Fitness Composite",domain:"physiology",packages:["pandas"],dataFiles:["test_battery.csv"],description:"Load the test battery. Z-score `Grip_Strength_kg`, `CMJ_cm`, and `Sit_Reach_cm`. Average the three z-scores per athlete into a column `fitness_z`. Store the athlete with the highest composite in `top_athlete` (use `.idxmax()` on the fitness_z Series indexed by Athlete). Print `top_athlete`.",initialCode:`import pandas as pd
+print(ranked.head(4).round(2).to_string(index=False))`},{type:"exercise",id:"ex-6-27",title:"Build a Z-Score Fitness Composite",domain:"physiology",packages:["pandas"],dataFiles:["test_battery.csv"],description:"Load the test battery. Z-score `Grip_Strength_kg`, `CMJ_cm`, and `Sit_Reach_cm`. Average the three z-scores per athlete into a column `fitness_z`. Store the athlete with the highest composite in `top_athlete` (use `.idxmax()` on the `fitness_z` Series indexed by Athlete). Print `top_athlete`.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/test_battery.csv')
 tests = ['Grip_Strength_kg', 'CMJ_cm', 'Sit_Reach_cm']`,testCode:`_tests = ['Grip_Strength_kg', 'CMJ_cm', 'Sit_Reach_cm']
@@ -302,7 +302,7 @@ for _c in _tests:
 df['fitness_z'] = _z.mean(axis=1)
 _top = df.set_index('Athlete')['fitness_z'].idxmax()
 assert top_athlete == _top, f"Expected {_top}, got {top_athlete}"
-print("PASS")`,hints:["z = (value - mean) / SD per column; average the three z-columns with .mean(axis=1); then idxmax() on the Athlete-indexed Series.",`z = pd.DataFrame()
+print("PASS")`,hints:["z = (value - mean) / SD per column; average the three z-columns with `.mean`(axis=1); then `idxmax()` on the Athlete-indexed Series.",`z = pd.DataFrame()
 for col in tests:
     z[col] = (df[col] - df[col].mean()) / df[col].___()
 
@@ -339,7 +339,7 @@ _up   = np.triu(np.ones((_n, _n), dtype=bool), k=1)
 _expected = round(float(_corr.values[_up].mean()), 2)
 assert abs(mean_iic - _expected) < 0.03, f"mean_iic={mean_iic}, expected ~{_expected}"
 assert mean_iic > 0, "Mean inter-item correlation should be positive after reversing"
-print("PASS")`,hints:["Reverse-code first, then scored.corr(); np.triu(..., k=1) selects the upper triangle above the diagonal.",`scored = df[items].copy()
+print("PASS")`,hints:["Reverse-code first, then `scored.corr()`; `np.triu(..., k=1)` selects the upper triangle above the diagonal.",`scored = df[items].copy()
 for col in ["Q3", "Q7", "Q11"]:
     scored[col] = 6 - scored[col]
 
@@ -384,7 +384,7 @@ from scipy import stats
 df = pd.read_csv('data/strength.csv')`,testCode:`_r = stats.linregress(df['muscle_csa'], df['squat_strength'])
 assert abs(slope_value - round(_r.slope,        3)) < 1e-3, f"slope_value={slope_value}"
 assert abs(r2_value    - round(_r.rvalue ** 2,  3)) < 1e-3, f"r2_value={r2_value}"
-print("PASS")`,hints:["stats.linregress(x, y) -- x comes first. R² is result.rvalue squared.",`result = stats.linregress(df["muscle_csa"], df["squat_strength"])
+print("PASS")`,hints:["`stats.linregress(x, y)` -- x comes first. R² is result.rvalue squared.",`result = stats.linregress(df["muscle_csa"], df["squat_strength"])
 slope_value = round(result.slope, 3)
 r2_value = round(result.rvalue ** ___, 3)
 
@@ -424,7 +424,7 @@ df = pd.read_csv('data/strength.csv')`,testCode:`_X = sm.add_constant(df['muscle
 _m = sm.OLS(df['squat_strength'], _X).fit()
 assert abs(ols_r2 - round(_m.rsquared,              3)) < 0.002, f"ols_r2={ols_r2}"
 assert abs(ols_p  - round(_m.pvalues['muscle_csa'], 4)) < 0.001, f"ols_p={ols_p}"
-print("PASS")`,hints:["sm.OLS(y, X) with X = sm.add_constant(...). R² is model.rsquared; the slope p-value lives in model.pvalues.",`X = sm.add_constant(df["muscle_csa"])
+print("PASS")`,hints:["`sm.OLS(y, X)` with X = `sm.add_constant(...)`. R² is model.rsquared; the slope p-value lives in model.pvalues.",`X = sm.add_constant(df["muscle_csa"])
 model = sm.OLS(df["squat_strength"], X).fit()
 
 ols_r2 = round(model.rsquared, 3)
@@ -450,7 +450,7 @@ from sklearn.linear_model import LinearRegression
 df = pd.read_csv('data/test_battery.csv')`,testCode:`_m = LinearRegression().fit(df[['Height_cm']], df['CMJ_cm'])
 _p = round(_m.predict([[185]])[0], 1)
 assert abs(pred - _p) < 0.15, f"pred={pred}, expected ~{_p}"
-print("PASS")`,hints:['X must be 2-D -- double brackets df[["Height_cm"]]. Fit, then predict for [[185]].',`X = df[["Height_cm"]]
+print("PASS")`,hints:['X must be 2-D -- double brackets `df`[["`Height_cm`"]]. Fit, then predict for [[185]].',`X = df[["Height_cm"]]
 y = df["CMJ_cm"]
 
 model = LinearRegression().fit(X, y)
@@ -498,7 +498,7 @@ _pred = _r.intercept + _r.slope * df['muscle_csa']
 _res  = df['squat_strength'] - _pred
 _expected = round(float(_res.abs().max()), 1)
 assert abs(max_abs_residual - _expected) < 0.15, f"max_abs_residual={max_abs_residual}, expected ~{_expected}"
-print("PASS")`,hints:["residual = actual - predicted, with predicted = intercept + slope * x. Then .abs().max().",`result = stats.linregress(x, y)
+print("PASS")`,hints:["residual = actual - predicted, with predicted = intercept + slope * x. Then `.abs()``.max()`.",`result = stats.linregress(x, y)
 predicted = result.intercept + result.slope * x
 residuals = y - ___
 
@@ -553,7 +553,7 @@ men = df[df['sex'] == 'M']['squat_strength']
 women = df[df['sex'] == 'F']['squat_strength']`,testCode:`_t, _p = stats.ttest_ind(df[df['sex']=='M']['squat_strength'], df[df['sex']=='F']['squat_strength'])
 assert abs(p - round(_p, 4)) < 1e-4, f"p={p}"
 assert significant == (round(_p, 4) < 0.05), f"significant={significant}"
-print("PASS")`,hints:["stats.ttest_ind(group1, group2) returns (t, p). Round to 4 decimals and compare with 0.05.",`t, pval = stats.ttest_ind(men, ___)
+print("PASS")`,hints:["`stats.ttest_ind(group1, group2)` returns (t, p). Round to 4 decimals and compare with 0.05.",`t, pval = stats.ttest_ind(men, ___)
 p = round(pval, 4)
 significant = p < 0.05
 
@@ -628,7 +628,7 @@ _t, _p = stats.ttest_rel(post, pre)
 _md = round(float(np.mean(post) - np.mean(pre)), 2)
 assert abs(mean_diff - _md) < 0.02, f"mean_diff={mean_diff}, expected {_md}"
 assert improved == (_p < 0.05), f"improved={improved}"
-print("PASS")`,hints:["The same athletes measured twice means paired data -- stats.ttest_rel(post, pre).",`t, pval = stats.ttest_rel(post, ___)
+print("PASS")`,hints:["The same athletes measured twice means paired data -- `stats.ttest_rel(post, pre)`.",`t, pval = stats.ttest_rel(post, ___)
 mean_diff = round(float(np.mean(post) - np.mean(pre)), 2)
 improved = pval < 0.05
 
@@ -665,7 +665,7 @@ df = pd.read_csv('data/training_log.csv').dropna(subset=['Avg_HR'])`,testCode:`_
 _F, _p = stats.f_oneway(*_g)
 assert abs(F - round(_F, 2)) < 0.05, f"F={F}, expected ~{round(_F,2)}"
 assert sig == (_p < 0.05), f"sig={sig}"
-print("PASS")`,hints:["Build one array per session type with groupby, then unpack the list into f_oneway with the * splat.",`groups = [g["Avg_HR"].values for _, g in df.groupby("Session_Type")]
+print("PASS")`,hints:["Build one array per session type with groupby, then unpack the list into `f_oneway` with the * splat.",`groups = [g["Avg_HR"].values for _, g in df.groupby("Session_Type")]
 
 Fval, pval = stats.f_oneway(*___)
 F = round(Fval, 2)
@@ -755,7 +755,7 @@ print(df['Injuries'].value_counts().sort_index())`},{type:"exercise",id:"ex-6-55
 df = pd.read_csv('data/team_injuries.csv')`,testCode:`_m = df.groupby('Position')['Injuries'].mean()
 _gk = round(float(_m['Goalkeeper']), 3)
 assert abs(gk_mean - _gk) < 0.005, f"gk_mean={gk_mean}, expected ~{_gk}"
-print("PASS")`,hints:['groupby("Position")["Injuries"].mean() gives one mean per position -- index the result with the position name.',`pos_means = df.groupby("Position")["Injuries"].mean()
+print("PASS")`,hints:['`groupby("Position")`["Injuries"]`.mean()` gives one mean per position -- index the result with the position name.',`pos_means = df.groupby("Position")["Injuries"].mean()
 gk_mean = round(float(pos_means["___"]), 3)
 print(gk_mean)`]},{type:"md",md:`---
 
@@ -823,7 +823,7 @@ df['log_exposure'] = np.log(df['Exposure_hours'])`,testCode:`_m = smf.glm("Injur
 _fwd = [k for k in _m.params.index if 'Forward' in k][0]
 _rr = round(float(np.exp(_m.params[_fwd])), 2)
 assert abs(rr_forward - _rr) < 0.03, f"rr_forward={rr_forward}, expected ~{_rr}"
-print("PASS")`,hints:['smf.glm with family=sm.families.Poisson() and offset=df["log_exposure"]; exponentiate the Forward coefficient with np.exp to get the rate ratio.',`model = smf.glm("Injuries ~ C(Position)", data=df,
+print("PASS")`,hints:['smf.glm with family=`sm.families.Poisson()` and offset=`df`["`log_exposure`"]; exponentiate the Forward coefficient with `np`.exp to get the rate ratio.',`model = smf.glm("Injuries ~ C(Position)", data=df,
                 family=sm.families.Poisson(),
                 offset=df["log_exposure"]).fit()
 
@@ -845,7 +845,7 @@ The real story: **goalkeepers get injured far less often than outfield players**
 
 The p-values back this up: Forward and Midfielder coefficients are nowhere near significant (p ≈ 0.93 and 0.88), and even the Goalkeeper effect is only borderline (p ≈ 0.06) given how few injuries the 17 keepers accumulated.
 
-> **Exponentiate to get a rate ratio.** Raw Poisson coefficients live on the log scale; \`exp(coef)\` converts each into a rate ratio — a multiplier on the baseline rate. A rate ratio of 1 means "no difference from the baseline"; above 1 means a higher rate; below 1 a lower rate. Always state the baseline explicitly, or your ratios have no anchor.`},{type:"exercise",id:"ex-6-57",title:"Goalkeeper Rate Ratio",domain:"physiology",packages:["statsmodels"],dataFiles:["team_injuries.csv"],description:"Using the same Poisson model (Injuries ~ C(Position) with log_exposure offset), extract the rate ratio for **Goalkeepers** relative to Defenders (rounded to 2 decimals) and store it in `rr_gk`. Also extract the Goalkeeper p-value (rounded to 3 decimals) into `p_gk`. Print both.",initialCode:`import pandas as pd
+> **Exponentiate to get a rate ratio.** Raw Poisson coefficients live on the log scale; \`exp(coef)\` converts each into a rate ratio — a multiplier on the baseline rate. A rate ratio of 1 means "no difference from the baseline"; above 1 means a higher rate; below 1 a lower rate. Always state the baseline explicitly, or your ratios have no anchor.`},{type:"exercise",id:"ex-6-57",title:"Goalkeeper Rate Ratio",domain:"physiology",packages:["statsmodels"],dataFiles:["team_injuries.csv"],description:"Using the same Poisson model (Injuries ~ `C(Position)` with `log_exposure` offset), extract the rate ratio for **Goalkeepers** relative to Defenders (rounded to 2 decimals) and store it in `rr_gk`. Also extract the Goalkeeper p-value (rounded to 3 decimals) into `p_gk`. Print both.",initialCode:`import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
@@ -857,7 +857,7 @@ _rr = round(float(np.exp(_m.params[_gk])), 2)
 _p  = round(float(_m.pvalues[_gk]), 3)
 assert abs(rr_gk - _rr) < 0.03, f"rr_gk={rr_gk}, expected ~{_rr}"
 assert abs(p_gk  - _p)  < 0.01, f"p_gk={p_gk}, expected ~{_p}"
-print("PASS")`,hints:["Same model as before; np.exp(coefficient) gives the rate ratio and model.pvalues holds the p-value.",`model = smf.glm("Injuries ~ C(Position)", data=df,
+print("PASS")`,hints:["Same model as before; `np.exp(coefficient)` gives the rate ratio and model.pvalues holds the p-value.",`model = smf.glm("Injuries ~ C(Position)", data=df,
                 family=sm.families.Poisson(),
                 offset=df["log_exposure"]).fit()
 
@@ -888,7 +888,7 @@ model_age = smf.glm("Injuries ~ C(Position) + Age", data=df,
 
 print(f"Age coefficient: {model_age.params['Age']:.4f}")
 print(f"Age p-value:     {model_age.pvalues['Age']:.3f}")
-print("(p >> 0.05 — Age adds nothing once exposure and position are in the model)")`},{type:"exercise",id:"ex-6-58",title:"Test Age as a Predictor",domain:"teaching",packages:["statsmodels"],dataFiles:["team_injuries.csv"],description:"Fit a Poisson GLM of `Injuries ~ C(Position) + Age` with `log_exposure` as an offset. Store the Age coefficient (rounded to 4 decimals) in `age_coef` and the Age p-value (rounded to 3 decimals) in `age_p`. Store a boolean `age_significant` that is True when age_p < 0.05. Print all three.",initialCode:`import pandas as pd
+print("(p >> 0.05 — Age adds nothing once exposure and position are in the model)")`},{type:"exercise",id:"ex-6-58",title:"Test Age as a Predictor",domain:"teaching",packages:["statsmodels"],dataFiles:["team_injuries.csv"],description:"Fit a Poisson GLM of `Injuries ~ C(Position) + Age` with `log_exposure` as an offset. Store the Age coefficient (rounded to 4 decimals) in `age_coef` and the Age p-value (rounded to 3 decimals) in `age_p`. Store a boolean `age_significant` that is True when `age_p` < 0.05. Print all three.",initialCode:`import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
@@ -910,7 +910,7 @@ age_significant = age_p < 0.05
 
 print(age_coef)
 print(age_p)
-print(age_significant)`]},{type:"exercise",id:"ex-6-59",title:"All Rate Ratios",domain:"biomechanics",packages:["statsmodels"],dataFiles:["team_injuries.csv"],description:"Fit the Poisson position model (no Age) with log_exposure offset. Compute rate ratios for all four positions: Defender (exp of Intercept gives the baseline rate per hour — **not** a rate ratio), Forward, Goalkeeper, and Midfielder. Store the Midfielder rate ratio (rounded to 2 decimals) in `rr_mid`. Also compute the ratio of rr_gk to rr_mid (i.e. how many times lower is the goalkeeper rate relative to midfielders), rounded to 2 decimals, stored in `gk_vs_mid`. Print both.",initialCode:`import pandas as pd
+print(age_significant)`]},{type:"exercise",id:"ex-6-59",title:"All Rate Ratios",domain:"biomechanics",packages:["statsmodels"],dataFiles:["team_injuries.csv"],description:"Fit the Poisson position model (no Age) with `log_exposure` offset. Compute rate ratios for all four positions: Defender (exp of Intercept gives the baseline rate per hour — **not** a rate ratio), Forward, Goalkeeper, and Midfielder. Store the Midfielder rate ratio (rounded to 2 decimals) in `rr_mid`. Also compute the ratio of `rr_gk` to `rr_mid` (i.e. how many times lower is the goalkeeper rate relative to midfielders), rounded to 2 decimals, stored in `gk_vs_mid`. Print both.",initialCode:`import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 import statsmodels.formula.api as smf

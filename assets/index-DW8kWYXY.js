@@ -2,8 +2,8 @@ const e={conditionals:{blocks:[{type:"md",md:'# Conditional Statements\n\n## Int
 personal_best_s  = 4.58   # previous best
 
 if current_sprint_s < personal_best_s:
-    print("New personal best!")`},{type:"exercise",id:"ex-3-10",title:"Heart Rate Ceiling Alert",domain:"coaching",description:'During a recovery session an athlete must keep their heart rate below the zone ceiling. Write an if statement that prints "Slow down!" when current_hr_bpm is above zone_ceiling_bpm, and nothing otherwise.',initialCode:`zone_ceiling_bpm = 152
-current_hr_bpm = 168`,expectedOutput:"Slow down!",hints:["Compare current_hr_bpm with zone_ceiling_bpm using >.",`if current_hr_bpm > ___:
+    print("New personal best!")`},{type:"exercise",id:"ex-3-10",title:"Heart Rate Ceiling Alert",domain:"coaching",description:'During a recovery session an athlete must keep their heart rate below the zone ceiling. Write an if statement that prints "Slow down!" when `current_hr_bpm` is above `zone_ceiling_bpm`, and nothing otherwise.',initialCode:`zone_ceiling_bpm = 152
+current_hr_bpm = 168`,expectedOutput:"Slow down!",hints:["Compare `current_hr_bpm` with `zone_ceiling_bpm` using >.",`if current_hr_bpm > ___:
     print("Slow down!")`]},{type:"md",md:"---\n\n## `if`/`else` — Two Paths\n\nAn `else` branch runs when the `if` condition is false. Together they form a clean pass/fail decision:\n\n```python\nif condition:\n    # runs when True\nelse:\n    # runs when False\n```\n\nExample: applying a VO2max fitness standard to clear or flag an athlete:"},{type:"example",caption:"if/else: classify a VO2max against a minimum threshold.",code:`vo2max = 48.5          # mL/kg/min
 threshold = 50.0       # minimum standard for the squad
 
@@ -11,7 +11,7 @@ if vo2max >= threshold:
     print("PASS: meets aerobic fitness standard")
 else:
     print("FAIL: below aerobic fitness standard")`},{type:"exercise",id:"ex-3-11",title:"Fitness Threshold Pass/Fail",domain:"physiology",description:'A squad fitness test requires athletes to complete a 3-km time trial in 14 minutes or less. Write an if/else that prints "PASS" when the time is within the cutoff and "FAIL" otherwise.',initialCode:`time_trial_min = 14.3
-cutoff_min = 14.0`,expectedOutput:"FAIL",hints:["PASS requires time_trial_min <= cutoff_min. Since 14.3 > 14.0, the else branch should run.",`if time_trial_min <= ___:
+cutoff_min = 14.0`,expectedOutput:"FAIL",hints:["PASS requires `time_trial_min` <= `cutoff_min`. Since 14.3 > 14.0, the else branch should run.",`if time_trial_min <= ___:
     print("PASS")
 else:
     print("FAIL")`]},{type:"md",md:`---
@@ -41,15 +41,15 @@ else:
     intensity = "Hard"
 
 print(f"Lactate {lactate_mmol} mmol/L -> {intensity} session")`},{type:"exercise",id:"ex-3-1",title:"Heart Rate Zone Classifier",domain:"physiology",description:`Write a program that classifies a heart rate into one of 5 training zones:
-1. Calculate max HR with the Tanaka formula (208 - 0.7 * age) and store it in hr_max.
-2. Calculate the percentage of max HR and store it in hr_percentage.
+1. Calculate max HR with the Tanaka formula (208 - 0.7 * age) and store it in \`hr_max\`.
+2. Calculate the percentage of max HR and store it in \`hr_percentage\`.
 3. Classify it into zone: Zone 1 <60%, Zone 2 60-69%, Zone 3 70-79%, Zone 4 80-89%, Zone 5 90%+.
 4. Print the percentage and the zone.
 Any clear print format is fine.`,initialCode:`age = 28
 current_hr_bpm = 168`,testCode:`assert abs(hr_max - 188.4) < 0.01, f"hr_max should be 188.4 (Tanaka), got {hr_max}"
 assert abs(hr_percentage - 89.17) < 0.05, f"hr_percentage should be about 89.2, got {hr_percentage}"
 assert zone == 4, f"89.2% of max falls in Zone 4, got {zone}"
-print("PASS")`,hints:["Calculate hr_max = 208 - 0.7 * age and hr_percentage = current_hr_bpm / hr_max * 100, then use an if-elif-else chain on hr_percentage.",`hr_max = 208 - 0.7 * age
+print("PASS")`,hints:["Calculate `hr_max` = 208 - 0.7 * age and `hr_percentage` = `current_hr_bpm` / `hr_max` * 100, then use an if-elif-else chain on `hr_percentage`.",`hr_max = 208 - 0.7 * age
 hr_percentage = current_hr_bpm / hr_max * 100
 
 if hr_percentage < 60:
@@ -69,7 +69,7 @@ sleep_hours = 7.5
 is_injured = False
 
 if (wellness_score >= 6) and (sleep_hours >= 7) and (not is_injured):
-    print("Green light: full training")`},{type:"exercise",id:"ex-3-12",title:"Training Readiness Flag",domain:"psychology",description:"An athlete is ready to train if their wellness score is at least 6 AND they are not carrying a reported injury. Write an if/else that checks both conditions in one boolean expression and sets ready_to_train to True or False, then print it.",initialCode:`wellness_score = 7      # 1-10 self-report
+    print("Green light: full training")`},{type:"exercise",id:"ex-3-12",title:"Training Readiness Flag",domain:"psychology",description:"An athlete is ready to train if their wellness score is at least 6 AND they are not carrying a reported injury. Write an if/else that checks both conditions in one boolean expression and sets `ready_to_train` to True or False, then print it.",initialCode:`wellness_score = 7      # 1-10 self-report
 has_injury = False`,testCode:`assert ready_to_train is True, f"Expected True, got {ready_to_train}"
 print("PASS")`,hints:["Two conditions joined with and: the wellness check and the absence of injury (use not).",`if (wellness_score >= 6) and (not ___):
     ready_to_train = True
@@ -88,7 +88,7 @@ else:
     status = "Not selected (medical hold)"
 
 print(status)`},{type:"exercise",id:"ex-3-13",title:"Squad Selection Gate",domain:"biomechanics",description:'An athlete can be selected for the squad if they are medically cleared AND their CMJ height is above 35 cm. Print "Selected" if both hold. If cleared but CMJ is too low, print "Needs strength work". If not cleared, print "Medical hold". Use a nested if.',initialCode:`medically_cleared = True
-cmj_cm = 33.5`,expectedOutput:"Needs strength work",hints:['The outer if checks medically_cleared; the inner if checks cmj_cm > 35. An outer else handles "Medical hold".',`if medically_cleared:
+cmj_cm = 33.5`,expectedOutput:"Needs strength work",hints:['The outer if checks `medically_cleared`; the inner if checks `cmj_cm` > 35. An outer else handles "Medical hold".',`if medically_cleared:
     if cmj_cm > ___:
         print("Selected")
     else:
@@ -134,7 +134,7 @@ position = "Goalkeeper"
 if position in high_load_positions:
     print(f"{position}: HIGH load monitoring")
 else:
-    print(f"{position}: standard monitoring")`},{type:"exercise",id:"ex-3-14",title:"High-Load Position Check",domain:"coaching",description:`A GPS monitoring protocol applies to players in high-load positions. Write an if/else that prints "Fit GPS vest" when the player's position is in the gps_positions list and "No GPS required" otherwise.`,initialCode:`gps_positions = ["Centre-mid", "Forward", "Wing-back"]
+    print(f"{position}: standard monitoring")`},{type:"exercise",id:"ex-3-14",title:"High-Load Position Check",domain:"coaching",description:'A GPS monitoring protocol applies to players in high-load positions. Write an if/else that prints "Fit GPS vest" when the player\'s position is in the `gps_positions` list and "No GPS required" otherwise.',initialCode:`gps_positions = ["Centre-mid", "Forward", "Wing-back"]
 player_position = "Forward"`,expectedOutput:"Fit GPS vest",hints:["The in operator tests whether a value is in a list.",`if player_position in ___:
     print("Fit GPS vest")
 else:
@@ -155,21 +155,17 @@ label = "Fast" if sprint_s < 5.0 else "Slow"
 
 Use it sparingly, only when the condition is genuinely simple. For anything more complex, a regular \`if\`/\`else\` is clearer.
 
-Three more exercises follow to consolidate what you have learned:`},{type:"exercise",id:"ex-3-15",title:"VO2max Fitness Category",domain:"physiology",description:'Classify a VO2max score into one of three categories using a simple (age-independent) standard: "Elite" for >= 60, "Good" for >= 50, and "Developing" for anything below 50. Assign the label to a variable category and print it.',initialCode:"vo2max = 53.4   # mL/kg/min",expectedOutput:"Good",hints:["Check >= 60 first (Elite), then >= 50 (Good), then let else handle Developing. 53.4 falls in the 50-59 range.",`if vo2max >= 60:
+Three more exercises follow to consolidate what you have learned:`},{type:"exercise",id:"ex-3-15",title:"VO2max Fitness Category",domain:"physiology",description:'Classify a VO2max score into one of three categories using a simple (age-independent) standard: "Elite" for >= 60, "Good" for >= 50, and "Developing" for anything below 50. Assign the label to a variable `category` and print it.',initialCode:"vo2max = 53.4   # mL/kg/min",expectedOutput:"Good",hints:["Check >= 60 first (Elite), then >= 50 (Good), then let else handle Developing. 53.4 falls in the 50-59 range.",`if vo2max >= 60:
     category = "Elite"
 elif vo2max >= ___:
     category = "Good"
 else:
     category = "Developing"
 
-print(category)`]},{type:"exercise",id:"ex-3-16",title:"Overreaching Flag",domain:"psychology",description:"An athlete is showing overreaching symptoms. Set the variable overreaching to True if BOTH of the following are true: perceived_fatigue >= 8 AND mood_score <= 3. Then print it.",initialCode:`perceived_fatigue = 9   # 1-10 scale (higher = more fatigue)
+print(category)`]},{type:"exercise",id:"ex-3-16",title:"Overreaching Flag",domain:"psychology",description:"An athlete is showing overreaching symptoms. Set the variable `overreaching` to True if BOTH of the following are true: `perceived_fatigue` >= 8 AND `mood_score` <= 3. Then print it.",initialCode:`perceived_fatigue = 9   # 1-10 scale (higher = more fatigue)
 mood_score = 2          # 1-10 scale (lower = worse mood)`,testCode:`assert overreaching is True, f"Expected True, got {overreaching}"
 print("PASS")`,hints:["Join the two comparisons with and -- both must be True for the flag to be True.",`overreaching = (perceived_fatigue >= 8) and (mood_score <= ___)
-print(overreaching)`]},{type:"exercise",id:"ex-3-17",title:"Class Register Check",domain:"teaching",description:`A PE teacher keeps a register of enrolled students.
-1. Check whether student is in class_list.
-2. If they are enrolled and assignment_delivered is True, print "Approved".
-3. If they are enrolled but the assignment is not delivered, print "Missing assignment".
-4. If they are not enrolled at all, print "Not enrolled".`,initialCode:`class_list = ["Emma", "Jonas", "Sofie", "Martin", "Ingrid",
+print(overreaching)`]},{type:"exercise",id:"ex-3-17",title:"Class Register Check",domain:"teaching",description:'A PE teacher keeps a register of enrolled students.\n1. Check whether student is in `class_list`.\n2. If they are enrolled and `assignment_delivered` is True, print "Approved".\n3. If they are enrolled but the assignment is not delivered, print "Missing assignment".\n4. If they are not enrolled at all, print "Not enrolled".',initialCode:`class_list = ["Emma", "Jonas", "Sofie", "Martin", "Ingrid",
               "Sander", "Nora", "Oskar", "Maja", "Lars",
               "Sigrid", "Erik", "Thea", "Henrik", "Amalie"]
 student = "Jonas"
@@ -253,7 +249,7 @@ for athlete in squad:
 Sprint: 4.68 s
 Sprint: 4.41 s
 Sprint: 4.77 s
-Sprint: 4.55 s`,hints:["Use for time in sprint_times_s: and an f-string with the :.2f format specifier.",`for time in sprint_times_s:
+Sprint: 4.55 s`,hints:["Use for time in `sprint_times_s`: and an f-string with the :.2f format specifier.",`for time in sprint_times_s:
     print(f"Sprint: {___:.2f} s")`]},{type:"md",md:`---
 
 ## The Accumulator Pattern
@@ -281,8 +277,8 @@ avg_per_day = total_km / training_days
 print(f"Total: {total_km} km")
 print(f"Training days: {training_days}")
 print(f"Average per training day: {avg_per_day:.1f} km")`},{type:"exercise",id:"ex-3-21",title:"Process Training Sessions",domain:"coaching",description:`Given a list of training sessions (each a dict with "day", "duration", and "rpe" keys):
-1. Loop over the sessions and compute each session's sRPE (duration * RPE), collecting the values in a list srpe_values.
-2. Accumulate the total into weekly_load.
+1. Loop over the sessions and compute each session's sRPE (duration * RPE), collecting the values in a list \`srpe_values\`.
+2. Accumulate the total into \`weekly_load\`.
 3. Print the per-session values and the weekly total.
 Any clear print format is fine.`,initialCode:`sessions = [
     {"day": "Monday",    "duration": 75,  "rpe": 7},
@@ -305,11 +301,11 @@ print(weekly_load)`]},{type:"md",md:"---\n\n## `enumerate()` — Index and Value
 
 for trial, t in enumerate(sprint_times, 1):
     flag = " <- BEST" if t == min(sprint_times) else ""
-    print(f"Trial {trial}: {t} s{flag}")`},{type:"exercise",id:"ex-3-23",title:"Rank Jumpers",domain:"biomechanics",description:`A list of CMJ heights (cm) is already sorted best-to-worst. Use enumerate() starting at 1 to print each athlete's rank and height. Format: "Rank N: XX.X cm".`,initialCode:"cmj_heights = [45.2, 42.8, 41.0, 38.5, 36.1]",expectedOutput:`Rank 1: 45.2 cm
+    print(f"Trial {trial}: {t} s{flag}")`},{type:"exercise",id:"ex-3-23",title:"Rank Jumpers",domain:"biomechanics",description:'A list of CMJ heights (cm) is already sorted best-to-worst. Use `enumerate()` starting at 1 to print each athlete\'s rank and height. Format: "Rank N: XX.X cm".',initialCode:"cmj_heights = [45.2, 42.8, 41.0, 38.5, 36.1]",expectedOutput:`Rank 1: 45.2 cm
 Rank 2: 42.8 cm
 Rank 3: 41.0 cm
 Rank 4: 38.5 cm
-Rank 5: 36.1 cm`,hints:["enumerate(list, 1) yields (rank, value) pairs starting the count at 1.",`for rank, height in enumerate(cmj_heights, ___):
+Rank 5: 36.1 cm`,hints:["`enumerate(list, 1)` yields (rank, value) pairs starting the count at 1.",`for rank, height in enumerate(cmj_heights, ___):
     print(f"Rank {rank}: {height} cm")`]},{type:"md",md:"---\n\n## Looping Over Dictionaries\n\nA dictionary's `.items()` method gives you `(key, value)` pairs. Looping over items lets you process every field in an athlete profile or every metric in a test result:\n\n```python\nfor key, value in my_dict.items():\n    print(key, value)\n```\n\nWhen you only need one side, replace `.items()` in the loop with `.keys()` (just the keys) or `.values()` (just the values). The loop then uses a single loop variable instead of a pair: `for test in my_dict.keys():` or `for result in my_dict.values():`."},{type:"example",caption:"Loop over dict.items(): print an athlete's test battery.",code:`test_results = {
     "CMJ height":    "35.2 cm",
     "20m sprint":    "3.05 s",
@@ -333,16 +329,12 @@ for time_s in df['Sprint_40m_s']:
     print(time_s)
 \`\`\`
 
-(Pandas has built-in shortcuts like \`.mean()\` for the common cases, as you saw in Module 2, but writing the loop yourself shows exactly what those shortcuts do, and keeps your pandas skills warm.)`},{type:"exercise",id:"ex-3-24",title:"Loop Over Real Sprint Data",domain:"coaching",packages:["pandas"],dataFiles:["sprint_times.csv"],description:`The 40 m sprint times of 20 athletes are imported for you as a DataFrame.
-1. Loop over the Sprint_40m_s column with an accumulator to compute the team mean, stored in mean_time_s. No .mean() here: build it yourself.
-2. Loop again and count how many athletes are faster (lower) than the mean, stored in n_faster.
-3. Print both.
-Any clear print format is fine.`,initialCode:`import pandas as pd
+(Pandas has built-in shortcuts like \`.mean()\` for the common cases, as you saw in Module 2, but writing the loop yourself shows exactly what those shortcuts do, and keeps your pandas skills warm.)`},{type:"exercise",id:"ex-3-24",title:"Loop Over Real Sprint Data",domain:"coaching",packages:["pandas"],dataFiles:["sprint_times.csv"],description:"The 40 m sprint times of 20 athletes are imported for you as a DataFrame.\n1. Loop over the `Sprint_40m_s` column with an accumulator to compute the team mean, stored in `mean_time_s`. No `.mean()` here: build it yourself.\n2. Loop again and count how many athletes are faster (lower) than the mean, stored in `n_faster`.\n3. Print both.\nAny clear print format is fine.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/sprint_times.csv')
 print(df.head(3))`,testCode:`assert abs(mean_time_s - 4.605) < 0.005, f"mean_time_s should be 4.605, got {mean_time_s}"
 assert n_faster == 11, f"11 athletes are faster than the mean, got {n_faster}"
-print("PASS")`,hints:['A for loop iterates over df["Sprint_40m_s"] just like a list. Accumulate a total, then divide by len(df).',`total = 0
+print("PASS")`,hints:['A for loop iterates over `df`["`Sprint_40m_s`"] just like a list. Accumulate a total, then divide by `len(df)`.',`total = 0
 for t in df["Sprint_40m_s"]:
     total += t
 mean_time_s = total / len(df)
@@ -376,8 +368,8 @@ for hr in hr_readings:
     valid.append(hr)
 
 print(f"Valid readings: {valid}")
-print(f"Average: {sum(valid) / len(valid):.0f} bpm")`},{type:"exercise",id:"ex-3-25",title:"Skip Missing GPS Values",domain:"physiology",description:'A GPS device recorded speeds (m/s) but some readings are None (signal lost). Use a for loop with continue to skip None values and collect the valid speeds in a list called valid_speeds. Then print "Valid readings: N" and "Mean speed: X.X m/s" (1 decimal place).',initialCode:"gps_speeds_ms = [3.2, None, 4.1, 3.8, None, 5.0, 4.6, None, 3.5]",expectedOutput:`Valid readings: 6
-Mean speed: 4.0 m/s`,hints:["Inside the loop: if speed is None, continue -- the append below is then skipped. After the loop, use len() and sum()/len().",`valid_speeds = []
+print(f"Average: {sum(valid) / len(valid):.0f} bpm")`},{type:"exercise",id:"ex-3-25",title:"Skip Missing GPS Values",domain:"physiology",description:'A GPS device recorded speeds (m/s) but some readings are None (signal lost). Use a for loop with continue to skip None values and collect the valid speeds in a list called `valid_speeds`. Then print "Valid readings: N" and "Mean speed: X.X m/s" (1 decimal place).',initialCode:"gps_speeds_ms = [3.2, None, 4.1, 3.8, None, 5.0, 4.6, None, 3.5]",expectedOutput:`Valid readings: 6
+Mean speed: 4.0 m/s`,hints:["Inside the loop: if speed is None, continue -- the append below is then skipped. After the loop, use `len()` and `sum()`/`len()`.",`valid_speeds = []
 for speed in gps_speeds_ms:
     if speed is None:
         ___
@@ -451,16 +443,12 @@ while total_km < 10000:
     total_km += weekly_km
 
 print(f"Weeks to 10 000 km: {weeks}")
-print(f"Total after {weeks} weeks: {total_km} km")`},{type:"exercise",id:"ex-3-28",title:"Recovery Time Calculator",domain:"physiology",description:`Simulate heart rate recovery after exercise. Starting at 185 bpm, HR decreases by 7% each minute.
-1. Use a while loop that runs until hr_bpm drops below target_bpm, counting the minutes in minutes.
-2. Print the heart rate after each minute.
-3. After the loop, print the recovery time in minutes.
-Any clear print format is fine.`,initialCode:`hr_bpm = 185
+print(f"Total after {weeks} weeks: {total_km} km")`},{type:"exercise",id:"ex-3-28",title:"Recovery Time Calculator",domain:"physiology",description:"Simulate heart rate recovery after exercise. Starting at 185 bpm, HR decreases by 7% each minute.\n1. Use a while loop that runs until `hr_bpm` drops below `target_bpm`, counting the minutes in minutes.\n2. Print the heart rate after each minute.\n3. After the loop, print the recovery time in minutes.\nAny clear print format is fine.",initialCode:`hr_bpm = 185
 target_bpm = 100
 decay = 0.07
 minutes = 0`,testCode:`assert minutes == 9, f"Recovery should take 9 minutes, got {minutes}"
 assert abs(hr_bpm - 96.3) < 0.5, f"After the loop hr_bpm should be about 96, got {hr_bpm}"
-print("PASS")`,hints:["Loop while hr_bpm > target_bpm: increment minutes, update hr_bpm = hr_bpm * (1 - decay), and print the new value.",`while hr_bpm > target_bpm:
+print("PASS")`,hints:["Loop while `hr_bpm` > `target_bpm`: increment minutes, update `hr_bpm` = `hr_bpm` * (1 - decay), and print the new value.",`while hr_bpm > target_bpm:
     minutes += 1
     hr_bpm = hr_bpm * (1 - ___)
     print(minutes, round(hr_bpm))
@@ -533,10 +521,9 @@ result = function_name(value1, value2)
     return bmi
 
 result = calculate_bmi(85, 1.82)
-print(f"BMI: {result:.1f}")`},{type:"exercise",id:"ex-3-34",title:"Max Heart Rate Function",domain:"physiology",description:`Write a function called max_hr(age) that returns the estimated maximum heart rate using the Tanaka formula: 208 - 0.7 * age. Call it for the ages 20 and 40, and print both results.
-Any clear print format is fine.`,initialCode:"",testCode:`assert abs(max_hr(20) - 194.0) < 0.01, f"max_hr(20) should be 194.0, got {max_hr(20)}"
+print(f"BMI: {result:.1f}")`},{type:"exercise",id:"ex-3-34",title:"Max Heart Rate Function",domain:"physiology",description:"Write a function called `max_hr(age)` that returns the estimated maximum heart rate using the Tanaka formula: 208 - 0.7 * age. Call it for the ages 20 and 40, and print both results.\nAny clear print format is fine.",initialCode:"",testCode:`assert abs(max_hr(20) - 194.0) < 0.01, f"max_hr(20) should be 194.0, got {max_hr(20)}"
 assert abs(max_hr(40) - 180.0) < 0.01, f"max_hr(40) should be 180.0, got {max_hr(40)}"
-print("PASS")`,hints:["Define the function with def, return the Tanaka formula, then call it twice inside print().",`def max_hr(age):
+print("PASS")`,hints:["Define the function with def, return the Tanaka formula, then call it twice inside `print()`.",`def max_hr(age):
     """Estimate max HR using the Tanaka formula."""
     return 208 - ___ * age
 
@@ -551,12 +538,11 @@ print(max_hr(40))`]},{type:"md",md:'---\n\n## Parameters, Arguments, and Return 
 fast, slow, avg = analyze_sprints([4.52, 4.61, 4.48, 4.95, 4.33])
 print(f"Fastest: {fast} s")
 print(f"Slowest: {slow} s")
-print(f"Average: {avg:.2f} s")`},{type:"exercise",id:"ex-3-35",title:"Aerobic Zone Boundaries",domain:"coaching",description:`Write a function zone_bounds(hr_max_bpm) that returns the lower and upper heart rate of the aerobic zone as two values: 60% and 70% of maximum heart rate. Call it with 190, unpack the result into two variables, and print both.
-Any clear print format is fine.`,initialCode:"",testCode:`vals190 = sorted(zone_bounds(190))
+print(f"Average: {avg:.2f} s")`},{type:"exercise",id:"ex-3-35",title:"Aerobic Zone Boundaries",domain:"coaching",description:"Write a function `zone_bounds(hr_max_bpm)` that returns the lower and upper heart rate of the aerobic zone as two values: 60% and 70% of maximum heart rate. Call it with 190, unpack the result into two variables, and print both.\nAny clear print format is fine.",initialCode:"",testCode:`vals190 = sorted(zone_bounds(190))
 assert abs(vals190[0] - 114.0) < 0.01 and abs(vals190[1] - 133.0) < 0.01, f"zone_bounds(190) should give 114.0 and 133.0, got {vals190}"
 vals200 = sorted(zone_bounds(200))
 assert abs(vals200[0] - 120.0) < 0.01 and abs(vals200[1] - 140.0) < 0.01, f"zone_bounds(200) should give 120.0 and 140.0, got {vals200}"
-print("PASS")`,hints:["Multiply hr_max_bpm by 0.6 and by 0.7, and return both values separated by a comma.",`def zone_bounds(hr_max_bpm):
+print("PASS")`,hints:["Multiply `hr_max_bpm` by 0.6 and by 0.7, and return both values separated by a comma.",`def zone_bounds(hr_max_bpm):
     lower = hr_max_bpm * 0.6
     upper = hr_max_bpm * ___
     return lower, upper
@@ -582,8 +568,7 @@ greet("Petter", "Hi")     # overrides: "Hi, Petter!"
     return 208 - coefficient * age
 
 print(estimate_hr_max(30))                   # default: 187.0
-print(estimate_hr_max(30, coefficient=0.8))  # custom:  184.0`},{type:"exercise",id:"ex-3-36",title:"VO2max Cooper Test Function",domain:"physiology",description:`Write a function vo2max_cooper(distance_m) that estimates VO2max from the Cooper 12-minute run test: VO2max = (distance_m - 504.9) / 44.73. Test it with distances of 2400, 2800, and 3200 metres, printing each result.
-Any clear print format is fine.`,initialCode:"",testCode:`assert abs(vo2max_cooper(2400) - 42.37) < 0.05, f"vo2max_cooper(2400) should be about 42.4, got {vo2max_cooper(2400)}"
+print(estimate_hr_max(30, coefficient=0.8))  # custom:  184.0`},{type:"exercise",id:"ex-3-36",title:"VO2max Cooper Test Function",domain:"physiology",description:"Write a function `vo2max_cooper(distance_m)` that estimates VO2max from the Cooper 12-minute run test: VO2max = (`distance_m` - 504.9) / 44.73. Test it with distances of 2400, 2800, and 3200 metres, printing each result.\nAny clear print format is fine.",initialCode:"",testCode:`assert abs(vo2max_cooper(2400) - 42.37) < 0.05, f"vo2max_cooper(2400) should be about 42.4, got {vo2max_cooper(2400)}"
 assert abs(vo2max_cooper(2800) - 51.31) < 0.05, f"vo2max_cooper(2800) should be about 51.3, got {vo2max_cooper(2800)}"
 assert abs(vo2max_cooper(3200) - 60.25) < 0.05, f"vo2max_cooper(3200) should be about 60.3, got {vo2max_cooper(3200)}"
 print("PASS")`,hints:["The function body is a single return line using the given formula. Then call it for the three distances.",`def vo2max_cooper(distance_m):
@@ -591,8 +576,7 @@ print("PASS")`,hints:["The function body is a single return line using the given
     return (distance_m - 504.9) / ___
 
 for d in [2400, 2800, 3200]:
-    print(d, round(vo2max_cooper(d), 1))`]},{type:"exercise",id:"ex-3-37",title:"Classify VO2max",domain:"physiology",description:`Write a function classify_vo2max(vo2max) that returns "Elite" for >= 60, "Good" for >= 50, "Average" for >= 40, and "Poor" for anything below. Test it by calling it on the values [72.3, 54.1, 43.8, 38.2] and printing each result.
-Any clear print format is fine.`,initialCode:"",testCode:`assert classify_vo2max(72.3) == "Elite", f"72.3 wrong: {classify_vo2max(72.3)}"
+    print(d, round(vo2max_cooper(d), 1))`]},{type:"exercise",id:"ex-3-37",title:"Classify VO2max",domain:"physiology",description:'Write a function `classify_vo2max(vo2max)` that returns "Elite" for >= 60, "Good" for >= 50, "Average" for >= 40, and "Poor" for anything below. Test it by calling it on the values [72.3, 54.1, 43.8, 38.2] and printing each result.\nAny clear print format is fine.',initialCode:"",testCode:`assert classify_vo2max(72.3) == "Elite", f"72.3 wrong: {classify_vo2max(72.3)}"
 assert classify_vo2max(54.1) == "Good", f"54.1 wrong: {classify_vo2max(54.1)}"
 assert classify_vo2max(43.8) == "Average", f"43.8 wrong: {classify_vo2max(43.8)}"
 assert classify_vo2max(38.2) == "Poor", f"38.2 wrong: {classify_vo2max(38.2)}"
@@ -625,15 +609,11 @@ def weekly_load(sessions):
 
 week = [(75, 7), (60, 9), (40, 3), (90, 6), (85, 8)]
 total = weekly_load(week)
-print(f"Weekly load: {total} AU")`},{type:"exercise",id:"ex-3-38",title:"Training Load Calculator",domain:"coaching",description:`A coach logged five training sessions in the list week. Each entry is a pair of (duration in minutes, RPE).
-1. Write a function session_load(duration, rpe) that returns the load of one session: duration * rpe.
-2. Write a second function weekly_load(sessions) that loops over a list of such pairs, calls session_load on each pair, adds the results together, and returns the total.
-3. Use the two functions on week: print each session's load, then the weekly total.
-Any clear print format is fine.`,initialCode:"week = [(75, 7), (60, 9), (40, 3), (90, 6), (85, 8)]",testCode:`assert session_load(75, 7) == 525, f"session_load(75, 7) should be 525, got {session_load(75, 7)}"
+print(f"Weekly load: {total} AU")`},{type:"exercise",id:"ex-3-38",title:"Training Load Calculator",domain:"coaching",description:"A coach logged five training sessions in the list week. Each entry is a pair of (duration in minutes, RPE).\n1. Write a function `session_load(duration, rpe)` that returns the load of one session: duration * rpe.\n2. Write a second function `weekly_load(sessions)` that loops over a list of such pairs, calls `session_load` on each pair, adds the results together, and returns the total.\n3. Use the two functions on week: print each session's load, then the weekly total.\nAny clear print format is fine.",initialCode:"week = [(75, 7), (60, 9), (40, 3), (90, 6), (85, 8)]",testCode:`assert session_load(75, 7) == 525, f"session_load(75, 7) should be 525, got {session_load(75, 7)}"
 assert session_load(60, 9) == 540, f"session_load(60, 9) should be 540, got {session_load(60, 9)}"
 assert weekly_load(week) == 2405, f"weekly_load(week) should be 2405, got {weekly_load(week)}"
 assert weekly_load([(30, 5)]) == 150, f"weekly_load([(30, 5)]) should be 150, got {weekly_load([(30, 5)])}"
-print("PASS")`,hints:["session_load is a one-line return. weekly_load loops through the tuples, calls session_load for each, and accumulates a total.",`def session_load(duration, rpe):
+print("PASS")`,hints:["`session_load` is a one-line return. `weekly_load` loops through the tuples, calls `session_load` for each, and accumulates a total.",`def session_load(duration, rpe):
     return duration * rpe
 
 def weekly_load(sessions):
@@ -680,11 +660,7 @@ def calculate_bmi(weight_kg, height_m):
     return weight_kg / height_m ** 2
 \`\`\`
 
-Well-documented functions make your code usable by colleagues, and by future you.`},{type:"exercise",id:"ex-3-43",title:"Putting It Together: Team VO2max Report",domain:"physiology",description:`The squad list below holds one dictionary per athlete, each with a "name" and a "vo2max".
-1. Write a function vo2max_category(v) that returns the category for a VO2max value: "Elite" for 60 or more, "Good" for 50-59, "Average" for 40-49, and "Poor" below 40.
-2. Write a function team_report(athletes) that loops over the athlete dictionaries and prints one line per athlete with their name, VO2max, and category. Use vo2max_category to find the category.
-3. Call team_report(squad).
-Any clear print format is fine.`,initialCode:`squad = [
+Well-documented functions make your code usable by colleagues, and by future you.`},{type:"exercise",id:"ex-3-43",title:"Putting It Together: Team VO2max Report",domain:"physiology",description:'The squad list below holds one dictionary per athlete, each with a "name" and a "vo2max".\n1. Write a function `vo2max_category(v)` that returns the category for a VO2max value: "Elite" for 60 or more, "Good" for 50-59, "Average" for 40-49, and "Poor" below 40.\n2. Write a function `team_report(athletes)` that loops over the athlete dictionaries and prints one line per athlete with their name, VO2max, and category. Use `vo2max_category` to find the category.\n3. Call `team_report(squad)`.\nAny clear print format is fine.',initialCode:`squad = [
     {"name": "Kwame",  "vo2max": 63.2},
     {"name": "Ingrid", "vo2max": 52.7},
     {"name": "Tomasz", "vo2max": 44.1},
@@ -694,7 +670,7 @@ assert vo2max_category(52.7) == "Good", f"52.7 should be Good, got {vo2max_categ
 assert vo2max_category(44.1) == "Average", f"44.1 should be Average, got {vo2max_category(44.1)}"
 assert vo2max_category(38.5) == "Poor", f"38.5 should be Poor, got {vo2max_category(38.5)}"
 assert callable(team_report), "team_report should be a function"
-print("PASS")`,hints:["vo2max_category is a chain of if-returns checking the thresholds from highest down. team_report loops over the dicts, looks up the category, and prints.",`def vo2max_category(v):
+print("PASS")`,hints:["`vo2max_category` is a chain of if-returns checking the thresholds from highest down. `team_report` loops over the dicts, looks up the category, and prints.",`def vo2max_category(v):
     if v >= 60:
         return "Elite"
     if v >= ___:

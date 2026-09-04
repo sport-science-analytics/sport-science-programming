@@ -8,8 +8,8 @@ print(type(age))               # <class 'int'>
 print(type(height_m))          # <class 'float'>`,caption:"Python has five fundamental data types. Use type() to check which one you have."},{type:"exercise",id:"ex-2-25",title:"Store Athlete Data",domain:"physiology",description:`Store this athlete in four variables of the right types:
 1. name = "Erling Haaland" (string)
 2. age = 24 (whole number)
-3. height_m = 1.94 (decimal number)
-4. is_captain = False (boolean)
+3. \`height_m\` = 1.94 (decimal number)
+4. \`is_captain\` = False (boolean)
 Then print each one with an f-string; any clear label works.`,initialCode:"",testCode:`assert name == "Erling Haaland", "name should be the full name as a string"
 assert age == 24 and isinstance(age, int), "age should be the whole number 24"
 assert abs(height_m - 1.94) < 1e-9, "height_m should be 1.94"
@@ -29,12 +29,12 @@ vo2max = 58.7
 print(int(vo2max))    # 58  (truncates, does not round!)
 
 reps = 10
-print(float(reps))    # 10.0`,caption:"int(), float(), and str() convert between types. Truncation is a common source of bugs -- use round() if you need rounding."},{type:"exercise",id:"ex-2-26",title:"Type Conversions",domain:"physiology",description:"The CSV values below arrived as strings, so Python cannot calculate with them yet. Convert weight_str to a number stored in weight_kg, and height_str to a number stored in height_cm. Then print both values.",initialCode:`weight_str = "82.5"
+print(float(reps))    # 10.0`,caption:"int(), float(), and str() convert between types. Truncation is a common source of bugs -- use round() if you need rounding."},{type:"exercise",id:"ex-2-26",title:"Type Conversions",domain:"physiology",description:"The CSV values below arrived as strings, so Python cannot calculate with them yet. Convert `weight_str` to a number stored in `weight_kg`, and `height_str` to a number stored in `height_cm`. Then print both values.",initialCode:`weight_str = "82.5"
 height_str = "185"`,testCode:`assert not isinstance(weight_kg, str), "weight_kg is still a string - convert it with float()"
 assert abs(weight_kg - 82.5) < 1e-9, f"weight_kg should be 82.5, got {weight_kg}"
 assert not isinstance(height_cm, str), "height_cm is still a string - convert it with float()"
 assert abs(height_cm - 185) < 1e-9, f"height_cm should be 185, got {height_cm}"
-print("PASS")`,hints:["float() turns a numeric string into a number you can calculate with.",`weight_kg = float(weight_str)
+print("PASS")`,hints:["`float()` turns a numeric string into a number you can calculate with.",`weight_kg = float(weight_str)
 height_cm = ___(height_str)
 print(weight_kg)
 print(height_cm)`]},{type:"md",md:"## Arithmetic with Variables\n\nIn Module 1 you calculated with `+`, `-`, `*`, and `/`, and two more operators were mentioned in passing: `**` (power) and `//` (whole-number division, which discards the remainder). Here is the full set in use. They chain, and parentheses control the order, just like in algebra.\n\nYou can also reassign a variable at any time. The old value is simply replaced. A common pattern is to update a variable using its own current value: `score = score + 10` or the shorthand `score += 10`.\n\nThe example below puts the operators to work on a real formula, the **free-fall equation** for estimating jump height from flight time:\n\n```\njump_height = (g × flight_time²) / 8\n```\n\nHere `g` = 9.81 m/s² is the acceleration due to gravity. The athlete rises for half the flight time and falls for the other half, and inserting t/2 into the free-fall distance formula h = ½ g t² is what produces the division by 8."},{type:"example",code:`# Jump height from flight time (free-fall formula)
@@ -46,8 +46,8 @@ print(f"Jump height: {jump_height_m:.2f} m")   # Jump height: 0.60 m
 # Reassignment
 score = 0
 score += 10   # same as: score = score + 10
-print(score)  # 10`,caption:"Arithmetic operators follow standard precedence. Use ** for powers and () to control order."},{type:"exercise",id:"ex-2-27",title:"Arithmetic with Variables",domain:"biomechanics",description:"Calculate vertical jump height from flight time using the free-fall formula shown above: jump_height_m = (9.81 * flight_time_s ** 2) / 8. Print the result rounded to 2 decimal places: round(___, 2).",initialCode:"flight_time_s = 0.52",expectedOutput:"0.33",hints:["** is the power operator; wrap the value in round(value, 2) when printing.",`jump_height_m = (9.81 * flight_time_s ** 2) / ___
-print(round(jump_height_m, 2))`]},{type:"exercise",id:"ex-2-28",title:"Reassign and Update",domain:"coaching",description:"The first session load is calculated below. Update rpe to 8 and duration_min to 60 for the second session, recalculate session_load, and print it.",initialCode:`rpe = 6
+print(score)  # 10`,caption:"Arithmetic operators follow standard precedence. Use ** for powers and () to control order."},{type:"exercise",id:"ex-2-27",title:"Arithmetic with Variables",domain:"biomechanics",description:"Calculate vertical jump height from flight time using the free-fall formula shown above: `jump_height_m` = (9.81 * `flight_time_s` ** 2) / 8. Print the result rounded to 2 decimal places: `round(___, 2)`.",initialCode:"flight_time_s = 0.52",expectedOutput:"0.33",hints:["** is the power operator; wrap the value in `round(value, 2)` when printing.",`jump_height_m = (9.81 * flight_time_s ** 2) / ___
+print(round(jump_height_m, 2))`]},{type:"exercise",id:"ex-2-28",title:"Reassign and Update",domain:"coaching",description:"The first session load is calculated below. Update rpe to 8 and `duration_min` to 60 for the second session, recalculate `session_load`, and print it.",initialCode:`rpe = 6
 duration_min = 45
 session_load = rpe * duration_min
 
@@ -69,10 +69,7 @@ print(f"{athlete} swam the {event} in {time} seconds")
 vo2max = 58.743
 print(f"VO2max: {vo2max:.1f} mL/kg/min")   # VO2max: 58.7 mL/kg/min`,caption:"f-strings embed variables directly. Add :.Nf inside {} to control decimal places."},{type:"exercise",id:"ex-2-29",title:"f-String Formatting",domain:"physiology",description:"Use ONE f-string print to produce exactly: Kipchoge: VO2max 54.3 mL/kg/min, HRmax 185 bpm",initialCode:`vo2max = 54.3
 hr_max = 185
-name = "Kipchoge"`,expectedOutput:"Kipchoge: VO2max 54.3 mL/kg/min, HRmax 185 bpm",hints:["Put f before the opening quote and wrap each variable in {}.",'print(f"{name}: VO2max {vo2max} mL/kg/min, HRmax {___} bpm")']},{type:"exercise",id:"ex-2-30",title:"Athlete Profile",domain:"physiology",description:`Build a small athlete profile from the given data:
-1. Calculate BMI from height_cm and weight_kg.
-2. Estimate HRmax with the Tanaka formula (208 - 0.7 * age).
-3. Print the profile exactly as shown in the expected output: the header line, the name, BMI to 1 decimal, and HRmax to 0 decimals.`,initialCode:`name = "Ada Hegerberg"
+name = "Kipchoge"`,expectedOutput:"Kipchoge: VO2max 54.3 mL/kg/min, HRmax 185 bpm",hints:["Put f before the opening quote and wrap each variable in {}.",'print(f"{name}: VO2max {vo2max} mL/kg/min, HRmax {___} bpm")']},{type:"exercise",id:"ex-2-30",title:"Athlete Profile",domain:"physiology",description:"Build a small athlete profile from the given data:\n1. Calculate BMI from `height_cm` and `weight_kg`.\n2. Estimate HRmax with the Tanaka formula (208 - 0.7 * age).\n3. Print the profile exactly as shown in the expected output: the header line, the name, BMI to 1 decimal, and HRmax to 0 decimals.",initialCode:`name = "Ada Hegerberg"
 age = 29
 height_cm = 175
 weight_kg = 68.0`,expectedOutput:`=== Athlete Profile ===
@@ -105,16 +102,16 @@ print(clean)   # Mo Farah
 
 name = "usain bolt"
 print(name.upper())    # USAIN BOLT
-print(name.title())    # Usain Bolt`,caption:".strip() removes surrounding whitespace. Case methods standardise text for display or comparison."},{type:"exercise",id:"ex-2-32",title:"Clean Messy Data",domain:"teaching",description:"An athlete name was read from a file with extra whitespace and a newline. Strip the whitespace and print the clean name.",initialCode:'raw = "  Mo Farah  \\n"',expectedOutput:"Mo Farah",hints:[".strip() removes spaces and newlines from both ends.",`clean = raw.___()
+print(name.title())    # Usain Bolt`,caption:".strip() removes surrounding whitespace. Case methods standardise text for display or comparison."},{type:"exercise",id:"ex-2-32",title:"Clean Messy Data",domain:"teaching",description:"An athlete name was read from a file with extra whitespace and a newline. Strip the whitespace and print the clean name.",initialCode:'raw = "  Mo Farah  \\n"',expectedOutput:"Mo Farah",hints:["`.strip()` removes spaces and newlines from both ends.",`clean = raw.___()
 print(clean)`]},{type:"md",md:"## Searching and Checking Strings\n\nPython provides several ways to search within strings. The `in` operator checks whether a substring exists (returns `True` or `False`). `.find()` returns the index where a substring starts (-1 if not found). `.startswith()` and `.endswith()` check the beginning and end."},{type:"example",code:`note = "Athlete reported knee pain after training"
 
 print("knee" in note)              # True
 print(note.startswith("Athlete"))  # True
 print(note.find("pain"))           # 22
 print(note.count("a"))             # 3`,caption:"The in operator is the fastest way to check for a substring. find() gives you the position."},{type:"exercise",id:"ex-2-33",title:"String Methods",domain:"coaching",description:'Print True or False for whether "hamstring" appears in the physio note, then print the note in title case for the medical report.',initialCode:'note = "physio cleared hamstring for full training"',expectedOutput:`True
-Physio Cleared Hamstring For Full Training`,hints:["The in operator answers the yes/no; .title() capitalises each word.",`print("hamstring" in ___)
+Physio Cleared Hamstring For Full Training`,hints:["The in operator answers the yes/no; `.title()` capitalises each word.",`print("hamstring" in ___)
 print(note.___())`]},{type:"md",md:"## Replacing Text\n\n`.replace(old, new)` returns a new string with every occurrence of `old` swapped for `new`. The original string is left untouched; you get back a corrected copy, which is exactly what you want when fixing a recording error."},{type:"example",code:`session = "warmup, drills, warmup"
-print(session.replace("warmup", "sprints"))   # sprints, drills, sprints`,caption:".replace() swaps every occurrence and returns the result as a new string."},{type:"exercise",id:"ex-2-34",title:"Injury Note Replacement",domain:"coaching",description:'The injury note below was recorded with the wrong side. Replace "Left" with "Right" and print the updated note.',initialCode:'note = "Left ACL strain - grade 2"',expectedOutput:"Right ACL strain - grade 2",hints:[".replace(old, new) returns a new string with every occurrence swapped.",`updated = note.replace("___", "Right")
+print(session.replace("warmup", "sprints"))   # sprints, drills, sprints`,caption:".replace() swaps every occurrence and returns the result as a new string."},{type:"exercise",id:"ex-2-34",title:"Injury Note Replacement",domain:"coaching",description:'The injury note below was recorded with the wrong side. Replace "Left" with "Right" and print the updated note.',initialCode:'note = "Left ACL strain - grade 2"',expectedOutput:"Right ACL strain - grade 2",hints:["`.replace`(old, new) returns a new string with every occurrence swapped.",`updated = note.replace("___", "Right")
 print(updated)`]},{type:"md",md:"## String Indexing and Slicing\n\nStrings are sequences, so you can access individual characters by position (starting from 0). Negative indices count from the end. Extract a portion with `[start:stop]` -- `stop` is exclusive (the character at that position is not included)."},{type:"example",code:`name = "Kipchoge"
 #        01234567
 
@@ -131,7 +128,7 @@ print(parts)   # ['Bolt', '100m', '9.58', 'Berlin']
 
 sports = ["Football", "Basketball", "Tennis"]
 result = ", ".join(sports)
-print(result)  # Football, Basketball, Tennis`,caption:"split() and join() are inverses. split() is essential for reading CSV-formatted data."},{type:"exercise",id:"ex-2-31",title:"Split the Athlete Record",domain:"physiology",description:'The comma-separated record below came straight from a CSV file. Split it into its six parts with .split(",") and print the resulting list. (Working with the individual parts is what the next lesson, on lists, is all about.)',initialCode:'data = "Marta Vieira,38,Football,Forward,1.63,60.0"',expectedOutput:"['Marta Vieira', '38', 'Football', 'Forward', '1.63', '60.0']",hints:['.split(",") breaks the string at every comma and returns the pieces.',`parts = data.split("___")
+print(result)  # Football, Basketball, Tennis`,caption:"split() and join() are inverses. split() is essential for reading CSV-formatted data."},{type:"exercise",id:"ex-2-31",title:"Split the Athlete Record",domain:"physiology",description:'The comma-separated record below came straight from a CSV file. Split it into its six parts with `.split`(",") and print the resulting list. (Working with the individual parts is what the next lesson, on lists, is all about.)',initialCode:'data = "Marta Vieira,38,Football,Forward,1.63,60.0"',expectedOutput:"['Marta Vieira', '38', 'Football', 'Forward', '1.63', '60.0']",hints:['`.split`(",") breaks the string at every comma and returns the pieces.',`parts = data.split("___")
 print(parts)`]},{type:"md",md:'## Summary\n\nKey string operations for sport science:\n\n| Operation | Syntax | Use Case |\n|-----------|--------|----------|\n| Concatenation | `+` or f-strings | Building labels and messages |\n| Split | `str.split(",")` | Parsing CSV data |\n| Join | `", ".join(list)` | Creating CSV output |\n| Strip | `str.strip()` | Cleaning file data |\n| Replace | `str.replace()` | Correcting data entries |\n| Format | `f"{val:.2f}"` | Formatting numeric output |\n| Upper/Lower | `str.upper()` | Standardising text data |\n| Slice | `str[2:8]` | Extracting substrings |\n\nIn the next lesson, we move from single values to collections: lists and tuples.'}],quiz:null},"lists-and-tuples":{blocks:[{type:"md",md:`# Lists and Tuples
 
 ## Introduction
@@ -147,15 +144,11 @@ print(sprint_times[-1])   # 4.33 (last element)
 print(len(sprint_times))  # 5
 print(min(sprint_times))  # 4.33
 print(max(sprint_times))  # 4.95
-print(sum(sprint_times))  # 27.89`,caption:"Lists store ordered sequences. len(), min(), max(), and sum() are essential for quick summaries."},{type:"exercise",id:"ex-2-37",title:"Manage Sprint Times",domain:"coaching",description:`From the 40 m sprint times below:
-1. Find the fastest time and store it in fastest.
-2. Find the slowest time and store it in slowest.
-3. Calculate the average and store it in average.
-Then print all three; any clear format is fine.`,initialCode:`# 40m sprint times (seconds)
+print(sum(sprint_times))  # 27.89`,caption:"Lists store ordered sequences. len(), min(), max(), and sum() are essential for quick summaries."},{type:"exercise",id:"ex-2-37",title:"Manage Sprint Times",domain:"coaching",description:"From the 40 m sprint times below:\n1. Find the fastest time and store it in `fastest`.\n2. Find the slowest time and store it in `slowest`.\n3. Calculate the average and store it in `average`.\nThen print all three; any clear format is fine.",initialCode:`# 40m sprint times (seconds)
 sprint_times_s = [5.21, 4.98, 5.45, 5.12, 4.87, 5.33]`,testCode:`assert abs(fastest - 4.87) < 1e-9, "fastest should be the minimum: 4.87"
 assert abs(slowest - 5.45) < 1e-9, "slowest should be the maximum: 5.45"
 assert abs(average - 5.16) < 0.005, "average should be about 5.16"
-print("PASS")`,hints:["min(), max(), and sum()/len() give the three statistics.",`fastest = min(sprint_times_s)
+print("PASS")`,hints:["`min()`, `max()`, and `sum()`/`len()` give the three statistics.",`fastest = min(sprint_times_s)
 slowest = max(sprint_times_s)
 average = sum(sprint_times_s) / len(sprint_times_s)
 print(f"Fastest: {fastest} s")
@@ -169,12 +162,7 @@ cool_down = hr_data[-3:]   # Last 3 values
 print(cool_down)           # [160, 120, 90]
 
 exercise = hr_data[4:9]    # Indices 4 through 8
-print(exercise)            # [155, 170, 182, 188, 190]`,caption:"Use slicing to extract phases from time-series data. stop is exclusive."},{type:"exercise",id:"ex-2-38",title:"Training Session Data",domain:"physiology",description:`Heart rate was recorded every minute for 10 minutes. From the list:
-1. Store the resting HR (the first value) in resting_hr.
-2. Store the peak HR (the maximum) in peak_hr.
-3. Store the average HR in avg_hr.
-4. Store the steady-state phase (indices 3 through 7) in steady_state.
-Then print all four; any clear format is fine.`,initialCode:"hr_bpm = [72, 95, 128, 155, 168, 172, 175, 171, 158, 130]",testCode:`assert resting_hr == 72, "resting_hr is the first value"
+print(exercise)            # [155, 170, 182, 188, 190]`,caption:"Use slicing to extract phases from time-series data. stop is exclusive."},{type:"exercise",id:"ex-2-38",title:"Training Session Data",domain:"physiology",description:"Heart rate was recorded every minute for 10 minutes. From the list:\n1. Store the resting HR (the first value) in `resting_hr`.\n2. Store the peak HR (the maximum) in `peak_hr`.\n3. Store the average HR in `avg_hr`.\n4. Store the steady-state phase (indices 3 through 7) in `steady_state`.\nThen print all four; any clear format is fine.",initialCode:"hr_bpm = [72, 95, 128, 155, 168, 172, 175, 171, 158, 130]",testCode:`assert resting_hr == 72, "resting_hr is the first value"
 assert peak_hr == 175, "peak_hr is the maximum"
 assert abs(avg_hr - 142.4) < 0.05, "avg_hr should be about 142.4"
 assert steady_state == [155, 168, 172, 175, 171], "steady_state is the slice [3:8]"
@@ -195,10 +183,10 @@ print(team)                # ['Messi', 'Haaland', 'Mbappe']`,caption:"Lists supp
 2. Add "Mbappe" to the end.
 3. Remove "Foden".
 Then print the final list.`,initialCode:'squad = ["Haaland", "De Bruyne", "Foden"]',testCode:`assert squad == ['Haaland', 'Rodri', 'Mbappe'], f"squad should end as ['Haaland', 'Rodri', 'Mbappe'], got {squad}"
-print("PASS")`,hints:["Assign to an index to replace; .append() adds to the end; .remove() deletes by value.",`squad[1] = "Rodri"
+print("PASS")`,hints:["Assign to an index to replace; `.append()` adds to the end; `.remove()` deletes by value.",`squad[1] = "Rodri"
 squad.append("___")
 squad.remove("Foden")
-print(squad)`]},{type:"exercise",id:"ex-2-40",title:"Slicing Training Data",domain:"physiology",description:"From the 10 weeks of training data, extract the peak training block (weeks 5-8, which are indices 4 to 7) into peak_block, then print its maximum.",initialCode:"weekly_km = [55, 62, 70, 68, 75, 80, 72, 65, 58, 50]",testCode:`assert peak_block == [75, 80, 72, 65], f"peak_block should be the slice [4:8], got {peak_block}"
+print(squad)`]},{type:"exercise",id:"ex-2-40",title:"Slicing Training Data",domain:"physiology",description:"From the 10 weeks of training data, extract the peak training block (weeks 5-8, which are indices 4 to 7) into `peak_block`, then print its maximum.",initialCode:"weekly_km = [55, 62, 70, 68, 75, 80, 72, 65, 58, 50]",testCode:`assert peak_block == [75, 80, 72, 65], f"peak_block should be the slice [4:8], got {peak_block}"
 print("PASS")`,hints:["Indices 4 to 7 need the slice [4:8] -- the stop index is exclusive.",`peak_block = weekly_km[4:___]
 print(f"Peak block max: {max(peak_block)} km")`]},{type:"md",md:`## Tuples
 
@@ -217,14 +205,10 @@ print(vo2max)  # 58.2`,caption:"Tuples are immutable records. Unpacking assigns 
 assert date == "2026-03-15", "date should hold the second element"
 assert abs(vo2max - 58.2) < 1e-9, "vo2max should hold the third element"
 print("PASS")`,hints:["List the three names on the left of =, the tuple on the right.",`name, date, vo2max = ___
-print(f"{name} tested on {date}: VO2max = {vo2max}")`]},{type:"exercise",id:"ex-2-42",title:"Training Summary",domain:"coaching",description:`Summarise the 10 weekly distances:
-1. Store the total in total.
-2. Store the average in average.
-3. Store the peak in peak.
-Then print all three; any clear format is fine.`,initialCode:"weekly_km = [85, 92, 78, 95, 88, 72, 90, 85, 98, 82]",testCode:`assert total == 865, "total should be the sum: 865"
+print(f"{name} tested on {date}: VO2max = {vo2max}")`]},{type:"exercise",id:"ex-2-42",title:"Training Summary",domain:"coaching",description:"Summarise the 10 weekly distances:\n1. Store the total in `total`.\n2. Store the average in `average`.\n3. Store the peak in `peak`.\nThen print all three; any clear format is fine.",initialCode:"weekly_km = [85, 92, 78, 95, 88, 72, 90, 85, 98, 82]",testCode:`assert total == 865, "total should be the sum: 865"
 assert abs(average - 86.5) < 0.05, "average should be 86.5"
 assert peak == 98, "peak should be the maximum: 98"
-print("PASS")`,hints:["sum(), len(), and max() do all three jobs.",`total = sum(weekly_km)
+print("PASS")`,hints:["`sum()`, `len()`, and `max()` do all three jobs.",`total = sum(weekly_km)
 average = total / len(weekly_km)
 peak = ___(weekly_km)
 print(f"Total: {total} km")
@@ -280,7 +264,7 @@ print(splits.get("50m", "not measured"))  # not measured`},{type:"exercise",id:"
 height_m = athlete["height_cm"] / 100
 athlete["bmi"] = round(athlete["weight_kg"] / height_m ** 2, 1)
 
-print(athlete["bmi"])   # 24.7`},{type:"exercise",id:"ex-2-61",title:"Update Test Results",domain:"coaching",description:'Make two updates to the result dictionary: change "vo2max" from 52.1 to 54.3, and add a new key "retest_date" with the value "2026-09-01". Then print both updated values on separate lines.',initialCode:`result = {
+print(athlete["bmi"])   # 24.7`},{type:"exercise",id:"ex-2-61",title:"Update Test Results",domain:"coaching",description:'Make two updates to the result dictionary: change "vo2max" from 52.1 to 54.3, and add a new key "`retest_date`" with the value "2026-09-01". Then print both updated values on separate lines.',initialCode:`result = {
     "athlete": "Anna Berg",
     "vo2max": 52.1,
     "test_date": "2026-03-01",
@@ -308,7 +292,7 @@ print("score" in test_result)   # False`},{type:"exercise",id:"ex-2-62",title:"A
     "weight_kg": 80.0,
 }
 `,expectedOutput:`['name', 'sport', 'age', 'height_cm', 'weight_kg', 'bmi']
-22.9`,hints:['Convert the height to metres first, then add the value with athlete["bmi"] = round(..., 1).',`height_m = athlete["height_cm"] / 100
+22.9`,hints:['Convert the height to metres first, then add the value with athlete["bmi"] = `round(..., 1)`.',`height_m = athlete["height_cm"] / 100
 athlete["bmi"] = round(athlete["weight_kg"] / height_m ** 2, 1)
 print(list(athlete.___()))
 print(athlete["bmi"])`]},{type:"md",md:'---\n\n## Nested Dictionaries\n\nBecause a dictionary\'s values can be of any type, a value can itself be another dictionary. This is called **nesting**, and it is how structured records stay organised as they grow: instead of one flat dictionary with fifteen keys, related fields live together under a sub-key, such as everything physical under `"physical"` and every test result under `"performance"`.\n\nReaching a value inside a nested dictionary works exactly like ordinary access, applied twice. The first set of square brackets picks the inner dictionary, and the second picks the value inside it:\n\n```python\nprint(athlete["physical"]["resting_hr"])    # 38\nprint(athlete["performance"]["vo2max"])     # 78.0\n```\n\nRead `athlete["physical"]["resting_hr"]` from left to right: from `athlete`, take the `"physical"` section, and from that, take `"resting_hr"`.'},{type:"example",caption:"Nested athlete profile with personal, physical, and performance sections.",code:`athlete = {
@@ -319,7 +303,7 @@ print(athlete["bmi"])`]},{type:"md",md:'---\n\n## Nested Dictionaries\n\nBecause
 
 print(athlete["personal"]["name"])
 print(athlete["physical"]["resting_hr"])
-print(athlete["performance"]["marathon_pb"])`},{type:"exercise",id:"ex-2-63",title:"Nested Fitness Test Battery",domain:"physiology",description:"From the nested test-battery dictionary, print the vo2max value (52.3) and the sprint_20m percentile (75) on separate lines.",initialCode:`battery = {
+print(athlete["performance"]["marathon_pb"])`},{type:"exercise",id:"ex-2-63",title:"Nested Fitness Test Battery",domain:"physiology",description:"From the nested test-battery dictionary, print the vo2max value (52.3) and the `sprint_20m` percentile (75) on separate lines.",initialCode:`battery = {
     "athlete": "Anna Andersson",
     "tests": {
         "vo2max":      {"value": 52.3, "unit": "mL/kg/min", "percentile": 68},
@@ -394,11 +378,11 @@ print(net_force_n)
 
 # Every array can describe itself
 print(force_n.shape)   # (8,)  -- 8 elements in 1 dimension
-print(force_n.dtype)   # int32 -- whole numbers`},{type:"md",md:"---\n\n## Key Array Properties\n\nEvery array has three essential properties, readable at any time:\n\n| Property | Meaning | Example |\n|----------|---------|---------|\n| `.shape` | Dimensions as a tuple | `(8,)` |\n| `.dtype` | Data type of elements | `float64`, `int64` |\n| `.size` | Total element count | `15` |"},{type:"exercise",id:"ex-2-66",title:"Force Array Basics",domain:"biomechanics",packages:["numpy"],description:"Convert force_list to a NumPy array called force_n. Print its shape, its dtype, and the result of adding 50 to every element.",initialCode:`import numpy as np
+print(force_n.dtype)   # int32 -- whole numbers`},{type:"md",md:"---\n\n## Key Array Properties\n\nEvery array has three essential properties, readable at any time:\n\n| Property | Meaning | Example |\n|----------|---------|---------|\n| `.shape` | Dimensions as a tuple | `(8,)` |\n| `.dtype` | Data type of elements | `float64`, `int64` |\n| `.size` | Total element count | `15` |"},{type:"exercise",id:"ex-2-66",title:"Force Array Basics",domain:"biomechanics",packages:["numpy"],description:"Convert `force_list` to a NumPy array called `force_n`. Print its shape, its dtype, and the result of adding 50 to every element.",initialCode:`import numpy as np
 
 force_list = [735, 780, 1250, 2800, 3500, 3100, 2200, 1500, 900, 750]`,expectedOutput:`(10,)
 int32
-[ 785  830 1300 2850 3550 3150 2250 1550  950  800]`,hints:["np.array() converts the list; .shape and .dtype are attributes (no parentheses).",`force_n = np.array(force_list)
+[ 785  830 1300 2850 3550 3150 2250 1550  950  800]`,hints:["`np.array()` converts the list; `.shape` and `.dtype` are attributes (no parentheses).",`force_n = np.array(force_list)
 print(force_n.shape)
 print(force_n.dtype)
 print(force_n + ___)`]},{type:"md",md:"---\n\n## Creating Time Vectors: np.arange and np.linspace\n\nMeasurement signals need a matching time axis. `np.arange(start, stop, step)` generates sequences with a known step, ideal for a fixed sampling rate. `np.linspace(start, stop, num)` generates exactly `num` evenly spaced points including the endpoint:\n\n| Function | Endpoint | You specify |\n|----------|----------|-------------|\n| `arange` | Excluded | Step size |\n| `linspace` | Included | Point count |"},{type:"example",caption:"Time vectors with arange (1000 Hz) and linspace (101 points).",packages:["numpy"],code:`import numpy as np
@@ -409,10 +393,7 @@ print(f"arange: {len(time_arange)} samples, last = {time_arange[-1]:.3f} s")
 
 # Exactly 101 points from 0 to 1 s
 time_linspace = np.linspace(0, 1, 101)
-print(f"linspace: {len(time_linspace)} samples, last = {time_linspace[-1]:.3f} s")`},{type:"exercise",id:"ex-2-68",title:"Create Time Vectors",domain:"biomechanics",packages:["numpy"],description:`Create two time vectors for a 2-second signal:
-1. time_arange with np.arange, sampling at 500 Hz.
-2. time_linspace with np.linspace, exactly 51 evenly spaced points from 0 to 2 seconds.
-Then print the length and last value of each; any clear format is fine.`,initialCode:"import numpy as np",testCode:`assert len(time_arange) == 1000, f"time_arange should have 1000 samples (2 s at 500 Hz), got {len(time_arange)}"
+print(f"linspace: {len(time_linspace)} samples, last = {time_linspace[-1]:.3f} s")`},{type:"exercise",id:"ex-2-68",title:"Create Time Vectors",domain:"biomechanics",packages:["numpy"],description:"Create two time vectors for a 2-second signal:\n1. `time_arange` with `np`.arange, sampling at 500 Hz.\n2. `time_linspace` with `np`.linspace, exactly 51 evenly spaced points from 0 to 2 seconds.\nThen print the length and last value of each; any clear format is fine.",initialCode:"import numpy as np",testCode:`assert len(time_arange) == 1000, f"time_arange should have 1000 samples (2 s at 500 Hz), got {len(time_arange)}"
 assert abs(float(time_arange[-1]) - 1.998) < 1e-9, "arange excludes the endpoint, so the last value is 1.998"
 assert len(time_linspace) == 51, f"time_linspace should have exactly 51 points, got {len(time_linspace)}"
 assert abs(float(time_linspace[-1]) - 2.0) < 1e-12, "linspace includes the endpoint 2.0"
@@ -429,11 +410,7 @@ body_weight_n = mass_kg * GRAVITY_MS2
 print(f"Mean force: {force_n.mean():.1f} N")
 print(f"Peak force: {force_n.max():.1f} N")
 print(f"Std dev:    {force_n.std():.1f} N")
-print(f"Peak force: {(force_n / body_weight_n).max():.2f} BW")`},{type:"exercise",id:"ex-2-70",title:"Force Plate Statistics",domain:"biomechanics",packages:["numpy"],description:`Describe the drop-landing force recording:
-1. Compute body weight in newtons: body_weight_n = mass_kg * GRAVITY_MS2.
-2. Print the mean, peak, min, and standard deviation of the force (1 decimal each, in newtons).
-3. Print the peak normalised to body weights (2 decimals).
-Match the expected output exactly.`,initialCode:`import numpy as np
+print(f"Peak force: {(force_n / body_weight_n).max():.2f} BW")`},{type:"exercise",id:"ex-2-70",title:"Force Plate Statistics",domain:"biomechanics",packages:["numpy"],description:"Describe the drop-landing force recording:\n1. Compute body weight in newtons: `body_weight_n` = `mass_kg` * `GRAVITY_MS2`.\n2. Print the mean, peak, min, and standard deviation of the force (1 decimal each, in newtons).\n3. Print the peak normalised to body weights (2 decimals).\nMatch the expected output exactly.",initialCode:`import numpy as np
 
 force_n = np.array([735, 780, 1250, 2800, 3500, 3100, 2200, 1500, 900, 750])
 mass_kg = 75
@@ -441,7 +418,7 @@ GRAVITY_MS2 = 9.81`,expectedOutput:`Mean force: 1751.5 N
 Peak force: 3500.0 N
 Min force: 735.0 N
 Std dev: 1009.8 N
-Peak force: 4.76 BW`,hints:["body_weight_n = mass_kg * GRAVITY_MS2; then .mean(), .max(), .min(), .std(), and (force_n / body_weight_n).max().",`body_weight_n = mass_kg * GRAVITY_MS2
+Peak force: 4.76 BW`,hints:["`body_weight_n` = `mass_kg` * `GRAVITY_MS2`; then `.mean()`, `.max()`, `.min()`, `.std()`, and (`force_n` / `body_weight_n`)`.max()`.",`body_weight_n = mass_kg * GRAVITY_MS2
 print(f"Mean force: {force_n.mean():.1f} N")
 print(f"Peak force: {force_n.max():.1f} N")
 print(f"Min force: {force_n.___():.1f} N")
@@ -473,7 +450,7 @@ cooldown = hr_bpm[40:]
 
 print(f"Warm-up HR:  {warmup.mean():.0f} bpm")
 print(f"Main set HR: {main_set.mean():.0f} bpm")
-print(f"Cool-down HR:{cooldown.mean():.0f} bpm")`},{type:"exercise",id:"ex-2-71",title:"Extract EMG Segments",domain:"biomechanics",packages:["numpy"],description:"From the rectified EMG signal (20 values, millivolts), extract the activation phase (indices 8 to 14 inclusive) into activation_mv, then print the segment and its mean.",initialCode:`import numpy as np
+print(f"Cool-down HR:{cooldown.mean():.0f} bpm")`},{type:"exercise",id:"ex-2-71",title:"Extract EMG Segments",domain:"biomechanics",packages:["numpy"],description:"From the rectified EMG signal (20 values, millivolts), extract the activation phase (indices 8 to 14 inclusive) into `activation_mv`, then print the segment and its mean.",initialCode:`import numpy as np
 
 emg_mv = np.array([0.02, 0.03, 0.01, 0.04, 0.02,
                    0.05, 0.12, 0.25, 0.48, 0.72,
@@ -503,7 +480,7 @@ hr_max_bpm = 195
 hard_bpm = hr_bpm[hr_bpm >= 0.85 * hr_max_bpm]
 print(f"Samples above 85% of max: {hard_bpm}")
 print(f"Time above 85%: {len(hard_bpm)} samples")`},{type:"exercise",id:"ex-2-77",title:"Filter GPS High-Intensity Periods",domain:"physiology",packages:["numpy"],description:`Using boolean indexing on the GPS speed data (one sample per second):
-1. Keep only the samples above 5.0 m/s in high_speed_ms.
+1. Keep only the samples above 5.0 m/s in \`high_speed_ms\`.
 2. Print how many seconds that is, the mean speed of those samples, and the total high-intensity distance (their sum).
 Any clear print format is fine.`,initialCode:`import numpy as np
 
@@ -512,7 +489,7 @@ speed_ms = np.array([2.1, 3.5, 5.2, 6.1, 7.3, 5.8, 4.2, 3.1, 5.5, 6.8,
 threshold_ms = 5.0`,testCode:`assert len(high_speed_ms) == 11, f"11 samples are above 5.0 m/s, got {len(high_speed_ms)}"
 assert abs(float(high_speed_ms.mean()) - 6.0545) < 0.001, "mean of the fast samples should be about 6.05"
 assert abs(float(high_speed_ms.sum()) - 66.6) < 0.01, "their sum (the distance) should be 66.6"
-print("PASS")`,hints:["speed_ms[speed_ms > threshold_ms] keeps only the fast samples; len() is seconds, .sum() is metres.",`high_speed_ms = speed_ms[speed_ms > threshold_ms]
+print("PASS")`,hints:["`speed_ms`[`speed_ms` > `threshold_ms`] keeps only the fast samples; `len()` is seconds, `.sum()` is metres.",`high_speed_ms = speed_ms[speed_ms > threshold_ms]
 print(f"Time above {threshold_ms} m/s: {len(high_speed_ms)} seconds")
 print(f"Mean high-intensity speed: {high_speed_ms.mean():.2f} m/s")
 print(f"High-intensity distance: {high_speed_ms.___():.1f} m")`]},{type:"md",md:'---\n\n## Summary\n\n| Idea | Syntax | Why it matters |\n|------|--------|----------------|\n| Create an array | `np.array([...])` | Convert existing data |\n| Time vectors | `np.arange`, `np.linspace` | Match a signal to its time axis |\n| Element-wise maths | `force / bw` | One expression, every element |\n| Statistics | `.mean()`, `.std()`, `.min()`, `.max()` | No loops needed |\n| Slicing | `a[start:stop]` | Cut a signal into phases |\n| Boolean filter | `a[a > 5]` | The pattern pandas filtering is built on |\n\nTwo small notes for later. In Module 5 you will sometimes see `np.random.normal(mean, sd, n)` in examples; read it as "n random values around a mean", used to fabricate demonstration data. And the Module 7 projects introduce a few more NumPy tools (numerical derivatives, cumulative sums) exactly where a high-frequency signal calls for them.\n\nIn the next lesson, we step up from arrays to tables: importing real datasets with pandas.'}],quiz:{id:"quiz-2-8",title:"NumPy Quiz",questions:[{id:"q1",type:"multiple-choice",question:"What is the main advantage of NumPy arrays over Python lists for numerical computing?",options:[{value:"a",label:"Arrays can store mixed data types"},{value:"b",label:"Vectorized operations make them much faster for math"},{value:"c",label:"Arrays can change size dynamically"},{value:"d",label:"Arrays use more memory for better precision"}],correctAnswer:"b",explanation:"NumPy arrays use vectorized operations (implemented in C) that operate on entire arrays at once, making them 10-100x faster than equivalent Python list operations for numerical work."},{id:"q2",type:"multiple-choice",question:"What does np.arange(0, 1, 0.1) produce?",options:[{value:"a",label:"An array from 0 to 1 with 10 elements, including 1.0"},{value:"b",label:"An array from 0 to 0.9 with step 0.1 (endpoint excluded)"},{value:"c",label:"An array of 10 ones"},{value:"d",label:"An error because the step is a float"}],correctAnswer:"b",explanation:"np.arange(start, stop, step) excludes the stop value, just like Python's range(). So np.arange(0, 1, 0.1) produces [0.0, 0.1, 0.2, ..., 0.9]."},{id:"q3",type:"multiple-choice",question:"Given force = np.array([100, 500, 1200, 800, 300]), what does force[force > 500] return?",options:[{value:"a",label:"np.array([True, False, True, True, False])"},{value:"b",label:"np.array([1200, 800])"},{value:"c",label:"np.array([2, 3])"},{value:"d",label:"An error"}],correctAnswer:"b",explanation:"force > 500 creates a boolean mask [False, False, True, True, False]. Using this mask for indexing returns only the elements where the mask is True: [1200, 800]."}]}},"importing-data":{blocks:[{type:"md",md:`# Series and DataFrames
@@ -570,17 +547,14 @@ print(f"Mean CMJ: {cmj.mean():.1f} cm")
 print(f"Best: {cmj.max():.1f} cm ({cmj.idxmax()})")
 print(f"Worst: {cmj.min():.1f} cm ({cmj.idxmin()})")
 above_mean = cmj[cmj > cmj.mean()]
-print(f"Above-average athletes: {len(above_mean)}")`},{type:"exercise",id:"ex-2-100",title:"Analyse a CMJ Series",domain:"physiology",packages:["pandas"],description:`The Series of 20 CMJ heights (cm) is created for you. Print:
-1. The number of values.
-2. The mean rounded to 1 decimal (wrap in float() before round()).
-3. The number of athletes with CMJ above 35 cm.`,initialCode:`import pandas as pd
+print(f"Above-average athletes: {len(above_mean)}")`},{type:"exercise",id:"ex-2-100",title:"Analyse a CMJ Series",domain:"physiology",packages:["pandas"],description:"The Series of 20 CMJ heights (cm) is created for you. Print:\n1. The number of values.\n2. The mean rounded to 1 decimal (wrap in `float()` before `round()`).\n3. The number of athletes with CMJ above 35 cm.",initialCode:`import pandas as pd
 
 cmj = pd.Series([33.8, 42.2, 35.3, 37.0, 27.7, 38.5, 42.1, 29.4,
                  36.6, 30.2, 24.6, 36.9, 41.1, 26.9, 36.4, 27.7,
                  34.9, 31.3, 35.1, 35.6])
 `,expectedOutput:`20
 34.2
-11`,hints:["len() counts; a comparison like cmj > 35 gives True/False values you can sum.",`print(len(cmj))
+11`,hints:["`len()` counts; a comparison like cmj > 35 gives True/False values you can sum.",`print(len(cmj))
 print(round(float(cmj.mean()), 1))
 print((cmj > ___).sum())`]},{type:"md",md:`---
 
@@ -620,7 +594,7 @@ team = pd.DataFrame({
 print(team.shape)
 print(list(team.columns))
 print(team.dtypes)
-print(team.head(3))`},{type:"exercise",id:"ex-2-101",title:"Build and Inspect a Team DataFrame",domain:"coaching",packages:["pandas"],description:"The team DataFrame is built for you. Inspect it: store the number of rows in n_rows (from .shape) and the column names as a list in col_names. Print n_rows, then col_names, then the first 3 rows using .head(3).",initialCode:`import pandas as pd
+print(team.head(3))`},{type:"exercise",id:"ex-2-101",title:"Build and Inspect a Team DataFrame",domain:"coaching",packages:["pandas"],description:"The team DataFrame is built for you. Inspect it: store the number of rows in `n_rows` (from `.shape`) and the column names as a list in `col_names`. Print `n_rows`, then `col_names`, then the first 3 rows using `.head`(3).",initialCode:`import pandas as pd
 
 team = pd.DataFrame({
     'Name':       ['Haaland', 'De Bruyne', 'Rodri', 'Dias', 'Ederson'],
@@ -631,7 +605,7 @@ team = pd.DataFrame({
 })
 `,testCode:`assert n_rows == 5, "n_rows should be the number of rows (use team.shape)"
 assert list(col_names) == ['Name', 'Position', 'Age', 'Sprint_40m', 'CMJ_cm'], "col_names should hold the column names (use team.columns)"
-print("PASS")`,hints:[".shape is a (rows, columns) tuple; wrap .columns in list().",`n_rows = team.shape[0]
+print("PASS")`,hints:["`.shape` is a (rows, columns) tuple; wrap `.columns` in `list()`.",`n_rows = team.shape[0]
 col_names = list(team.___)
 print(n_rows)
 print(col_names)
@@ -643,13 +617,10 @@ print("=== Training Log ===")
 print(df.head())
 print(f"\\nShape: {df.shape}")
 print(f"\\nColumn types:\\n{df.dtypes}")
-print(f"\\nMissing values:\\n{df.isnull().sum()}")`},{type:"exercise",id:"ex-2-102",title:"Load and Inspect the Training Log",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:`Load data/training_log.csv into df. Print:
-1. The shape.
-2. The column names as a list.
-3. The count of missing values per column using .isnull().sum().to_string().`,initialCode:"import pandas as pd",testCode:`assert df.shape == (236, 8), f"Expected (236, 8), got {df.shape}"
+print(f"\\nMissing values:\\n{df.isnull().sum()}")`},{type:"exercise",id:"ex-2-102",title:"Load and Inspect the Training Log",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:"Load `data/training_log.csv` into `df`. Print:\n1. The shape.\n2. The column names as a list.\n3. The count of missing values per column using `.isnull()``.sum()``.to_string()`.",initialCode:"import pandas as pd",testCode:`assert df.shape == (236, 8), f"Expected (236, 8), got {df.shape}"
 assert 'Athlete' in df.columns, "Missing Athlete column"
 assert df['Distance_km'].isna().sum() == 71, "Expected 71 missing in Distance_km"
-print("PASS")`,hints:["pd.read_csv loads the file; .isnull().sum() counts missing values per column.",`df = pd.read_csv('data/training_log.csv')
+print("PASS")`,hints:["`pd`.read_csv loads the file; `.isnull()``.sum()` counts missing values per column.",`df = pd.read_csv('data/training_log.csv')
 print(df.shape)
 print(list(df.columns))
 print(df.isnull().sum().___())`]},{type:"md",md:`---
@@ -705,12 +676,10 @@ print(df.iloc[0])
 # Multiple columns -- ending the block with a bare expression
 # (no print) shows the result as a formatted table
 cardio = df[['Athlete', 'Avg_HR', 'Max_HR']]
-cardio.head(3)`},{type:"exercise",id:"ex-2-103",title:"Column and Row Selection",domain:"physiology",packages:["pandas"],dataFiles:["training_log.csv"],description:`The training log is loaded for you.
-1. Extract the RPE column as a Series and print its mean rounded to 2 decimals (wrap in float()).
-2. Select only the columns Athlete, Session_Type, and RPE into a DataFrame called summary and print its shape.`,initialCode:`import pandas as pd
+cardio.head(3)`},{type:"exercise",id:"ex-2-103",title:"Column and Row Selection",domain:"physiology",packages:["pandas"],dataFiles:["training_log.csv"],description:"The training log is loaded for you.\n1. Extract the RPE column as a Series and print its mean rounded to 2 decimals (wrap in `float()`).\n2. Select only the columns Athlete, `Session_Type`, and RPE into a DataFrame called `summary` and print its shape.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')`,expectedOutput:`6.51
-(236, 3)`,hints:['One column with df["RPE"]; several columns with a list of names.',`rpe = df['RPE']
+(236, 3)`,hints:['One column with `df`["RPE"]; several columns with a list of names.',`rpe = df['RPE']
 print(round(float(rpe.mean()), 2))
 summary = df[['Athlete', 'Session_Type', '___']]
 print(summary.shape)`]},{type:"md",md:"---\n\n## Reading Excel Files\n\nPandas reads Excel workbooks with `pd.read_excel()`. Pass `sheet_name` to select a specific sheet:\n\n```python\ntb = pd.read_excel('data/test_battery.xlsx', sheet_name='Testing')\nprint(tb.head())\n```\n\nReading Excel requires the `openpyxl` package (declare it in `packages` in course exercises; install once with `pip install openpyxl` on your own machine).\n\nYou can read all sheets at once:\n\n```python\nall_sheets = pd.read_excel('data/test_battery.xlsx', sheet_name=None)\nprint(list(all_sheets.keys()))   # sheet names\n```"},{type:"example",caption:"Load the testing battery from an Excel workbook and preview.",packages:["pandas","openpyxl"],dataFiles:["test_battery.xlsx"],code:`import pandas as pd
@@ -719,12 +688,9 @@ tb = pd.read_excel('data/test_battery.xlsx', sheet_name='Testing')
 
 print(tb.shape)
 print(list(tb.columns))
-tb.head()`},{type:"exercise",id:"ex-2-104",title:"Load a Testing Battery",domain:"physiology",packages:["pandas"],dataFiles:["test_battery.csv"],description:`Load data/test_battery.csv into tb. Print:
-1. The shape.
-2. The mean CMJ_cm across all athletes (1 decimal, wrap in float()).
-3. The number of male athletes (Sex == "M").`,initialCode:"import pandas as pd",expectedOutput:`(20, 8)
+tb.head()`},{type:"exercise",id:"ex-2-104",title:"Load a Testing Battery",domain:"physiology",packages:["pandas"],dataFiles:["test_battery.csv"],description:'Load `data/test_battery.csv` into `tb`. Print:\n1. The shape.\n2. The mean `CMJ_cm` across all athletes (1 decimal, wrap in `float()`).\n3. The number of male athletes (Sex == "M").',initialCode:"import pandas as pd",expectedOutput:`(20, 8)
 33.8
-10`,hints:['(tb["Sex"] == "M").sum() counts the matching rows.',`tb = pd.read_csv('data/test_battery.csv')
+10`,hints:['(`tb`["Sex"] == "M")`.sum()` counts the matching rows.',`tb = pd.read_csv('data/test_battery.csv')
 print(tb.shape)
 print(round(float(tb['CMJ_cm'].mean()), 1))
 print((tb['Sex'] == '___').sum())`]},{type:"md",md:'---\n\n## Summary\n\n| Task | Code |\n|------|------|\n| Import pandas | `import pandas as pd` |\n| Create a Series | `pd.Series([v1, v2, ...], index=[...])` |\n| Create a DataFrame | `pd.DataFrame({"col": [...], ...})` |\n| Load a CSV | `pd.read_csv("path.csv")` |\n| Load Excel | `pd.read_excel("path.xlsx", sheet_name="Sheet")` |\n| Inspect | `.head()`, `.shape`, `.dtypes`, `.isnull().sum()` |\n| Select one column | `df["col"]` → Series |\n| Select multiple cols | `df[["col1", "col2"]]` → DataFrame |\n| Row by position | `df.iloc[0]` |\n| Row by label | `df.loc["label"]` |\n\nPandas builds on top of NumPy -- you can convert between them easily with `.values` or `.to_numpy()`. The next lesson covers how to get your results back out by exporting to files.'}],quiz:null},"exporting-data":{blocks:[{type:"md",md:`# Exporting Data
@@ -784,10 +750,7 @@ df = pd.read_csv('data/training_log.csv')
 overview = df[['Date', 'Athlete', 'Session_Type', 'RPE']]
 
 overview.to_csv('data/rpe_overview.csv', index=False)
-print(f"Exported {len(overview)} rows and {len(overview.columns)} columns")`},{type:"exercise",id:"ex-2-107",title:"Export Selected Columns",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:`The training log is loaded for you.
-1. Keep only the columns Date, Athlete, and Duration_min.
-2. Export them to data/duration_log.csv WITHOUT the index column.
-3. Print the number of rows you exported.`,initialCode:`import pandas as pd
+print(f"Exported {len(overview)} rows and {len(overview.columns)} columns")`},{type:"exercise",id:"ex-2-107",title:"Export Selected Columns",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:"The training log is loaded for you.\n1. Keep only the columns Date, Athlete, and `Duration_min`.\n2. Export them to `data/duration_log.csv` WITHOUT the index column.\n3. Print the number of rows you exported.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')`,testCode:`import os, pandas as pd
 assert os.path.exists('data/duration_log.csv'), "Export the file first"
@@ -805,9 +768,7 @@ df = pd.DataFrame({
 })
 
 df.to_excel('data/results.xlsx', index=False, sheet_name='Results')
-print("Saved data/results.xlsx")`},{type:"md",md:"---\n\n## Norwegian and European Excel\n\nIf you open a normal CSV in a Norwegian (or German, French, or other European) copy of Excel, you may get a mess. The reason is a regional convention: in English-locale Excel the column separator is a comma and the decimal point is a dot (`34.2`). In much of Europe the decimal mark is a **comma** (`34,2`), so the column separator must be a **semicolon**.\n\nTo produce a CSV that Norwegian Excel opens correctly, set both:\n\n```python\ndf.to_csv('results.csv', sep=';', decimal=',', index=False)\n```\n\nThe resulting file uses semicolons between columns and commas inside the numbers -- the same `sep` and `decimal` you saw for *reading* European files."},{type:"exercise",id:"ex-2-108",title:"Export for Norwegian Excel",domain:"physiology",packages:["pandas"],dataFiles:["training_log.csv"],description:`The training log is loaded for you.
-1. Export the whole DataFrame to data/training_log_norsk.csv so that Norwegian Excel opens it correctly: semicolon separator, comma decimals, and no index.
-2. Print the number of rows you exported.`,initialCode:`import pandas as pd
+print("Saved data/results.xlsx")`},{type:"md",md:"---\n\n## Norwegian and European Excel\n\nIf you open a normal CSV in a Norwegian (or German, French, or other European) copy of Excel, you may get a mess. The reason is a regional convention: in English-locale Excel the column separator is a comma and the decimal point is a dot (`34.2`). In much of Europe the decimal mark is a **comma** (`34,2`), so the column separator must be a **semicolon**.\n\nTo produce a CSV that Norwegian Excel opens correctly, set both:\n\n```python\ndf.to_csv('results.csv', sep=';', decimal=',', index=False)\n```\n\nThe resulting file uses semicolons between columns and commas inside the numbers -- the same `sep` and `decimal` you saw for *reading* European files."},{type:"exercise",id:"ex-2-108",title:"Export for Norwegian Excel",domain:"physiology",packages:["pandas"],dataFiles:["training_log.csv"],description:"The training log is loaded for you.\n1. Export the whole DataFrame to `data/training_log_norsk.csv` so that Norwegian Excel opens it correctly: semicolon separator, comma decimals, and no index.\n2. Print the number of rows you exported.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')`,testCode:`import os, pandas as pd
 assert os.path.exists('data/training_log_norsk.csv'), "Export the file first"
@@ -816,7 +777,7 @@ assert ';' in first_line, "Use sep=';' so the columns are separated by semicolon
 check = pd.read_csv('data/training_log_norsk.csv', sep=';', decimal=',')
 assert check.shape == (236, 8), f"Expected (236, 8), got {check.shape}"
 assert check['Duration_min'].dtype == float, "Also pass decimal=',' so the numbers are written with comma decimals"
-print("PASS")`,hints:["to_csv takes sep and decimal arguments; the Norwegian combination is sep=';' and decimal=','.",`df.to_csv('data/training_log_norsk.csv', sep=';', decimal=',', index=___)
+print("PASS")`,hints:["`to_csv` takes sep and decimal arguments; the Norwegian combination is sep=';' and decimal=','.",`df.to_csv('data/training_log_norsk.csv', sep=';', decimal=',', index=___)
 print(len(df))`]},{type:"md",md:`---
 
 ## Exporting Plain Arrays
@@ -895,7 +856,7 @@ print(f"Ingrid mean RPE: {ingrid['RPE'].mean():.1f}")`},{type:"exercise",id:"ex-
 2. Filter for sessions where RPE is 8 or higher and print how many there are.`,initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')`,expectedOutput:`56
-61`,hints:['One comparison per filter: Session_Type against "Match", then RPE against 8. len() counts the rows.',`matches = df[df['Session_Type'] == 'Match']
+61`,hints:['One comparison per filter: `Session_Type` against "Match", then RPE against 8. `len()` counts the rows.',`matches = df[df['Session_Type'] == 'Match']
 print(len(matches))
 hard = df[df['RPE'] >= ___]
 print(len(hard))`]},{type:"md",md:`---
@@ -920,14 +881,11 @@ print(f"Lowest VO2max: {vo2_sorted.iloc[0]['VO2max_est']} mL/kg/min")
 
 # Top 3 jumpers -- the bare expression on the last line shows a table
 top_jumpers = tb.sort_values('CMJ_cm', ascending=False).head(3)
-top_jumpers[['Athlete', 'Sex', 'CMJ_cm']]`},{type:"exercise",id:"ex-2-113",title:"Sort the Test Battery",domain:"physiology",packages:["pandas"],dataFiles:["test_battery.csv"],description:`The test battery is loaded for you.
-1. Store the top 3 athletes by CMJ height in top3, sorted best first, and print their Athlete codes and CMJ_cm values.
-2. Store the mean VO2max_est rounded to 1 decimal in mean_vo2 and print it.
-Any clear print format is fine.`,initialCode:`import pandas as pd
+top_jumpers[['Athlete', 'Sex', 'CMJ_cm']]`},{type:"exercise",id:"ex-2-113",title:"Sort the Test Battery",domain:"physiology",packages:["pandas"],dataFiles:["test_battery.csv"],description:"The test battery is loaded for you.\n1. Store the top 3 athletes by CMJ height in `top3`, sorted best first, and print their Athlete codes and `CMJ_cm` values.\n2. Store the mean `VO2max_est` rounded to 1 decimal in `mean_vo2` and print it.\nAny clear print format is fine.",initialCode:`import pandas as pd
 
 tb = pd.read_csv('data/test_battery.csv')`,testCode:`assert list(top3['Athlete']) == ['A02', 'A07', 'A14'], f"The top 3 by CMJ_cm should be A02, A07, A14; got {list(top3['Athlete'])}"
 assert abs(mean_vo2 - 45.2) < 0.05, f"mean_vo2 should be 45.2, got {mean_vo2}"
-print("PASS")`,hints:["sort_values with ascending=False, then .head(3); the mean comes straight from the VO2max_est column.",`top3 = tb.sort_values('CMJ_cm', ascending=___).head(3)
+print("PASS")`,hints:["`sort_values` with ascending=False, then `.head`(3); the mean comes straight from the `VO2max_est` column.",`top3 = tb.sort_values('CMJ_cm', ascending=___).head(3)
 print(top3[['Athlete', 'CMJ_cm']])
 mean_vo2 = round(tb['VO2max_est'].mean(), 1)
 print(mean_vo2)`]},{type:"md",md:`---
@@ -947,16 +905,12 @@ df = pd.read_csv('data/training_log.csv')
 df['session_load'] = df['RPE'] * df['Duration_min']
 
 print(f"Mean session load: {df['session_load'].mean():.0f}")
-df[['Athlete', 'Session_Type', 'RPE', 'session_load']].head(6)`},{type:"exercise",id:"ex-2-114",title:"Add Session Load Column",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:`The training log is loaded for you.
-1. Add a column session_load = RPE * Duration_min.
-2. Store the mean session load in mean_load and the highest single-session load in max_load.
-3. Print both.
-Any clear print format is fine.`,initialCode:`import pandas as pd
+df[['Athlete', 'Session_Type', 'RPE', 'session_load']].head(6)`},{type:"exercise",id:"ex-2-114",title:"Add Session Load Column",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:"The training log is loaded for you.\n1. Add a column `session_load` = RPE * `Duration_min`.\n2. Store the mean session load in `mean_load` and the highest single-session load in `max_load`.\n3. Print both.\nAny clear print format is fine.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')`,testCode:`assert 'session_load' in df.columns, "add the session_load column first"
 assert abs(float(mean_load) - 432.04) < 0.5, f"mean_load should be about 432, got {mean_load}"
 assert abs(float(max_load) - 3915.0) < 0.01, f"max_load should be 3915.0, got {max_load}"
-print("PASS")`,hints:["Multiply the two columns to make session_load; .mean() and .max() on that column give the two numbers.",`df['session_load'] = df['RPE'] * df['Duration_min']
+print("PASS")`,hints:["Multiply the two columns to make `session_load`; `.mean()` and `.max()` on that column give the two numbers.",`df['session_load'] = df['RPE'] * df['Duration_min']
 mean_load = df['session_load'].mean()
 max_load = df['session_load'].___()
 print(mean_load)
@@ -1008,26 +962,19 @@ print(df.groupby('Session_Type')['RPE'].mean().round(1))
 
 # Number of sessions per athlete
 print()
-print(df.groupby('Athlete')['RPE'].count())`},{type:"exercise",id:"ex-2-115",title:"Group by Athlete",domain:"physiology",packages:["pandas"],dataFiles:["training_log.csv"],description:`The training log is loaded for you.
-1. Group by Athlete and store the mean RPE per athlete in mean_rpe, rounded to 2 decimals.
-2. Print it sorted from highest to lowest.`,initialCode:`import pandas as pd
+print(df.groupby('Athlete')['RPE'].count())`},{type:"exercise",id:"ex-2-115",title:"Group by Athlete",domain:"physiology",packages:["pandas"],dataFiles:["training_log.csv"],description:"The training log is loaded for you.\n1. Group by Athlete and store the mean RPE per athlete in `mean_rpe`, rounded to 2 decimals.\n2. Print it sorted from highest to lowest.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')`,testCode:`assert len(mean_rpe) == 6, f"Expected one value per athlete (6), got {len(mean_rpe)}"
 assert abs(float(mean_rpe['Jonas']) - 7.41) < 0.05, f"Jonas trains hardest at mean RPE 7.41, got {mean_rpe['Jonas']}"
 assert abs(float(mean_rpe['Ingrid']) - 6.05) < 0.05, f"Ingrid's mean RPE should be 6.05, got {mean_rpe['Ingrid']}"
-print("PASS")`,hints:['groupby("Athlete"), take the RPE column, then .mean(); sort_values(ascending=False) orders the result.',`mean_rpe = df.groupby('Athlete')['RPE'].mean().round(2)
-print(mean_rpe.sort_values(ascending=___))`]},{type:"exercise",id:"ex-2-117",title:"Mini Analysis: Hardest Sessions",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:`Chain the skills from this lesson into one small analysis.
-1. Add a derived column sRPE = Duration_min * RPE.
-2. Filter to the hard sessions (RPE >= 8) and store how many there are in n_hard.
-3. Sort the hard sessions by sRPE descending and store the three highest sRPE values in top3.
-4. Print n_hard and top3.
-Any clear print format is fine.`,initialCode:`import pandas as pd
+print("PASS")`,hints:['`groupby("Athlete")`, take the RPE column, then `.mean()`; `sort_values(ascending=False)` orders the result.',`mean_rpe = df.groupby('Athlete')['RPE'].mean().round(2)
+print(mean_rpe.sort_values(ascending=___))`]},{type:"exercise",id:"ex-2-117",title:"Mini Analysis: Hardest Sessions",domain:"coaching",packages:["pandas"],dataFiles:["training_log.csv"],description:"Chain the skills from this lesson into one small analysis.\n1. Add a derived column sRPE = `Duration_min` * RPE.\n2. Filter to the hard sessions (RPE >= 8) and store how many there are in `n_hard`.\n3. Sort the hard sessions by sRPE descending and store the three highest sRPE values in `top3`.\n4. Print `n_hard` and top3.\nAny clear print format is fine.",initialCode:`import pandas as pd
 
 df = pd.read_csv('data/training_log.csv')
 `,testCode:`assert 'sRPE' in df.columns, "add the sRPE column first"
 assert n_hard == 61, f"Expected 61 hard sessions, got {n_hard}"
 assert list(top3) == [3915.0, 810.0, 810.0], f"Top 3 loads wrong: {list(top3)}"
-print("PASS")`,hints:['Three steps in order: df["sRPE"] = ..., then hard = df[df["RPE"] >= 8], then hard.sort_values("sRPE", ascending=False).',`df["sRPE"] = df["Duration_min"] * df["RPE"]
+print("PASS")`,hints:['Three steps in order: `df`["sRPE"] = ..., then hard = `df`[`df`["RPE"] >= 8], then `hard.sort_values("sRPE", ascending=False)`.',`df["sRPE"] = df["Duration_min"] * df["RPE"]
 hard = df[df["RPE"] >= 8]
 n_hard = len(hard)
 top = hard.sort_values("sRPE", ascending=___)

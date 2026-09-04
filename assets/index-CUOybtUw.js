@@ -206,11 +206,7 @@ print(f"Sampling interval: {dt*1000:.3f} ms  ->  {fs:.0f} Hz")
 print(f"Duration: {time[-1]:.2f} s")
 print(f"Baseline torque (first {baseline_samples} samples): {baseline_mean:.2f} +/- {baseline_sd:.3f} Nm")
 print(f"Angle sweep: {angle[0]:.0f} deg -> {angle[-1]:.0f} deg")
-print(f"Peak torque: {torque.max():.1f} Nm at t = {time[np.argmax(torque)]:.3f} s")`},{type:"exercise",id:"ex-7-20",title:"Import and Prepare Data",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:`The recording is loaded for you with np.loadtxt (columns Time, Torque, Angle).
-1. Split it into time, torque, and angle arrays.
-2. Compute n (number of samples), dt = np.median(np.diff(time)), and fs = 1/dt.
-3. Compute the baseline mean and SD from the first 2000 samples.
-The print lines then report the number of samples, sampling rate, duration, baseline torque, and peak torque.`,initialCode:`import numpy as np
+print(f"Peak torque: {torque.max():.1f} Nm at t = {time[np.argmax(torque)]:.3f} s")`},{type:"exercise",id:"ex-7-20",title:"Import and Prepare Data",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"The recording is loaded for you with `np`.loadtxt (columns Time, Torque, Angle).\n1. Split it into time, torque, and angle arrays.\n2. Compute n (number of samples), dt = `np.median(np.diff(time))`, and fs = 1/dt.\n3. Compute the baseline mean and SD from the first 2000 samples.\nThe print lines then report the number of samples, sampling rate, duration, baseline torque, and peak torque.",initialCode:`import numpy as np
 
 # Load the real isokinetic recording (skip the header row)
 data = np.loadtxt('data/isok30.csv', delimiter=',', skiprows=1)`,testCode:`import numpy as np
@@ -219,7 +215,7 @@ assert abs(fs - 2000) < 1, f"Sampling rate should be ~2000 Hz, got {fs}"
 assert abs(time[-1] - 4.27) < 0.05, "Duration should be ~4.27 s"
 assert abs(baseline_mean - (-0.60)) < 0.2, f"Baseline mean should be near -0.60 Nm, got {baseline_mean}"
 assert abs(torque.max() - 105.0) < 0.5, f"Peak torque should be ~105.0 Nm, got {torque.max()}"
-print("PASS")`,hints:["Slice columns with data[:, i]. Sampling: dt = np.median(np.diff(time)), fs = 1/dt. The baseline statistics come from torque[:2000].",`time = data[:, 0]
+print("PASS")`,hints:["Slice columns with data[:, i]. Sampling: dt = `np.median(np.diff(time))`, fs = 1/dt. The baseline statistics come from torque[:2000].",`time = data[:, 0]
 torque = data[:, 1]
 angle = data[:, 2]
 
@@ -275,11 +271,7 @@ idx = get_index_at(time, 1.5)
 print(f"Index at t=1.5s: {idx}  (time={time[idx]:.3f} s, torque={torque[idx]:.1f} Nm)")
 print(f"Nearest torque to 50 Nm: {nearest(torque, 50):.1f} Nm")
 threshold = get_threshold(torque, baseline_samples=2000, offset=5.0)
-print(f"Onset threshold (baseline_mean + 5 Nm): {threshold:.2f} Nm")`},{type:"exercise",id:"ex-7-21",title:"Write Helper Functions",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:`Write the three helper functions used throughout the project:
-1. get_index_at(time_array, target_time): the index of the sample closest to target_time.
-2. nearest(array, value): the element of the array closest to value.
-3. get_threshold(signal, baseline_samples=2000, offset=5.0): baseline mean + offset.
-The test prints below try out each one.`,initialCode:`import numpy as np
+print(f"Onset threshold (baseline_mean + 5 Nm): {threshold:.2f} Nm")`},{type:"exercise",id:"ex-7-21",title:"Write Helper Functions",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"Write the three helper functions used throughout the project:\n1. `get_index_at(time_array, target_time)`: the index of the sample closest to `target_time`.\n2. `nearest(array, value)`: the element of the array closest to value.\n3. `get_threshold(signal, baseline_samples=2000, offset=5.0)`: baseline mean + offset.\nThe test prints below try out each one.",initialCode:`import numpy as np
 
 # Load the real isokinetic recording (skip the header row)
 data = np.loadtxt('data/isok30.csv', delimiter=',', skiprows=1)
@@ -292,7 +284,7 @@ assert isinstance(nearest(torque, 50.0), (float, np.floating)), "nearest should 
 assert abs(nearest(torque, 50.0) - 50.0) < 1.0, "nearest(torque, 50) should be ~50 Nm on this signal"
 _thr = get_threshold(torque, baseline_samples=2000, offset=5.0)
 assert abs(_thr - 4.40) < 0.3, f"Threshold (baseline_mean + 5 Nm) should be ~4.40 Nm, got {_thr}"
-print("PASS")`,hints:["All three functions build on the same tricks: np.argmin(np.abs(...)) finds the closest sample, and the threshold is the baseline slice's mean plus the offset.",`def get_index_at(time_array, target_time):
+print("PASS")`,hints:["All three functions build on the same tricks: `np.argmin(np.abs(...))` finds the closest sample, and the threshold is the baseline slice's mean plus the offset.",`def get_index_at(time_array, target_time):
     """Return the index of the sample closest to target_time."""
     return np.argmin(np.abs(time_array - target_time))
 
@@ -346,11 +338,7 @@ time_to_peak = time[peak_idx] - onset_time
 print(f"Threshold: {threshold:.2f} Nm")
 print(f"Onset: index {onset_idx},  t = {onset_time:.3f} s,  torque = {onset_torque:.1f} Nm")
 print(f"Peak torque: {torque[peak_idx]:.1f} Nm at t = {time[peak_idx]:.3f} s")
-print(f"Time from onset to peak: {time_to_peak*1000:.0f} ms")`},{type:"exercise",id:"ex-7-22",title:"Detect Contraction Onset",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:`The onset threshold (baseline mean + 5 Nm) is computed for you.
-1. Find onset_idx: the first sample where torque exceeds the threshold.
-2. Read off onset_time and onset_torque.
-3. Find peak_idx with np.argmax and compute time_to_peak.
-The print statements are already in place.`,initialCode:`import numpy as np
+print(f"Time from onset to peak: {time_to_peak*1000:.0f} ms")`},{type:"exercise",id:"ex-7-22",title:"Detect Contraction Onset",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"The onset threshold (baseline mean + 5 Nm) is computed for you.\n1. Find `onset_idx`: the first sample where torque exceeds the threshold.\n2. Read off `onset_time` and `onset_torque`.\n3. Find `peak_idx` with `np`.argmax and compute `time_to_peak`.\nThe print statements are already in place.",initialCode:`import numpy as np
 
 # Load the real isokinetic recording (skip the header row)
 data = np.loadtxt('data/isok30.csv', delimiter=',', skiprows=1)
@@ -370,7 +358,7 @@ assert abs(threshold - 4.40) < 0.3, f"Threshold should be ~4.40 Nm, got {thresho
 assert 2200 < onset_idx < 2360, f"Onset index should be ~2279, got {onset_idx}"
 assert abs(onset_time - 1.140) < 0.01, f"Onset time should be ~1.140 s, got {onset_time}"
 assert abs(time_to_peak - 0.733) < 0.02, f"Time onset->peak should be ~733 ms, got {time_to_peak*1000:.0f} ms"
-print("PASS")`,hints:["np.where(torque > threshold)[0][0] gives the first sample above the threshold; np.argmax(torque) gives the peak index.",`onset_idx = np.where(torque > ___)[0][0]
+print("PASS")`,hints:["`np.where(torque > threshold)`[0][0] gives the first sample above the threshold; `np.argmax(torque)` gives the peak index.",`onset_idx = np.where(torque > ___)[0][0]
 onset_time = time[onset_idx]
 onset_torque = torque[onset_idx]
 
@@ -430,7 +418,7 @@ for win, label in zip(windows, window_labels):
     print(f"  {label}: {rtd:7.1f} Nm/s  ({t_onset:.1f} -> {t_end:.1f} Nm)")
 
 best_win = max(rtd_values, key=rtd_values.get)
-print(f"\\nHighest RTD: {rtd_values[best_win]:.1f} Nm/s at {best_win}")`},{type:"exercise",id:"ex-7-23",title:"Calculate RTD Metrics",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"Calculate RTD over three early time windows after onset: 0-50ms, 0-100ms, and 0-200ms. RTD = (torque_at_end - torque_at_onset) / window_duration. Store the results in a dictionary keyed by label and print each value, then print which window has the highest RTD.",initialCode:`import numpy as np
+print(f"\\nHighest RTD: {rtd_values[best_win]:.1f} Nm/s at {best_win}")`},{type:"exercise",id:"ex-7-23",title:"Calculate RTD Metrics",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"Calculate RTD over three early time windows after onset: 0-50ms, 0-100ms, and 0-200ms. RTD = (`torque_at_end` - `torque_at_onset`) / `window_duration`. Store the results in a dictionary keyed by label and print each value, then print which window has the highest RTD.",initialCode:`import numpy as np
 
 # Load the real isokinetic recording (skip the header row)
 data = np.loadtxt('data/isok30.csv', delimiter=',', skiprows=1)
@@ -457,7 +445,7 @@ assert abs(rtd_values['0-50ms'] - 233.1) < 8.0, f"RTD 0-50ms should be ~233 Nm/s
 assert abs(rtd_values['0-100ms'] - 298.7) < 8.0, f"RTD 0-100ms should be ~299 Nm/s, got {rtd_values['0-100ms']}"
 assert abs(rtd_values['0-200ms'] - 349.9) < 8.0, f"RTD 0-200ms should be ~350 Nm/s, got {rtd_values['0-200ms']}"
 assert best_window == '0-200ms', f"0-200ms should have the highest RTD, got {best_window}"
-print("PASS")`,hints:["For each window: find the end index with get_index_at(time, onset_time + win), take the torque change from onset to that index, divide by the window length, and store it under the label.",`print("RTD at fixed time windows:")
+print("PASS")`,hints:["For each window: find the end index with `get_index_at(time, onset_time + win)`, take the torque change from onset to that index, divide by the window length, and store it under the label.",`print("RTD at fixed time windows:")
 print("-" * 45)
 
 for win, label in zip(windows, window_labels):
@@ -507,7 +495,7 @@ peak_rtd_time  = time[peak_rtd_idx]
 print(f"Peak RTD:           {peak_rtd_value:.1f} Nm/s")
 print(f"Time of peak RTD:   {peak_rtd_time:.3f} s")
 print(f"Time after onset:   {(peak_rtd_time - onset_time)*1000:.0f} ms")
-print(f"Torque at peak RTD: {torque[peak_rtd_idx]:.1f} Nm")`},{type:"exercise",id:"ex-7-24",title:"Find Peak RTD",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"Compute the first derivative of the real torque signal with rtd_signal = np.gradient(torque, time) (Nm/s). This recording is clean enough that no smoothing is needed, so find the peak directly: peak_rtd_idx = np.argmax(rtd_signal). Print the peak RTD value, the time it occurs, the time after onset in milliseconds, and the torque at that instant.",initialCode:`import numpy as np
+print(f"Torque at peak RTD: {torque[peak_rtd_idx]:.1f} Nm")`},{type:"exercise",id:"ex-7-24",title:"Find Peak RTD",domain:"biomechanics",packages:["numpy"],dataFiles:["isok30.csv"],description:"Compute the first derivative of the real torque signal with `rtd_signal` = `np.gradient(torque, time)` (Nm/s). This recording is clean enough that no smoothing is needed, so find the peak directly: `peak_rtd_idx` = `np.argmax(rtd_signal)`. Print the peak RTD value, the time it occurs, the time after onset in milliseconds, and the torque at that instant.",initialCode:`import numpy as np
 
 # Load the real isokinetic recording (skip the header row)
 data = np.loadtxt('data/isok30.csv', delimiter=',', skiprows=1)
@@ -527,7 +515,7 @@ assert len(rtd_signal) == len(torque), "rtd_signal should have the same length a
 assert abs(peak_rtd_value - 437.3) < 5.0, f"Peak RTD should be ~437 Nm/s, got {peak_rtd_value}"
 assert abs(peak_rtd_time - 1.270) < 0.01, f"Peak RTD should occur near t=1.270 s, got {peak_rtd_time}"
 assert peak_rtd_time > onset_time, "Peak RTD should occur after onset"
-print("PASS")`,hints:["np.gradient(torque, time) gives the instantaneous slope in Nm/s at every sample; np.argmax finds where it peaks. No smoothing is needed on this clean signal.",`rtd_signal = np.gradient(torque, ___)
+print("PASS")`,hints:["`np.gradient(torque, time)` gives the instantaneous slope in Nm/s at every sample; `np`.argmax finds where it peaks. No smoothing is needed on this clean signal.",`rtd_signal = np.gradient(torque, ___)
 
 peak_rtd_idx = np.argmax(rtd_signal)
 peak_rtd_value = rtd_signal[peak_rtd_idx]
@@ -607,10 +595,7 @@ ax2.axhline(y=0, color='gray', linestyle='-', alpha=0.3)
 ax2.set_xlabel('Time (s)', fontsize=12);  ax2.set_ylabel('RTD (Nm/s)', fontsize=12)
 ax2.set_title('Rate of Torque Development', fontsize=13, fontweight='bold')
 ax2.legend(loc='upper right', fontsize=10);  ax2.grid(True, alpha=0.3)
-plt.tight_layout()`},{type:"exercise",id:"ex-7-25",title:"Create Final Visualisation",domain:"biomechanics",packages:["numpy","matplotlib"],dataFiles:["isok30.csv"],description:`Create a two-panel figure of the recording (stacked, sharing the x-axis), with the axes named ax1 (top) and ax2 (bottom):
-1. Top panel: the torque-time curve with onset marker (green dot), peak torque marker (red triangle), threshold line, and shaded RTD windows.
-2. Bottom panel: the RTD signal (np.gradient) with peak RTD annotated.
-Add labels, titles, and legends.`,initialCode:`import numpy as np
+plt.tight_layout()`},{type:"exercise",id:"ex-7-25",title:"Create Final Visualisation",domain:"biomechanics",packages:["numpy","matplotlib"],dataFiles:["isok30.csv"],description:"Create a two-panel figure of the recording (stacked, sharing the x-axis), with the `axes` named `ax1` (top) and `ax2` (bottom):\n1. Top panel: the torque-time curve with onset marker (green dot), peak torque marker (red triangle), threshold line, and shaded RTD windows.\n2. Bottom panel: the RTD signal (`np`.gradient) with peak RTD annotated.\nAdd labels, titles, and legends.",initialCode:`import numpy as np
 import matplotlib.pyplot as plt
 
 # Load the recording and recompute everything from the previous steps
@@ -640,7 +625,7 @@ window_labels = ['0-50ms', '0-100ms', '0-200ms']`,testCode:`assert len(fig.axes)
 assert len(ax1.lines) >= 1, "No lines on ax1 (torque panel)"
 assert len(ax2.lines) >= 1, "No lines on ax2 (RTD panel)"
 assert len(ax1.patches) >= 1, "No axvspan shading on ax1 (axvspan adds Polygon patches)"
-print("PASS")`,hints:['Two stacked panels sharing x: plt.subplots(2, 1, sharex=True, gridspec_kw={"height_ratios": [2, 1]}). Torque trace, onset/peak markers, threshold line, and axvspan window shading go on ax1; the gradient signal and its peak marker go on ax2.',`fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True,
+print("PASS")`,hints:['Two stacked panels sharing x: `plt.subplots(2, 1, sharex=True, gridspec_kw={"height_ratios": [2, 1]})`. Torque trace, onset/peak markers, threshold line, and axvspan window shading go on `ax1`; the gradient signal and its peak marker go on `ax2`.',`fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True,
                                 gridspec_kw={"height_ratios": [2, 1]})
 
 ax1.plot(time, torque, "b-", linewidth=1.5, label="Torque")
@@ -747,11 +732,7 @@ print(f"Sampling interval: {dt:.0f} s")
 print(f"Duration: {duration} s ({duration/60:.1f} min)")
 print(f"East range:  {east.min()} to {east.max()} m")
 print(f"North range: {north.min()} to {north.max()} m")
-print(f"Start (E, N): ({east[0]}, {north[0]})  ->  End: ({east[-1]}, {north[-1]})")`},{type:"exercise",id:"ex-7-26",title:"Import GPS Data",domain:"coaching",packages:["pandas","numpy"],dataFiles:["gps_session.csv"],description:`The GPS export is loaded for you.
-1. Detect which columns are completely empty (all NaN) into empty_cols; you should find the five derived columns.
-2. Keep Time, East, and North as arrays: time, east, north.
-3. Compute n_points, duration (last Time minus first), and dt (the median of the Time differences).
-The print lines then report the fixes, sampling interval, duration, coordinate ranges, and empty columns.`,initialCode:`import pandas as pd
+print(f"Start (E, N): ({east[0]}, {north[0]})  ->  End: ({east[-1]}, {north[-1]})")`},{type:"exercise",id:"ex-7-26",title:"Import GPS Data",domain:"coaching",packages:["pandas","numpy"],dataFiles:["gps_session.csv"],description:"The GPS export is loaded for you.\n1. Detect which columns are completely empty (all NaN) into `empty_cols`; you should find the five derived columns.\n2. Keep Time, East, and North as arrays: time, east, north.\n3. Compute `n_points`, duration (last Time minus first), and dt (the median of the Time differences).\nThe print lines then report the fixes, sampling interval, duration, coordinate ranges, and empty columns.",initialCode:`import pandas as pd
 import numpy as np
 
 # Load the real GPS export and inspect what we received
@@ -764,7 +745,7 @@ assert dt == 10, f"Sampling interval should be 10 s, got {dt}"
 assert int(east.max()) == 3006, f"East max should be 3006 m, got {east.max()}"
 assert int(north.max()) == 1686, f"North max should be 1686 m, got {north.max()}"
 assert set(empty_cols) == {'East Displacement', 'North Displacement', 'Resultant Distance', 'Speed', 'Distance Traveled'}, f"The five derived columns should be all-NaN, got {empty_cols}"
-print("PASS")`,hints:["A column is empty when df[c].isna().all(). Extract arrays with .values; the sampling interval is the median of the Time differences.",`empty_cols = [c for c in df.columns if df[c].isna().___()]
+print("PASS")`,hints:["A column is empty when `df`[c]`.isna()``.all()`. Extract arrays with `.values`; the sampling interval is the median of the Time differences.",`empty_cols = [c for c in df.columns if df[c].isna().___()]
 
 time = df["Time"].values
 east = df["East"].values
@@ -836,11 +817,7 @@ zones = {
 print("\\nTime in speed zones:")
 for zone_name, (low, high) in zones.items():
     count = np.sum((speed >= low) & (speed < high))
-    print(f"  {zone_name}: {count*10}s ({count/len(speed)*100:.1f}%)")`},{type:"exercise",id:"ex-7-27",title:"Calculate Displacements and Speed",domain:"coaching",packages:["pandas","numpy"],dataFiles:["gps_session.csv"],description:`The export's Speed and Distance columns are empty, so derive them from the positions (already in metres):
-1. step_dist: the straight-line (Euclidean) distance sqrt(dEast^2 + dNorth^2) between consecutive fixes.
-2. speed: each step distance divided by the 10-second interval.
-3. total_distance (the sum) and cum_distance (np.cumsum).
-The print lines then report the distance, speed summary, and time in each speed zone (each fix is 10 s).`,initialCode:`import pandas as pd
+    print(f"  {zone_name}: {count*10}s ({count/len(speed)*100:.1f}%)")`},{type:"exercise",id:"ex-7-27",title:"Calculate Displacements and Speed",domain:"coaching",packages:["pandas","numpy"],dataFiles:["gps_session.csv"],description:"The export's Speed and Distance columns are empty, so derive them from the positions (already in metres):\n1. `step_dist`: the straight-line (Euclidean) distance `sqrt(dEast^2 + dNorth^2)` between consecutive fixes.\n2. speed: each step distance divided by the 10-second interval.\n3. `total_distance` (the sum) and `cum_distance` (`np`.cumsum).\nThe print lines then report the distance, speed summary, and time in each speed zone (each fix is 10 s).",initialCode:`import pandas as pd
 import numpy as np
 
 # Load the session; keep the trustworthy columns as arrays
@@ -864,7 +841,7 @@ assert abs(cum_distance[-1] - total_distance) < 1e-6, "cum_distance[-1] should e
 assert abs(speed.mean() - 1.68) < 0.05, f"Mean speed should be ~1.68 m/s, got {speed.mean():.3f}"
 assert abs(speed.max() - 2.01) < 0.05, f"Max speed should be ~2.01 m/s, got {speed.max():.3f}"
 assert abs(speed.min() - 0.22) < 0.05, f"Min speed should be ~0.22 m/s, got {speed.min():.3f}"
-print("PASS")`,hints:["Each step is sqrt(dEast² + dNorth²) using np.diff on the positions; speed divides by np.diff(time); the cumulative distance is np.cumsum of the steps.",`d_east = np.diff(east)
+print("PASS")`,hints:["Each step is `sqrt(dEast² + dNorth²)` using `np`.diff on the positions; speed divides by `np.diff(time)`; the cumulative distance is `np`.cumsum of the steps.",`d_east = np.diff(east)
 d_north = np.diff(north)
 step_dist = np.sqrt(d_east**2 + d_north**___)
 
@@ -941,10 +918,7 @@ axes[1].set_title('Speed Over Time', fontsize=13, fontweight='bold')
 axes[1].legend(fontsize=10);  axes[1].grid(True, alpha=0.3)
 axes[1].set_xlim(0, time[-1]/60)
 plt.suptitle('GPS Training Session Analysis', fontsize=15, fontweight='bold')
-plt.tight_layout()`},{type:"exercise",id:"ex-7-28",title:"Create Movement Visualisations",domain:"coaching",packages:["pandas","numpy","matplotlib"],dataFiles:["gps_session.csv"],description:`Create a side-by-side figure of the session, stored as fig and the axes array:
-1. Left panel: the movement path, North against East in metres, coloured by speed at the step midpoints, with start (green triangle) and end (red square) markers and equal aspect.
-2. Right panel: speed over time with a 5-fix (50-second) rolling average and shaded speed zone backgrounds.
-Add the suptitle "GPS Training Session Analysis".`,initialCode:`import pandas as pd
+plt.tight_layout()`},{type:"exercise",id:"ex-7-28",title:"Create Movement Visualisations",domain:"coaching",packages:["pandas","numpy","matplotlib"],dataFiles:["gps_session.csv"],description:'Create a side-by-side figure of the session, stored as `fig` and the `axes` array:\n1. Left panel: the movement path, North against East in metres, coloured by speed at the step midpoints, with start (green triangle) and end (red square) markers and equal aspect.\n2. Right panel: speed over time with a 5-fix (50-second) rolling average and shaded speed zone backgrounds.\nAdd the suptitle "GPS Training Session Analysis".',initialCode:`import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -960,7 +934,7 @@ total_distance = step_dist.sum()`,testCode:`assert len(fig.axes) >= 2, f"Expecte
 assert len(axes[0].collections) >= 1, "Left panel: no scatter/collections (speed-colored path)"
 assert len(axes[1].lines) >= 1, "Right panel: no speed line plotted"
 assert len(axes[1].patches) >= 1, "Right panel: no axhspan speed zones (axhspan adds Polygon patches)"
-print("PASS")`,hints:["fig, axes = plt.subplots(1, 2). Left: scatter the step midpoints coloured by speed, add start/end markers and equal aspect. Right: plot speed against time[1:]/60, add a 5-fix np.convolve rolling average and axhspan zone bands.",`fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+print("PASS")`,hints:["`fig`, `axes` = `plt.subplots(1, 2)`. Left: scatter the step midpoints coloured by speed, add start/end markers and equal aspect. Right: plot speed against time[1:]/60, add a 5-fix `np`.convolve rolling average and axhspan zone bands.",`fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
 east_mid = (east[:-1] + east[1:]) / 2
 north_mid = (north[:-1] + north[1:]) / 2

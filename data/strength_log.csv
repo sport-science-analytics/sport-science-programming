@@ -1,0 +1,289 @@
+Date,Athlete,Exercise,Sets,Reps,Added_Weight_kg,RPE,RIR
+2026-01-05,Emma,Deadlift,5,5,97.5,6.0,4.0
+2026-01-05,Emma,Pull-Up,4,12,,7.0,4.0
+2026-01-05,Emma,Squat,4,5,77.5,5.0,5.0
+2026-01-05,Ingrid,Bench Press,5,5,50.0,7.0,4.0
+2026-01-05,Ingrid,Pull-Up,3,8,,7.0,3.0
+2026-01-05,Ingrid,Squat,4,8,75.0,7.0,4.0
+2026-01-05,Jonas,Deadlift,5,5,157.5,9.0,0.0
+2026-01-05,Jonas,Pull-Up,3,6,,8.0,1.0
+2026-01-05,Jonas,Squat,3,4,125.0,7.0,
+2026-01-05,Martin,Bench Press,4,6,95.0,7.0,3.0
+2026-01-05,Martin,Pull-Up,4,10,,6.0,3.0
+2026-01-05,Martin,Squat,5,4,137.5,8.0,
+2026-01-05,Sander,Deadlift,3,8,127.5,5.0,5.0
+2026-01-05,Sander,Pull-Up,3,8,,6.0,3.0
+2026-01-05,Sander,Squat,4,7,102.5,6.0,3.0
+2026-01-05,Sofie,Deadlift,5,4,117.5,8.0,
+2026-01-05,Sofie,Pull-Up,3,12,,6.0,
+2026-01-05,Sofie,Squat,3,3,100.0,8.0,2.0
+2026-01-08,Emma,Bench Press,4,3,45.0,9.0,0.0
+2026-01-08,Emma,Deadlift,5,5,100.0,8.0,1.0
+2026-01-08,Emma,Pull-Up,3,7,,8.0,1.0
+2026-01-08,Ingrid,Bench Press,4,3,52.5,7.0,
+2026-01-08,Ingrid,Deadlift,3,5,105.0,7.0,2.0
+2026-01-08,Ingrid,Squat,4,3,87.5,7.0,3.0
+2026-01-08,Jonas,Bench Press,3,3,92.5,8.0,3.0
+2026-01-08,Jonas,Pull-Up,3,8,,9.0,1.0
+2026-01-08,Jonas,Squat,3,8,110.0,6.0,4.0
+2026-01-08,Martin,Bench Press,4,7,90.0,7.0,2.0
+2026-01-08,Martin,Deadlift,5,4,167.5,7.0,2.0
+2026-01-08,Martin,Pull-Up,4,7,,7.0,4.0
+2026-01-08,Sander,Bench Press,4,3,82.5,7.0,3.0
+2026-01-08,Sander,Deadlift,3,7,132.5,,
+2026-01-08,Sander,Pull-Up,3,12,,8.0,3.0
+2026-01-08,Sofie,Bench Press,3,3,57.5,8.0,1.0
+2026-01-08,Sofie,Deadlift,3,6,112.5,7.0,3.0
+2026-01-08,Sofie,Pull-Up,3,10,,7.0,4.0
+2026-01-12,Emma,Bench Press,5,4,45.0,8.0,3.0
+2026-01-12,Emma,Deadlift,3,5,100.0,7.0,2.0
+2026-01-12,Emma,Pull-Up,3,8,,6.0,5.0
+2026-01-12,Ingrid,Bench Press,5,4,52.5,8.0,3.0
+2026-01-12,Ingrid,Deadlift,4,5,107.5,7.0,4.0
+2026-01-12,Ingrid,Squat,4,4,87.5,6.0,4.0
+2026-01-12,Jonas,Bench Press,4,4,92.5,6.0,4.0
+2026-01-12,Jonas,Deadlift,3,6,157.5,6.0,3.0
+2026-01-12,Jonas,Squat,5,7,117.5,7.0,4.0
+2026-01-12,Martin,Bench Press,5,5,97.5,6.0,3.0
+2026-01-12,Martin,Deadlift,4,8,152.5,,
+2026-01-12,Martin,Squat,3,5,137.5,7.0,3.0
+2026-01-12,Sander,Bench Press,5,8,72.5,6.0,5.0
+2026-01-12,Sander,Deadlift,5,8,127.5,5.0,5.0
+2026-01-12,Sander,Squat,4,8,100.0,7.0,2.0
+2026-01-12,Sofie,Bench Press,5,8,50.0,5.0,5.0
+2026-01-12,Sofie,Pull-Up,3,9,,6.0,
+2026-01-12,Sofie,Squat,4,8,87.5,6.0,4.0
+2026-01-15,Emma,Deadlift,3,8,92.5,6.0,3.0
+2026-01-15,Emma,Pull-Up,3,8,,9.0,2.0
+2026-01-15,Emma,Squat,5,8,75.0,7.0,3.0
+2026-01-15,Ingrid,Bench Press,5,5,47.5,7.0,2.0
+2026-01-15,Ingrid,Pull-Up,3,10,,6.0,4.0
+2026-01-15,Ingrid,Squat,4,5,82.5,,
+2026-01-15,Jonas,Bench Press,3,4,87.5,8.0,3.0
+2026-01-15,Jonas,Deadlift,5,7,147.5,7.0,4.0
+2026-01-15,Jonas,Squat,5,7,115.0,6.0,4.0
+2026-01-15,Martin,Bench Press,5,7,92.5,7.0,3.0
+2026-01-15,Martin,Deadlift,3,6,160.0,6.0,4.0
+2026-01-15,Martin,Squat,4,6,132.5,6.0,4.0
+2026-01-15,Sander,Bench Press,5,6,75.0,7.0,
+2026-01-15,Sander,Deadlift,3,6,140.0,5.0,
+2026-01-15,Sander,Pull-Up,3,10,,7.0,3.0
+2026-01-15,Sofie,Deadlift,3,6,112.5,6.0,
+2026-01-15,Sofie,Pull-Up,3,12,,9.0,0.0
+2026-01-15,Sofie,Squat,5,8,87.5,7.0,2.0
+2026-01-19,Emma,Bench Press,5,5,45.0,8.0,3.0
+2026-01-19,Emma,Deadlift,5,6,92.5,7.0,3.0
+2026-01-19,Emma,Squat,3,8,72.5,6.0,5.0
+2026-01-19,Ingrid,Bench Press,3,5,50.0,8.0,3.0
+2026-01-19,Ingrid,Deadlift,4,8,97.5,6.0,5.0
+2026-01-19,Ingrid,Pull-Up,3,7,,7.0,4.0
+2026-01-19,Jonas,Bench Press,5,3,92.5,9.0,0.0
+2026-01-19,Jonas,Deadlift,3,6,157.5,7.0,3.0
+2026-01-19,Jonas,Pull-Up,4,8,,8.0,3.0
+2026-01-19,Martin,Bench Press,4,4,100.0,7.0,2.0
+2026-01-19,Martin,Pull-Up,4,9,,6.0,
+2026-01-19,Martin,Squat,5,5,135.0,9.0,0.0
+2026-01-19,Sander,Bench Press,5,7,75.0,7.0,3.0
+2026-01-19,Sander,Pull-Up,4,9,,6.0,3.0
+2026-01-19,Sander,Squat,4,3,115.0,7.0,2.0
+2026-01-19,Sofie,Bench Press,4,4,55.0,8.0,2.0
+2026-01-19,Sofie,Deadlift,3,3,127.5,8.0,1.0
+2026-01-19,Sofie,Squat,5,7,87.5,5.0,4.0
+2026-01-22,Emma,Bench Press,5,7,40.0,6.0,4.0
+2026-01-22,Emma,Deadlift,5,6,97.5,6.0,4.0
+2026-01-22,Emma,Squat,4,5,77.5,7.0,2.0
+2026-01-22,Ingrid,Bench Press,5,3,52.5,7.0,4.0
+2026-01-22,Ingrid,Deadlift,3,4,115.0,6.0,4.0
+2026-01-22,Ingrid,Pull-Up,4,8,,8.0,2.0
+2026-01-22,Jonas,Bench Press,3,7,82.5,6.0,5.0
+2026-01-22,Jonas,Deadlift,3,7,147.5,7.0,2.0
+2026-01-22,Jonas,Pull-Up,4,12,,7.0,4.0
+2026-01-22,Martin,Deadlift,3,6,165.0,7.0,3.0
+2026-01-22,Martin,Pull-Up,3,9,,7.0,3.0
+2026-01-22,Martin,Squat,5,5,137.5,7.0,4.0
+2026-01-22,Sander,Bench Press,4,5,77.5,6.0,3.0
+2026-01-22,Sander,Deadlift,4,6,135.0,7.0,4.0
+2026-01-22,Sander,Pull-Up,4,6,,,3.0
+2026-01-22,Sofie,Deadlift,5,8,107.5,6.0,3.0
+2026-01-22,Sofie,Pull-Up,3,9,,8.0,2.0
+2026-01-22,Sofie,Squat,3,4,95.0,7.0,4.0
+2026-01-26,Emma,Bench Press,3,4,45.0,8.0,2.0
+2026-01-26,Emma,Pull-Up,4,8,,7.0,4.0
+2026-01-26,Emma,Squat,4,8,1200.0,5.0,5.0
+2026-01-26,Ingrid,Deadlift,3,4,110.0,8.0,1.0
+2026-01-26,Ingrid,Pull-Up,3,10,,7.0,2.0
+2026-01-26,Ingrid,Squat,3,8,77.5,8.0,1.0
+2026-01-26,Jonas,Bench Press,4,7,85.0,6.0,3.0
+2026-01-26,Jonas,Pull-Up,4,5,,6.0,5.0
+2026-01-26,Jonas,Squat,5,8,112.5,6.0,5.0
+2026-01-26,Martin,Bench Press,3,6,95.0,8.0,3.0
+2026-01-26,Martin,Deadlift,4,3,177.5,8.0,2.0
+2026-01-26,Martin,Squat,4,7,127.5,6.0,3.0
+2026-01-26,Sander,Deadlift,4,5,142.5,7.0,2.0
+2026-01-26,Sander,Pull-Up,3,12,,9.0,0.0
+2026-01-26,Sander,Squat,5,3,115.0,8.0,3.0
+2026-01-26,Sofie,Bench Press,5,6,52.5,6.0,3.0
+2026-01-26,Sofie,Deadlift,5,7,112.5,7.0,
+2026-01-26,Sofie,Squat,5,4,92.5,7.0,4.0
+2026-01-29,Emma,Deadlift,3,6,97.5,6.0,3.0
+2026-01-29,Emma,Pull-Up,4,7,,7.0,2.0
+2026-01-29,Emma,Squat,5,3,82.5,7.0,2.0
+2026-01-29,Ingrid,Bench Press,3,8,47.5,5.0,4.0
+2026-01-29,Ingrid,Pull-Up,4,6,,8.0,2.0
+2026-01-29,Ingrid,Squat,4,8,77.5,5.0,
+2026-01-29,Jonas,Deadlift,3,6,157.5,6.0,3.0
+2026-01-29,Jonas,Pull-Up,4,6,,8.0,2.0
+2026-01-29,Jonas,Squat,4,4,130.0,,4.0
+2026-01-29,Martin,Bench Press,5,4,102.5,8.0,1.0
+2026-01-29,Martin,Deadlift,5,5,165.0,5.0,5.0
+2026-01-29,Martin,Squat,5,7,135.0,7.0,4.0
+2026-01-29,Sander,Bench Press,5,4,80.0,7.0,4.0
+2026-01-29,Sander,Deadlift,4,7,140.0,5.0,4.0
+2026-01-29,Sander,Squat,3,3,117.5,8.0,3.0
+2026-01-29,Sofie,Bench Press,5,7,50.0,5.0,4.0
+2026-01-29,Sofie,Deadlift,3,3,125.0,,4.0
+2026-01-29,Sofie,Squat,5,7,92.5,6.0,3.0
+2026-02-02,Emma,Bench Press,4,3,47.5,7.0,3.0
+2026-02-02,Emma,Deadlift,4,7,95.0,6.0,4.0
+2026-02-02,Emma,Pull-Up,4,5,,8.0,1.0
+2026-02-02,Ingrid,Bench Press,4,3,52.5,7.0,2.0
+2026-02-02,Ingrid,Pull-Up,3,8,,9.0,1.0
+2026-02-02,Ingrid,Squat,5,8,77.5,5.0,5.0
+2026-02-02,Jonas,Bench Press,4,7,87.5,7.0,3.0
+2026-02-02,Jonas,Deadlift,4,6,157.5,7.0,4.0
+2026-02-02,Jonas,Squat,5,5,120.0,7.0,2.0
+2026-02-02,Martin,Bench Press,4,7,92.5,6.0,3.0
+2026-02-02,Martin,Pull-Up,3,6,,6.0,5.0
+2026-02-02,Martin,Squat,5,6,137.5,7.0,4.0
+2026-02-02,Sander,Bench Press,3,7,77.5,5.0,5.0
+2026-02-02,Sander,Pull-Up,3,11,,9.0,0.0
+2026-02-02,Sander,Squat,5,6,105.0,7.0,4.0
+2026-02-02,Sofie,Deadlift,5,6,112.5,7.0,3.0
+2026-02-02,Sofie,Pull-Up,3,12,,6.0,4.0
+2026-02-02,Sofie,Squat,5,6,92.5,8.0,3.0
+2026-02-05,Emma,Bench Press,4,7,42.5,6.0,4.0
+2026-02-05,Emma,Deadlift,4,3,105.0,9.0,0.0
+2026-02-05,Emma,Squat,5,7,75.0,6.0,3.0
+2026-02-05,Ingrid,Bench Press,3,8,47.5,7.0,3.0
+2026-02-05,Ingrid,Deadlift,4,4,110.0,7.0,2.0
+2026-02-05,Ingrid,Pull-Up,4,10,,6.0,4.0
+2026-02-05,Jonas,Bench Press,5,4,92.5,7.0,4.0
+2026-02-05,Jonas,Deadlift,4,3,167.5,8.0,3.0
+2026-02-05,Jonas,Pull-Up,4,9,,8.0,3.0
+2026-02-05,Martin,Bench Press,4,8,90.0,5.0,5.0
+2026-02-05,Martin,Deadlift,3,4,172.5,7.0,3.0
+2026-02-05,Martin,Squat,4,8,127.5,8.0,3.0
+2026-02-05,Sander,Bench Press,4,7,72.5,6.0,3.0
+2026-02-05,Sander,Deadlift,5,3,152.5,7.0,2.0
+2026-02-05,Sander,Pull-Up,3,6,,9.0,2.0
+2026-02-05,Sofie,Deadlift,3,8,107.5,6.0,4.0
+2026-02-05,Sofie,Pull-Up,3,7,,6.0,4.0
+2026-02-05,Sofie,Squat,5,3,102.5,8.0,1.0
+2026-02-09,Emma,Deadlift,5,5,102.5,8.0,3.0
+2026-02-09,Emma,Pull-Up,4,12,,8.0,1.0
+2026-02-09,Emma,Squat,3,6,80.0,7.0,3.0
+2026-02-09,Ingrid,Deadlift,4,5,112.5,7.0,3.0
+2026-02-09,Ingrid,Pull-Up,3,11,,6.0,3.0
+2026-02-09,Ingrid,Squat,5,6,85.0,6.0,4.0
+2026-02-09,Jonas,Bench Press,5,4,92.5,7.0,3.0
+2026-02-09,Jonas,Pull-Up,3,8,,8.0,1.0
+2026-02-09,Jonas,Squat,5,8,115.0,6.0,3.0
+2026-02-09,Martin,Deadlift,5,8,157.5,5.0,5.0
+2026-02-09,Martin,Pull-Up,4,10,,7.0,3.0
+2026-02-09,Martin,Squat,3,6,132.5,7.0,
+2026-02-09,Sander,Deadlift,5,5,145.0,45.0,2.0
+2026-02-09,Sander,Pull-Up,3,5,,6.0,5.0
+2026-02-09,Sander,Squat,4,6,105.0,7.0,
+2026-02-09,Sofie,Deadlift,5,6,120.0,6.0,4.0
+2026-02-09,Sofie,Pull-Up,4,7,,6.0,4.0
+2026-02-09,Sofie,Squat,4,4,100.0,8.0,3.0
+2026-02-12,Emma,Bench Press,5,3,47.5,9.0,1.0
+2026-02-12,Emma,Deadlift,3,5,97.5,6.0,4.0
+2026-02-12,Emma,Pull-Up,3,5,,9.0,1.0
+2026-02-12,Ingrid,Bench Press,5,6,50.0,8.0,2.0
+2026-02-12,Ingrid,Pull-Up,4,10,,8.0,2.0
+2026-02-12,Ingrid,Squat,5,6,85.0,6.0,5.0
+2026-02-12,Jonas,Bench Press,3,8,85.0,5.0,5.0
+2026-02-12,Jonas,Deadlift,4,3,170.0,7.0,4.0
+2026-02-12,Jonas,Squat,3,8,112.5,6.0,4.0
+2026-02-12,Martin,Bench Press,5,5,100.0,7.0,2.0
+2026-02-12,Martin,Deadlift,4,5,172.5,7.0,4.0
+2026-02-12,Martin,Squat,5,8,130.0,,5.0
+2026-02-12,Sander,Deadlift,3,5,145.0,7.0,2.0
+2026-02-12,Sander,Pull-Up,4,11,,6.0,4.0
+2026-02-12,Sander,Squat,3,5,112.5,8.0,3.0
+2026-02-12,Sofie,Bench Press,5,5,57.5,7.0,3.0
+2026-02-12,Sofie,Deadlift,4,7,117.5,5.0,5.0
+2026-02-12,Sofie,Pull-Up,3,7,,9.0,
+2026-02-16,Emma,Bench Press,5,5,47.5,8.0,3.0
+2026-02-16,Emma,Pull-Up,3,11,,7.0,4.0
+2026-02-16,Emma,Squat,4,6,80.0,8.0,3.0
+2026-02-16,Ingrid,Bench Press,3,8,45.0,7.0,3.0
+2026-02-16,Ingrid,Deadlift,3,5,112.5,5.0,4.0
+2026-02-16,Ingrid,Squat,4,6,80.0,7.0,2.0
+2026-02-16,Jonas,Deadlift,3,8,150.0,6.0,4.0
+2026-02-16,Jonas,Pull-Up,4,6,,7.0,2.0
+2026-02-16,Jonas,Squat,4,7,120.0,5.0,4.0
+2026-02-16,Martin,Bench Press,3,7,95.0,5.0,5.0
+2026-02-16,Martin,Deadlift,4,4,172.5,8.0,3.0
+2026-02-16,Martin,Pull-Up,4,9,,8.0,2.0
+2026-02-16,Sander,Bench Press,4,6,77.5,,4.0
+2026-02-16,Sander,Pull-Up,3,7,,6.0,4.0
+2026-02-16,Sander,Squat,5,4,115.0,7.0,3.0
+2026-02-16,Sofie,Bench Press,3,7,55.0,6.0,3.0
+2026-02-16,Sofie,Deadlift,5,3,127.5,8.0,
+2026-02-16,Sofie,Squat,4,4,97.5,8.0,1.0
+2026-02-19,Emma,Deadlift,5,5,100.0,6.0,5.0
+2026-02-19,Emma,Pull-Up,4,7,,,1.0
+2026-02-19,Emma,Squat,5,7,75.0,7.0,3.0
+2026-02-19,Ingrid,Bench Press,3,7,47.5,7.0,2.0
+2026-02-19,Ingrid,Deadlift,3,7,105.0,6.0,3.0
+2026-02-19,Ingrid,Squat,4,8,77.5,5.0,5.0
+2026-02-19,Jonas,Deadlift,3,6,157.5,6.0,5.0
+2026-02-19,Jonas,Pull-Up,3,10,,6.0,4.0
+2026-02-19,Jonas,Squat,3,7,122.5,8.0,1.0
+2026-02-19,Martin,Bench Press,3,6,95.0,6.0,5.0
+2026-02-19,Martin,Deadlift,4,5,167.5,7.0,3.0
+2026-02-19,Martin,Squat,3,5,137.5,6.0,
+2026-02-19,Sander,Bench Press,4,3,85.0,8.0,1.0
+2026-02-19,Sander,Deadlift,3,7,137.5,6.0,3.0
+2026-02-19,Sander,Pull-Up,4,5,,9.0,1.0
+2026-02-19,Sofie,Bench Press,4,3,57.5,6.0,5.0
+2026-02-19,Sofie,Deadlift,3,6,120.0,8.0,3.0
+2026-02-19,Sofie,Squat,4,3,102.5,8.0,3.0
+2026-02-23,Emma,Deadlift,3,3,105.0,7.0,3.0
+2026-02-23,Emma,Pull-Up,3,10,,6.0,4.0
+2026-02-23,Emma,Squat,5,4,82.5,7.0,4.0
+2026-02-23,Ingrid,Bench Press,3,8,45.0,5.0,5.0
+2026-02-23,Ingrid,Deadlift,3,5,110.0,6.0,
+2026-02-23,Ingrid,Squat,5,7,82.5,6.0,5.0
+2026-02-23,Jonas,Bench Press,3,6,87.5,6.0,
+2026-02-23,Jonas,Pull-Up,3,11,,9.0,1.0
+2026-02-23,Jonas,Squat,5,7,117.5,5.0,5.0
+2026-02-23,Martin,Deadlift,5,8,157.5,5.0,5.0
+2026-02-23,Martin,Pull-Up,3,12,,7.0,2.0
+2026-02-23,Martin,Squat,3,8,127.5,7.0,4.0
+2026-02-23,Sander,Deadlift,4,5,150.0,7.0,4.0
+2026-02-23,Sander,Pull-Up,4,10,,8.0,
+2026-02-23,Sander,Squat,3,5,112.5,6.0,5.0
+2026-02-23,Sofie,Bench Press,4,5,55.0,8.0,3.0
+2026-02-23,Sofie,Deadlift,4,8,112.5,6.0,4.0
+2026-02-23,Sofie,Squat,4,7,92.5,7.0,2.0
+2026-02-26,Emma,Bench Press,5,6,45.0,9.0,1.0
+2026-02-26,Emma,Deadlift,5,5,97.5,8.0,1.0
+2026-02-26,Emma,Pull-Up,3,10,,9.0,
+2026-02-26,Ingrid,Deadlift,5,8,105.0,6.0,
+2026-02-26,Ingrid,Pull-Up,4,7,,6.0,5.0
+2026-02-26,Ingrid,Squat,5,5,82.5,7.0,3.0
+2026-02-26,Jonas,Bench Press,3,8,82.5,6.0,4.0
+2026-02-26,Jonas,Pull-Up,4,7,,8.0,2.0
+2026-02-26,Jonas,Squat,5,6,122.5,5.0,5.0
+2026-02-26,Martin,Deadlift,3,7,165.0,6.0,3.0
+2026-02-26,Martin,Pull-Up,4,9,,7.0,2.0
+2026-02-26,Martin,Squat,4,3,147.5,6.0,3.0
+2026-02-26,Sander,Bench Press,3,7,77.5,6.0,3.0
+2026-02-26,Sander,Pull-Up,4,8,,7.0,
+2026-02-26,Sander,Squat,3,8,105.0,7.0,2.0
+2026-02-26,Sofie,Bench Press,5,6,52.5,6.0,3.0
+2026-02-26,Sofie,Pull-Up,4,8,,9.0,1.0
+2026-02-26,Sofie,Squat,4,6,92.5,5.0,
